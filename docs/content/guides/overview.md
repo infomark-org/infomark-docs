@@ -24,8 +24,8 @@ tar -xzvf infomark.tar.gz
 
 cd infomark
 # use default settings
-cp .infomark.yml.example .infomark.yml
-cp docker-compose.yml.example docker-compose.yml
+cp .infomark.example.yml .infomark.yml
+cp docker-compose.example.yml docker-compose.yml
 
 # configure paths for backend
 sed -i 's/\/var\/www\/infomark-staging\/app/\/tmp\/infomark/g' /tmp/infomark/.infomark.yml
