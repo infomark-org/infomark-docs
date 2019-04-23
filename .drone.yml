@@ -85,17 +85,6 @@ steps:
     api_key:
       from_secret: github_token
     files:
-      - /drone/src/infomark.tar.gz
-    checksum:
-      - md5
-      - sha256
-
-- name: publish_release
-  image: plugins/github-release
-  settings:
-    api_key:
-      from_secret: github_token
-    files:
       - infomark.tar.gz
     checksum:
       - md5
@@ -109,6 +98,6 @@ trigger:
   - tag
 ---
 kind: signature
-hmac: c8b5caf53bbfbd8a6ee1ae214b29c4ae332493571525a8e37f9adc9acb992d22
+hmac: ed289b19dc540f335cb690009203c7a899e22fbd9421a8689e5bad818cdf9c84
 
 ...
