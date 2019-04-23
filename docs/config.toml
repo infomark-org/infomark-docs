@@ -1,0 +1,8 @@
+baseURL = "https://infomark.org"
+languageCode = "en-us"
+title = "InfoMark"
+theme = "infomark.org"
+
+pygmentsCodeFences = true
+pygmentsStyle = "native"
+pygmentsCodefencesGuessSyntax = true

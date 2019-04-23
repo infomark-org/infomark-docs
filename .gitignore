@@ -1,0 +1,5 @@
+docs/static/swagger/api.yaml
+*.asc
+hook.sh
+
+dockerimages/deploy/id_rsa*

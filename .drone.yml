@@ -1,0 +1,114 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: prepare_files
+  pull: default
+  image: alpine:3.7
+  commands:
+  - source versions.txt
+  - export BACKEND_VERSION
+  - export FRONTEND_VERSION
+  - echo $${BACKEND_VERSION}
+  - echo $${FRONTEND_VERSION}
+  - mkdir /tmp/infomark
+  - cd /tmp/infomark
+  - wget https://github.com/cgtuebingen/infomark-backend/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
+  - tar -xzvf infomark-backend.tar.gz
+  - rm infomark-backend.tar.gz
+  - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
+
+- name: build_docs
+  pull: never
+  image: patwie/hugo:v1
+  commands:
+  - cd /drone/src/docs
+  - hugo version
+  - hugo
+
+- name: publish_pages
+  pull: never
+  image: patwie/deploy_docs:v1
+  commands:
+  - /opt/publish.sh
+
+trigger:
+  branch:
+  - master
+
+---
+
+kind: pipeline
+name: release
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: prepare_files
+  pull: default
+  image: alpine:3.7
+  commands:
+  - source versions.txt
+  - export BACKEND_VERSION
+  - export FRONTEND_VERSION
+  - echo $${BACKEND_VERSION}
+  - echo $${FRONTEND_VERSION}
+  - mkdir /tmp/infomark
+  - cd /tmp/infomark
+  - wget https://github.com/cgtuebingen/infomark-backend/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
+  - tar -xzvf infomark-backend.tar.gz
+  - rm infomark-backend.tar.gz
+  - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
+  - mkdir /tmp/infomark-ui
+  - cd /tmp/infomark-ui
+  - wget https://github.com/cgtuebingen/infomark-ui/releases/download/$${FRONTEND_VERSION}/infomark-ui.tar.gz
+  - tar -xzvf infomark-ui.tar.gz
+  - rm infomark-ui.tar.gz
+  - mkdir -p /tmp/infomark/static
+  - cp -r /tmp/infomark-ui/build/* /tmp/infomark/static
+  - cd /tmp
+  - ls -ls
+  - tar -czvf infomark.tar.gz infomark
+  - cp /tmp/infomark.tar.gz /drone/src/infomark.tar.gz
+  - cd /drone/src
+
+- name: publish_release
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: github_token
+    files:
+      - /drone/src/infomark.tar.gz
+    checksum:
+      - md5
+      - sha256
+
+- name: publish_release
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: github_token
+    files:
+      - infomark.tar.gz
+    checksum:
+      - md5
+      - sha256
+  when:
+    event: tag
+
+
+trigger:
+  event:
+  - tag
+---
+kind: signature
+hmac: c8b5caf53bbfbd8a6ee1ae214b29c4ae332493571525a8e37f9adc9acb992d22
+
+...
