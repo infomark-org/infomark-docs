@@ -5,16 +5,18 @@ lastmod: 2019-04-24
 layout: subpage
 ---
 
-The System is managed via two git-repositories:
-
-|Frontend|Backend|
-|----|----|
-|[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-ui)|[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-backend)|
-| [git+source](https://github.com/cgtuebingen/infomark-ui), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest) | [git+source](https://github.com/cgtuebingen/infomark-backend), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest)|
-
+The System is managed via two git-repositories.
 Both parts are tested separately using continuous integration tests. It is a good idea to read the `.drone.yml` configuration on how to build these parts from source.
 
+Whenever a combination is stable, we will create a new release, which can be downloaded here:
+<a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download Now</a>
+
+
 # Frontend
+
+[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-ui)
+[![source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-ui)
+[![download](https://img.shields.io/badge/release-download-blueviolet.svg)](https://github.com/cgtuebingen/infomark-ui/releases/latest)
 
 We use the [Elm]((https://elm-lang.org/)) language to create a robust and fast implementation. Elm compiles to JavaScript.
 
@@ -31,6 +33,10 @@ sed -i 's/localhost:3000/your.domain.com/g' /var/www/path/to/static/js/*.js
 
 
 # Backend
+
+[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-backend)
+[![source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-backend)
+[![download](https://img.shields.io/badge/release-download-blueviolet.svg)](https://github.com/cgtuebingen/infomark-ui/releases/latest)|
 
 For use in production, we highly recommend using our pre-built releases as they are tested. If you want to compile the backend from source
 
