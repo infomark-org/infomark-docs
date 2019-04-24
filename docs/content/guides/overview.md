@@ -9,11 +9,11 @@ layout: subpage
 InfoMark is a scalable, modern and open-source online
 course management system supporting auto-testing of programming assignments scaling to thousand of students.
 
-Students can upload their homework, which are tested automatically. TAs can grade these homeworks online. The platform supports multiple courses each with multiple exercise groups and helps to distribute slides and course material.
+Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
 
 ### Quick-Start
 
-To locally test the system we suggest to run the following commands
+To locally test the system we suggest to run the following commands:
 
 ```bash
 cd /tmp
@@ -34,17 +34,40 @@ sed -i 's/\/var\/www\/infomark-staging\/app/\/tmp\/infomark/g' /tmp/infomark/.in
 # run these commands in separate terminals
 # start dependencies
 sudo docker-compose up -d
+
+# create database
+cd database
+PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f schema.sql
+PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha14.sql
+PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha21.sql
+cd ..
+
 # start a single background worker
 ./infomark work
 # start Restful JSON web server
 ./infomark serve
 ```
 
-In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark.
+After registration in the web-interface the email address needs to be confirmed. This can be done manually over the console. Further, you might want to upgrade the permission to root:
+
+```bash
+# confirm email
+./infomark console user confirm your@email.com
+
+# find id of user
+./infomark console user find your@email.com
+
+    1 YourFirstname YourLastname your@email.com
+
+# add user with id "1" to admins.
+./infomark console admin add 1
+```
+
+In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark. See the Administartor Guide for different roles.
 
 ### Design Choices
 
- It is designed to run within  IT-controlled private environments in public clouds
+InfoMark is designed to run within IT-controlled private environments in public clouds
 on your own servers to be compliant with any data privacy issues providing data sovereignty.
 
 It is based on several design choices:
@@ -53,15 +76,15 @@ It is based on several design choices:
 - The backend must be easy to deploy, maintain and scalable.
 - The frontend must be light-weight, fast and responsive.
 - Auto-Testing of programming assigments must be language-agnostic, isolated and safe.
-- All intense operations must be asynchron scheduled.
+- All intense operations must be asynchronously scheduled.
 
 
 ### System Overview
 
-This section provides a brief overview of the InfoMark system including a descriptions of its parts.
-We use continous-integration tests to ensure the implementation can be built and passes all tests at any point.
+This section provides a brief overview of the InfoMark system including a description of its parts.
+We use continuous-integration tests to ensure the implementation can be built and passes all tests at any point.
 
-At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) here.
+At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
 ### Backend
 [![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](https://ci.patwie.com/cgtuebingen/infomark-backend)
@@ -69,23 +92,14 @@ At its core, InfoMark is a single-compiled Go binary that is exposed as a Restfu
 
 The backend acts as a Restful JSON web server and is written in [Go](https://golang.org/). All dependencies are encapsulated in a docker-compose configuration file. The dependencies are:
 
-- A [PostgreSQL](https://www.postgresql.org/) database containing all data.
-- Computationally intensive operations are scheduled and balance across several background workers asynchron via [RabbitMQ](https://www.rabbitmq.com/).
+- We use a [PostgreSQL](https://www.postgresql.org/) database to store all dynamic data.
+- Computationally intensive operations are scheduled and balanced across several background workers asynchronous via [RabbitMQ](https://www.rabbitmq.com/).
 - It uses [Redis](https://redis.io/) as a light-weight key-value memory store.
-- [Docker](https://www.docker.com/) is used a as light-weight sandbox to run auto-tests of homework solutions in a isolated environment.
+- [Docker](https://www.docker.com/) is used a as light-weight sandbox to run auto-tests of  solutions to programming assignments in a isolated environment.
 
-Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed accross multiple machines. We recommmend to use one worker process for 100 students.
+Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed accross multiple machines. We recommmend to use one worker process for 100 students. The workers can be added or removed at any time.
 
-#### Auto-Testing
-
-Each task can be linked to a docker-image and a zip file containing the test code.
-
-```bash
-docker run --rm -it --net="none" \
-  -v <STUDENT_UPLOAD.ZIP>:/data/submission.zip:ro \
-  -v <TASK_SEPCIFIC_TEST.ZIP>:/data/unittest.zip:ro  \
-  <YOUR_DOCKER_IMAGE>
-```
+Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.
 
 #### Console
 

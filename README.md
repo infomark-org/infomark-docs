@@ -18,7 +18,7 @@ Features:
 - easy to install using docker-compose for dependencies and single binary for the server
 - CLI for administrative work without touching the database
 
-<img src="./raw/master/docs/static/images/preview.png"/>
+<img src="//github.com/cgtuebingen/infomark/raw/master/docs/static/images/preview.png"/>
 
 The [InfoMark-frontend](https://github.com/cgtuebingen/infomark-ui) is Single-Page-Applications written in [Elm]((https://elm-lang.org/)) based on REST-backend server [InfoMark-backend](https://github.com/cgtuebingen/infomark-backend) written in [Go](https://golang.org/). Communication to internal background workers uses [RabbitMQ](https://www.rabbitmq.com/) and data is stored in a [PostgreSQL](https://www.postgresql.org/) database. The [Swagger](https://swagger.io/) definitions for the REST endpoints can be automatically generated from the REST server. It is possible to export/import the [Symphony](https://projects.coin-or.org/SYMPHONY) problem/solution format.
 
