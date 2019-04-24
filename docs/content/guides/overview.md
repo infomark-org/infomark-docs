@@ -137,3 +137,6 @@ interact with the server. The API is defined in this [repository](https://github
 using [Swagger](https://swagger.io/).
 
 
+## Development
+
+This system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.
