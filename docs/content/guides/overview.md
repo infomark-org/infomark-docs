@@ -43,7 +43,8 @@ PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha
 cd ..
 
 # start a single background worker
-./infomark work
+# sudo is required for talking to docker
+sudo ./infomark work
 # start Restful JSON web server
 ./infomark serve
 ```

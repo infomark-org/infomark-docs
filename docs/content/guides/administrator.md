@@ -158,13 +158,13 @@ The folder `assignment_solver` contains the docker image. Alternatively you can 
 To export the bids of students run
 
 ```bash
-./infomark console assignments dump-bids [courseID] [file] [min_per_group] [max_per_group]
+./infomark console group dump-bids [courseID] [file] [min_per_group] [max_per_group]
 ```
 
 Hereby, `min_per_group` and `max_per_group` constraint the number of allowed participants in each exercise group. If you use the wrong bounds the problem might be infeasible to solve. Then change these constraints. An example is
 
 ```bash
-./infomark console  assignments  dump-bids 1 mycourse 15 30
+./infomark console group dump-bids 1 mycourse 15 30
 ```
 
 InfoMark will then display the command to create a solution, e.g.
@@ -196,7 +196,58 @@ assign[u290,g4]    1.0000000000
 The solution `solution.txt` can be directly fed into infomark using
 
 ```bash
-./infomark console assignments import-solution [courseID] solution.txt
+./infomark console group import-assignments [courseID] solution.txt
 ```
 
 Executing this command will assign each student to a group. Once they are assigned to an exercise group they cannot change their preference anymore. However, any course-admin can manually change the assignment.
+
+## Backup / Restore
+
+The console features commands which can create and restore snapsshots from the database.
+We use PostGres version 11 and the backup/restore routine requires the binaries
+`pg_dump`, `dropdb`, `createdb`, `psql`, `gunzip` as it simply wraps these commands and creates pipesl
+
+Installing the correct binaries make sure you run these commands **once**:
+
+```bash
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RELEASE=$(lsb_release -cs)
+echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main | sudo tee  /etc/apt/sources.list.d/pgdg.list
+sudo apt update
+sudo apt -y install postgresql-11
+which gunzip
+```
+
+To create a snapshot run
+
+```bash
+./infomark console database backup path/to/file.sql.gz
+```
+
+To load data from a snapshot run
+
+```bash
+./infomark console database restore path/to/file.sql.gz
+```
+
+## Generated Files
+
+The InfoMark-backend generates file in an internal cron-job. The cron-jobs have
+a setting `cronjob_intervall_*` which specifies the interval these jobs should run.
+One cronjob is `submission_zip`, which will zip all submissions together (per group and task) such that tutors/TAs can download the entire bundle of submissions.
+
+The job will create a lock file to avoid creating the same zip again and to avoid race conditions.
+Setting the interval is done via the setting `cronjob_intervall_submission_zip`.
+
+These files resides in the directory `generated_files_dir` with the name
+
+```
+collection-course%d-sheet%d-task%d-group%d.lock
+```
+
+where each '%d' is replaced by the *id*. To regenerate a specific file (e.g. you extended the due-date for an exercise) simply remove both file
+
+```bash
+rm collection-course%d-sheet%d-task%d-group%d.lock
+rm collection-course%d-sheet%d-task%d-group%d.zip
+```
