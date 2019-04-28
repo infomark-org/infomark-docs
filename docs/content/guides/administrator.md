@@ -203,9 +203,9 @@ Executing this command will assign each student to a group. Once they are assign
 
 ## Backup / Restore
 
-The console features commands which can create and restore snapsshots from the database.
-We use PostGres version 11 and the backup/restore routine requires the binaries
-`pg_dump`, `dropdb`, `createdb`, `psql`, `gunzip` as it simply wraps these commands and creates pipesl
+The console features commands which can create and restore snapshots from the database.
+We use Postgres version 11, and the backup/restore routine requires the binaries
+`pg_dump`, `dropdb`, `createdb`, `psql`, `gunzip` as it merely wraps these commands and creates pipes
 
 Installing the correct binaries make sure you run these commands **once**:
 
