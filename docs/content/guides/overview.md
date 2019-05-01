@@ -11,7 +11,7 @@ course management system supporting auto-testing of programming assignments scal
 
 Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
 
-### Quick-Start
+# Quick-Start
 
 To locally test the system we suggest to run the following commands:
 
@@ -66,7 +66,7 @@ After registration in the web-interface the email address needs to be confirmed.
 
 In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark. See the Administartor Guide for different roles.
 
-### Design Choices
+# Design Choices
 
 InfoMark is designed to run within IT-controlled private environments in public clouds
 on your own servers to be compliant with any data privacy issues providing data sovereignty.
@@ -80,14 +80,14 @@ It is based on several design choices:
 - All intense operations must be asynchronously scheduled.
 
 
-### System Overview
+# System Overview
 
 This section provides a brief overview of the InfoMark system including a description of its parts.
 We use continuous-integration tests to ensure the implementation can be built and passes all tests at any point.
 
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
-### Backend
+# Backend
 [![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](https://ci.patwie.com/cgtuebingen/infomark-backend)
 [![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-backend)
 
@@ -102,7 +102,7 @@ Part of the backend are **workers**, which are separate processes that handle th
 
 Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.
 
-#### Console
+## Console
 
 To avoid manual interaction with the database InfoMark provides a console to run several commands like enroll a student into a course/group, set role of user.
 
@@ -128,7 +128,7 @@ To avoid manual interaction with the database InfoMark provides a console to run
 
 ```
 
-### Frontend
+# Frontend
 [![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg)](https://ci.patwie.com/cgtuebingen/infomark-ui)
 [![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-ui)
 
@@ -138,6 +138,6 @@ interact with the server. The API is defined in this [repository](https://github
 using [Swagger](https://swagger.io/).
 
 
-## Development
+# Development
 
 This system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.

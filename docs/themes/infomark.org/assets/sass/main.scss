@@ -1,163 +1,155 @@
 // Variables to modify font folders
-$color-primary:#a51e37;
+$primary:#a51e37;
 // $font-size-base: 16px;
-// $navbar-default-color:             #777 !default;
-// $font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif !default;
-// $navbar-default-bg:   #0a293e !default;
+$navbar-default-color:             #777 !default;
+$font-family-sans-serif:  "Open Sans", Helvetica, Arial, sans-serif !default;
+$navbar-default-bg:   #0a293e !default;
 // $navbar-default-color:             #fff !default;
-// $navbar-default-link-color:                #fff !default;
+// $navbar-default-link-color:                red !default;
 // $navbar-default-link-active-bg:          $navbar-default-bg !default;
 // $navbar-default-link-active-color:          #fff !default;
 // $navbar-default-link-hover-color:          #9bcff3 !default;
-// $link-color:            darken(#428bca, 6.5%) !default;
+$link-color:            $primary !default;
 // $link-hover-color:      $link-color ;
 
 $icon-font-path:      "/fonts/bootstrap";
 // $fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default;
 $fa-font-path:        "/fonts/font-awesome";
 
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import "bootstrap/bootstrap";
+
 @import "font-awesome/font-awesome";
+
+.primary-bg{
+    background-color:$primary;
+}
 
 video {
   width: 100%    !important;
   height: auto   !important;
 }
 
+.word-cloud{
+    color:$gray-500;
+    font-size:30px;
+}
+
+.nav-border{
+    border-bottom: 1px solid $primary;
+}
 
 .header {
+    // border-top: 3px solid $primary;
     background: $gray-800;
-    background: $color-primary;
+    // background: $primary;
     color: rgba(256, 256, 256, 0.85);
-    border-top: 5px solid $color-primary;
-    padding: 30px 0;
-    padding-top:4rem;
+
+    // padding: 30px 0;
+    margin-top:3rem;
+    margin-bottom:2rem;
+    padding: 60px 10%;
     a {
         color: #fff;
     }
     .container {
       position: relative;
     }
-}
 
-
-
-.branding {
-    text-transform: uppercase;
-    margin-bottom: 10px;
-
-    .logo {
-        font-size: 28px;
-        margin-top: 0;
-        margin-bottom: 0;
-        a {
-            text-decoration: none;
-        }
-    }
-    .text-highlight {
-        // color: $color-primary;
-        // color: yellow;
-        color: #fff;
-    // text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
-
-    }
-    .text-bold {
-        font-weight: 800;
-        color: #fff;
-    }
-    .icon {
-        font-size: 24px;
-        color: $color-primary;
-
+    h1{
+        font-size: 38px;
+            margin-top: 0;
+            margin-bottom: 0;
+            color:white;
     }
 }
 
-.breadcrumb {
-    background: none;
-    margin-bottom: 0;
-    padding: 0;
-    li {
-        color: rgba(256, 256, 256, 0.5);
-        &.active {
-            color: rgba(256, 256, 256, 0.5);
-        }
-        a {
-            color: rgba(256, 256, 256, 0.5);
-            &:hover {
-                color: #fff;
-            }
-        }
-    }
 
-}
-
-.breadcrumb>li+li:before {
-    color: rgba(0, 0, 0, 0.4);
-}
-
-
-.btn, a.btn {
-  @include transition (all 0.4s ease-in-out);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.5;
-  .svg-inline--fa {
-    margin-right: 5px;
-    position: relative;
-    top: -1px;
-  }
-}
-
-.btn-primary, a.btn-primary {
-  background: $color-primary;
-  border: 1px solid $color-primary;
-  color: #fff !important;
-  &:hover, &:focus, &:active, &.active, &.hover {
-    background: darken($color-primary, 5%);
-    color: #fff !important;
-    border: 1px solid darken($color-primary, 5%);
-  }
-}
 
 code {
     // background: #222;
     // background: #272822;
-    color: $color-primary;
+    background: #2b303b;;
+    // color: $primary;
     font-size: 14px;
     font-weight: bold;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     padding:2px 8px;
     padding-top: 4px;
     display: inline-block;
+    color:$primary;
+    background-color: lighten($primary, 58);
 
 }
 
 
-.page-wrapper {
-    min-height: 100%;
-    /* equal to footer height */
-    margin-bottom: -50px;
-    &:after {
-        content: "";
+
+.highlight pre{
+    border-radius: 5px;
+    width:100%;
+
+    padding: 0;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0.15);
+    border-radius: 3px;
+    overflow-x: hidden;
+    margin: 20px 0;
+    background: #2b303b;
+    color: #eff1f5;
+        padding: 13px 33px 13px 15px;
         display: block;
-        height: 50px;
+    code{
+        width:100%;
+        color: white;
+        // padding: 13px 33px 13px 15px;
+        color: inherit;
+        overflow-x: auto;
+        background: transparent;
     }
 }
 
-.doc-wrapper {
-    padding: 45px 0;
-    // background: $smoky-grey;
+
+
+.bd-toc {
+    .title{
+        padding-left: 1rem;
+        color:$gray-600;
+        font-weight:bold;
+    }
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5rem;
+    height: calc(100vh - 5rem);
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+
 }
 
-.doc-body {
-    position: relative;
+#TableOfContents{
+    padding-right: 0;
+
+    ul {
+        padding-left: 1rem;
+        list-style-type: none;
+    }
+
+    li{
+        display: block;
+        list-style-type: none;
+
+        ul{
+            list-style-type: none;
+        }
+    }
 }
+
 
 .doc-header {
+    margin-top: 6rem;
     margin-bottom: 30px;
     .doc-title {
-        color: $color-primary;
+        color: $primary;
         margin-top: 0;
         font-size: 36px;
     }
@@ -176,7 +168,7 @@ code {
     position: relative;
     text-align: center;
     img {
-        border: 1px solid $color-primary;
+        border: 1px solid $primary;
     }
     .mask {
         display: block;
@@ -209,25 +201,7 @@ code {
 }
 
 
-.video-container {
-position: relative;
-padding-bottom: 56.25%;
-padding-top: 30px; height: 0; overflow: hidden;
-}
-
-.video-container iframe,
-.video-container object,
-.video-container embed {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-}
-
-
 blockquote{
-
     background-color: #0E97EE;
     border: 2px solid #2187BB;
     border-radius: 5px;
@@ -235,13 +209,12 @@ blockquote{
     font-style: italic;
     padding: 10px 20px;
     padding-top:20px;
-
 }
 
-.highlight pre{
-    border-radius: 5px;
-}
+
 
 h1, h2, h3{
-    color:$color-primary;
+    color:$primary;
 }
+
+@import "pygments";

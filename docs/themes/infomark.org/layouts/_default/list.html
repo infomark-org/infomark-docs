@@ -1,51 +1,87 @@
 {{ define "content" }}
-<h1>Online Course Management System</h1>
-<p>InfoMark is a scalable, modern and open-source online
-course management system supporting auto-testing of programming assignments.</p>
-<div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ifyUssK6PJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<br />
-<p>This system was developed in the <a href="https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/" target="_blank">computer graphics groups</a> of the University of Tübingen because there are no comparable systems that meet our requirements.</p>
+<header id="header" class="header">
+    <div class="container">
 
-
-<div class="row"><div class="col-sm-12">
-  <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download latest Release</a>
-</div>
-</div>
-
-<br />
-<br />
-<h3>Separate Parts</h3>
-<p>The release above contains a complete implementation. However, you can download each part separately.</p>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Frontend</h5>
-        <p class="card-text">
-          <p><a href="http://ci.patwie.com/cgtuebingen/infomark-ui"><img src="https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg" alt="Build Status"></a>
-          <a href="https://github.com/cgtuebingen/infomark-ui"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
-          <a href="https://github.com/cgtuebingen/infomark-ui/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a></p>
-          Containing a Single-Page-Application written in ELM
-        </p>
-        <a href="https://github.com/cgtuebingen/infomark-ui" class="btn btn-primary">visit on GitHub</a>
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <h1>InfoMark</h1>
+          <div class="lead">
+              a scalable, modern and open-source online course management system supporting auto-testing of programming assignments
+          </div>
+        </div>
+        <div class="col-4">
+          <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download Latest Release</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Backend</h5>
-        <p class="card-text">
-          <p><a href="http://ci.patwie.com/cgtuebingen/infomark-backend"><img src="https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg" alt="Build Status"></a>
-          <a href="https://github.com/cgtuebingen/infomark-backend"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
-          <a href="https://github.com/cgtuebingen/infomark-backend/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a></p>
-          Containing the RESTful JSON webserver
-        </p>
-        <a href="https://github.com/cgtuebingen/infomark-backend" class="btn btn-primary">visit on GitHub</a>
-      </div>
+</header>
+<!--//header-->
+<main role="main" class="container">
+    <div class="row">
+    <div class="col-12">
+      <p>
+        <a href="https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/staff/" target="_blank">We</a>have developed InfoMark to support hundreds of students and several TAs in university courses that involve evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
+      </p>
+      <p>
+        The system uses the following frameworks and technologies:
+      </p>
+    </div>
+    <div class="col-12 word-cloud ">
+      Elm Go Redis Postgres AMPQ Prometheus Docker Swagger
     </div>
   </div>
-</div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Frontend</h5>
+                    <p class="card-text">
+                        <p>
+                            <a href="http://ci.patwie.com/cgtuebingen/infomark-ui"><img src="https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg" alt="Build Status"></a>
+                            <a href="https://github.com/cgtuebingen/infomark-ui"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
+                            <a href="https://github.com/cgtuebingen/infomark-ui/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a>
+                        </p>
+                        Containing a Single-Page-Application written in ELM
+                    </p>
+                    <a href="https://github.com/cgtuebingen/infomark-ui" class="btn btn-primary">visit on GitHub</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Backend</h5>
+                    <p class="card-text">
+                        <p>
+                            <a href="http://ci.patwie.com/cgtuebingen/infomark-backend"><img src="https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg" alt="Build Status"></a>
+                            <a href="https://github.com/cgtuebingen/infomark-backend"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
+                            <a href="https://github.com/cgtuebingen/infomark-backend/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a>
+                        </p>
+                        Containing the RESTful JSON webserver
+                    </p>
+                    <a href="https://github.com/cgtuebingen/infomark-backend" class="btn btn-primary">visit on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-12">
+        <h2>Demo</h2>
+        The following video demonstrates the usage from the perspective of a student uploading a solution and getting feedback from the system.
 
+          <div class="row justify-content-md-center">
+            <div class="col-8">
+              <div class="embed-responsive embed-responsive-4by3">
+  <iframe  src="https://www.youtube-nocookie.com/embed/ifyUssK6PJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- content end -->
+</main>
+<!-- /.container -->
 {{ end }}

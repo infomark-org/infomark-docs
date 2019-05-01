@@ -5,21 +5,39 @@
     </head>
     <body>
         {{- partial "header.html" . -}}
-        <div class="doc-wrapper">
-            <div class="container">
-                <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> {{.Title}}</h1>
-                    <div class="meta">
-                        <i class="far fa-clock"></i> Last updated: {{ dateFormat ( or $.Site.Params.dateFormat " January 02, 2006" ) .Lastmod }}
+            <div class="container-fluid">
+                <div class="row flex-xl-nowrap docs">
+                    <div class="col-xl-2 col-md-1">
+                        <div class="d-none d-xl-block bd-toc">
+                            <div class="title">What's on this page?</div>
+                            {{.TableOfContents}}
+                        </div>
                     </div>
-                </div><!--//doc-header-->
-                {{ block "content" .}}
-                {{ .Content }}
+                    <div class="col-xl-10  col-md-11" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                        <div id="doc-header" class="doc-header text-center">
+                            <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> {{.Title}}</h1>
+                            <div class="meta">
+                                <i class="far fa-clock"></i> Last updated: {{ dateFormat ( or $.Site.Params.dateFormat " January 02, 2006" ) .Lastmod }}
+                            </div>
+                        </div><!--//doc-header-->
+                        <main role="main" class="container">
+                            <!-- content start -->
+                            {{ block "content" .}}
+                            {{ .Content }}
 
-                {{ end }}
+                            {{ end }}
+                            <!-- content end -->
+                        </main><!-- /.container -->
+                    </div>
+                </div>
             </div><!--//container-->
-        </div><!--//doc-wrapper-->
 
         {{- partial "footer.html" . -}}
+    <script>
+        $("#TableOfContents a").each(function(){
+            $($(this).attr("href")).css("padding-top", "6rem").prev().css("margin-bottom", "-6rem");
+            // alert("hi");
+        });
+    </script>
     </body>
 </html>

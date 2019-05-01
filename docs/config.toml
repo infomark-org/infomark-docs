@@ -6,3 +6,4 @@ theme = "infomark.org"
 pygmentsCodeFences = true
 pygmentsStyle = "native"
 pygmentsCodefencesGuessSyntax = true
+pygmentsuseclasses = true

@@ -5,14 +5,12 @@
     </head>
     <body>
         {{- partial "header.html" . -}}
-        <div class="doc-wrapper">
-            <div class="container">
+
                 {{ block "content" .}}
                 {{ .Content }}
 
                 {{ end }}
-            </div><!--//container-->
-        </div><!--//doc-wrapper-->
+
         {{- partial "footer.html" . -}}
     </body>
 </html>
