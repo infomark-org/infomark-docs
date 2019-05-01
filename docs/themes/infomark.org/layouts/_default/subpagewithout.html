@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        {{- partial "head.html" . -}}
+    </head>
+    <body>
+        {{- partial "header.html" . -}}
+            <div class="container-fluid">
+                <div class="row flex-xl-nowrap docs">
+                    <div class="offset-xl-1 col-xl-10  col-md-12" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                        <div id="doc-header" class="doc-header text-center">
+                            <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> {{.Title}}</h1>
+                            <div class="meta">
+                                <i class="far fa-clock"></i> Last updated: {{ dateFormat ( or $.Site.Params.dateFormat " January 02, 2006" ) .Lastmod }}
+                            </div>
+                        </div><!--//doc-header-->
+                        <main role="main" class="container">
+                            <!-- content start -->
+                            {{ block "content" .}}
+                            {{ .Content }}
+
+                            {{ end }}
+                            <!-- content end -->
+                        </main><!-- /.container -->
+                    </div>
+                </div>
+            </div><!--//container-->
+
+        {{- partial "footer.html" . -}}
+    <script>
+        $("#TableOfContents a").each(function(){
+            $($(this).attr("href")).css("padding-top", "6rem").prev().css("margin-bottom", "-6rem");
+            // alert("hi");
+        });
+    </script>
+    </body>
+</html>

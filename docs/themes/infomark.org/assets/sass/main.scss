@@ -31,9 +31,18 @@ video {
   height: auto   !important;
 }
 
-.word-cloud{
-    color:$gray-500;
-    font-size:30px;
+.word-cloud {
+    a{
+
+        color:$gray-400;
+        font-size:30px;
+        padding-right:1rem;
+
+    }
+    a:hover{
+        text-decoration: none;
+        color:$gray-600;
+    }
 }
 
 .nav-border{
@@ -109,7 +118,9 @@ code {
     }
 }
 
-
+h1,h2,h3,h4{
+    margin-top:2rem;
+}
 
 .bd-toc {
     .title{
@@ -161,6 +172,10 @@ code {
     }
 }
 
+
+main{
+    margin-bottom:10rem;
+}
 
 .screenshot-holder {
     margin-top: 15px;
