@@ -13,14 +13,14 @@
                             {{.TableOfContents}}
                         </div>
                     </div>
-                    <div class="col-xl-10  col-md-11" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                    <div class="col-xl-9  col-md-11" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
                         <div id="doc-header" class="doc-header text-center">
                             <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> {{.Title}}</h1>
                             <div class="meta">
                                 <i class="far fa-clock"></i> Last updated: {{ dateFormat ( or $.Site.Params.dateFormat " January 02, 2006" ) .Lastmod }}
                             </div>
                         </div><!--//doc-header-->
-                        <main role="main" class="container">
+                        <main role="main">
                             <!-- content start -->
                             {{ block "content" .}}
                             {{ .Content }}
