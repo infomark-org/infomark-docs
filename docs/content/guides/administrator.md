@@ -104,12 +104,14 @@ To upgrade a user to a course-tutor or course-admin use the console
 
 Note, this enrolls the user to a course if the user is not enrolled. Otherwise, it simply updates the role in a course.
 
-## Auto-Tests Programming Assignments
+## Auto-Tests
 
-Each task can be linked to a docker-image and a zip file containing the test code.
+Each task of a programming assignment can be linked to a docker-image and a zip file containing the test code.
 Technically, the server process handling acting as a Restful JSON web server will communicate with separate processes, which are called `workers`. These workers can be started at different machines.
 
-><i class="fa fa-exclamation-triangle"></i> Please note, in the current version these workers have global admin privileges. This will change in the future. Hence, only start these workers on machines you trust!
+>Please note, in the current version these workers have global admin privileges. This will change in the future. Hence, only start these workers on machines you trust!
+
+### Conventions
 
 A worker communicates directory to the local docker API and runs a command like:
 
@@ -146,6 +148,35 @@ will be captured as
 If the docker child returns an exit code != 0 a default message will be sent instead. We highly encourage to locally test any new test-framework using the "docker run" command above.
 
 The workers, will download the student submission over HTTP and run these tests locally. Make sure, the used docker file exists or is already pulled from e.g. docker-hub.
+
+### Example
+
+A basic dockerfile for testing a submission might be
+
+```docker
+# Dockerfile
+FROM ubuntu:18.04
+ADD scripts/run.sh /app/run.sh
+ENTRYPOINT ["/app/run.sh"]
+```
+
+and script
+
+```bash
+# run.sh
+DATA_DIR="/data"
+SUBMISSION_FILE="$DATA_DIR/submission.zip"
+TEST_FILE="$DATA_DIR/unittest.zip"
+
+echo "this line will be ignored"
+echo "--- BEGIN --- INFOMARK -- WORKER"
+echo ${SUBMISSION_FILE}
+echo ${TEST_FILE}
+echo "--- END --- INFOMARK -- WORKER"
+echo "this line will be ignored"
+```
+
+The testing-framework, e.g., JUnit has to ensure to supress any potential output from the uploaded user code.
 
 ## Exercise Groups
 
@@ -253,3 +284,7 @@ where each '%d' is replaced by the *id*. To regenerate a specific file (e.g. you
 rm collection-course%d-sheet%d-task%d-group%d.lock
 rm collection-course%d-sheet%d-task%d-group%d.zip
 ```
+
+# API
+
+The definition of all available routes to the RESTful backend is described in our Swagger [definition file](/swagger/).

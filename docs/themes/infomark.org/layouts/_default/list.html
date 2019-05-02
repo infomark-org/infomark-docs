@@ -7,21 +7,27 @@
           <h1>InfoMark</h1>
           <div class="lead">
               a scalable, modern and open-source online course management system supporting auto-testing of programming assignments
+              <br>
+              <br>
+              <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download Latest Release</a>
           </div>
         </div>
         <div class="col-4">
-          <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download Latest Release</a>
+          <div class="embed-responsive embed-responsive-4by3">
+  <iframe  src="https://www.youtube-nocookie.com/embed/ifyUssK6PJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
         </div>
       </div>
     </div>
 </header>
 <!--//header-->
-<main role="main" class="container">
+<main role="main" class="container" id="main">
     <div class="row">
     <div class="col-12">
-      <p>
-        <a href="https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/staff/" target="_blank"> We</a>have developed InfoMark to support hundreds of students and several TAs in university courses that involve evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
-      </p>
+      <div class="text-justify">
+        <a href="https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/staff/" target="_blank"> We</a> developed InfoMark to support hundreds of students and several TAs in university courses that involve evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
+      </div>
       <p>
         The system uses the following frameworks and technologies:
       </p>
@@ -36,9 +42,9 @@
       <a href="https://docker.com">Docker</a>
       <a href="https://swagger.io/">Swagger</a>
       <a href="https://projects.coin-or.org/SYMPHONY">Symphony</a>
-      <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA</a>
+      <a href="https://jwt.io/">JWT</a>
       <a href="https://github.com/moby/moby">Moby</a>
-      <a href="">RESTful</a>
+      <a href="https://tachyons.io/">Tachyons</a>
     </div>
   </div>
     <br />
@@ -80,31 +86,19 @@
     <br />
     <div class="row">
       <div class="col-12">
-        <h2>Demo</h2>
-        The following video demonstrates the usage from the perspective of a student uploading a solution and getting feedback from the system.
-        <br /><br />
-          <div class="row justify-content-md-center">
-            <div class="col-8">
-              <div class="embed-responsive embed-responsive-4by3">
-  <iframe  src="https://www.youtube-nocookie.com/embed/ifyUssK6PJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            </div>
-          </div>
-        </div>
-
-         <div>
-                   <h2>Features</h2>
-                   <p>This gives all the advantages:</p>
-                   <ul>
+       <h2>Features</h2>
+       <p>This gives all the advantages:</p>
+       <ul>
           <li>Fast: minimal javascript assets</li>
           <li>Cross-platform: RESTful backend runs on OSX, Linux and Windows</li>
           <li>Easy to Install: a single binary contains the entire RESTful backend</li>
-          <li>Minimal Dependencies: just RabbitMQ, Redis and PostgreSQL are required and everything is bundle in docker-compose</li>
+          <li>Minimal Dependencies: just RabbitMQ, Redis and PostgreSQL are required and dependencies are bundled using docker-compose</li>
           <li>Highly-Scalable: background workers can be deployed on different machines and the unit-test workload will be distributed amongst them</li>
-          </ul>
-          </div>
+        </ul>
+      </div>
     </div>
     <!-- content end -->
 </main>
 <!-- /.container -->
+
 {{ end }}

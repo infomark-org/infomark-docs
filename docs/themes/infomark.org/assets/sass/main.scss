@@ -48,6 +48,24 @@ video {
 .nav-border{
     border-bottom: 1px solid $primary;
 }
+.nav-scroll{
+    background: $gray-800 !important;
+    border-bottom: none;
+    .navbar-nav .nav-link, .navbar-brand {
+      color: white;
+
+      &:hover{
+        color:$gray-400 ;
+      }
+    }
+
+    .navbar-nav .show>.nav-link{
+        color:white;
+    }
+
+
+}
+
 
 .header {
     // border-top: 3px solid $primary;
@@ -57,7 +75,7 @@ video {
 
     // padding: 30px 0;
     margin-top:3rem;
-    margin-bottom:2rem;
+
     padding: 60px 10%;
     a {
         color: #fff;
@@ -76,13 +94,13 @@ video {
 
 
 
-code {
+code, .chroma {
     // background: #222;
     // background: #272822;
     background: #2b303b;;
     // color: $primary;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     padding:2px 8px;
     padding-top: 4px;
@@ -127,19 +145,20 @@ h1,h2,h3,h4{
         padding-left: 1rem;
         color:$gray-600;
         font-weight:bold;
+        border-right: 1px solid #eee;
     }
     position: -webkit-sticky;
     position: sticky;
     top: 5rem;
     height: calc(100vh - 5rem);
     overflow-y: auto;
-    border-right: 1px solid #eee;
+
 
 }
 
 #TableOfContents{
     padding-right: 0;
-
+    border-right: 1px solid #eee;
     ul {
         padding-left: 1rem;
         list-style-type: none;
@@ -175,6 +194,7 @@ h1,h2,h3,h4{
 
 main{
     margin-bottom:10rem;
+    padding-top:2rem;
 }
 
 .screenshot-holder {
@@ -218,7 +238,7 @@ main{
 
 blockquote{
     background-color: #0E97EE;
-    border: 2px solid #2187BB;
+    // border: 2px solid #2187BB;
     border-radius: 5px;
     color: #ffffff;
     font-style: italic;
