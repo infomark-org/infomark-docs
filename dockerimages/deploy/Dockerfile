@@ -1,6 +1,3 @@
-# Minimal docker container to build project
-# Image: rabits/qt:5.9-desktop
-
 FROM ubuntu:16.04
 MAINTAINER Patwie <mail@patwie.com>
 
@@ -17,7 +14,6 @@ RUN mkdir /root/.ssh
 COPY id_rsa /root/.ssh/id_rsa
 COPY config /root/.ssh/config
 RUN touch /root/.ssh/known_hosts
-# COPY known_hosts /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 COPY publish.sh /opt/publish.sh

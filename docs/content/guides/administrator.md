@@ -7,11 +7,11 @@ layout: subpage
 
 # General Information
 
-The Infomark System can serve multiple courses within a single instance. The linked background workers will then be shared amongst these courses.
+The Infomark System can serve multiple courses within a single server instance. The linked background workers will then be shared amongst these courses.
 
 ## Configuration
 
-The configuration is done within a YAML config file and has the following content
+The configuration is done within a YAML config file and has the following structure:
 
 ```yaml
 # shared configuration for both
@@ -34,39 +34,50 @@ worker_workdir: /tmp
 ...
 ```
 
-Now, only the keys `rabbitmq_*` need to be shared and the same for worker and server (backend). In general, the defaults might do the job. For all secrets like passwords, tokens or keys we suggest to use `openssl rand -base64 32` to generate random high-quality secrets.
+Only the keys `rabbitmq_*` need to be shared between the server. In general, the defaults might do the job. For all secrets like passwords, tokens or keys we suggest to use `openssl rand -base64 32` to generate random high-quality secrets.
 
 
 We discuss some important settings:
 
 ### Auth_JWT
 
-Infomark supports two authentications systems: JSON-Web-Token (JWT) and sessions. If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and a refresh token. The refresh token serves the purpose to create a new short-life access token.
+Infomark supports two authentications systems:
 
-The sessions are handled in the server over cookies. Any session will stay 24h valid but expires within 20 minutes if no action is taken. Please note, the frontend usually starts frequently request to the backend even without user interaction, e.g. polling for new logs of the testing features. Hence, these sessions will be kept alive.
+- JSON-Web-Token (JWT) and
+- sessions.
+
+If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and has to be attached to the header in each request. The refresh token serves the purpose to create a new short-life access token.
+
+The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken. Please note, the frontend frequently does send request to the backend even without explicit user interaction, e.g. polling for new test-logs from auto-testing feature. Hence, these sessions will be kept alive.
 
 ### Email
 
-For technical reasons in our infrastructure we only support sendmail yet. If you remove the `sendmail_binary` key, outgoing emails will be instead displayed in the terminal. Additionally, each outgoing email will have a footnote:
+For technical reasons in our infrastructure we only support sendmail to deliver emails. If you remove the `sendmail_binary` key from the config, outgoing emails will be instead displayed in the terminal. Additionally, each outgoing email will have a footnote
 
 ```
 Sent by: FirstName LastName
 sent via Infomark
 ```
 
-We hard-coded the domain `uni-tuebingen.de` such that any registration attempt outside this domain will get a warning. You might want to see the Developer setting to hard-code your own domain there or see the developer guide on how to build the frontend.
+when these are composed by any identity.
+
+We hard-coded the domain `uni-tuebingen.de` in the front-end such that any registration attempt outside this domain will get a warning. You might want to see the developer guide to change this value.
 
 ### Directories
 
-We use directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies.
+We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest to estimate beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings using the key `max_request_submission_bytes`.
 
 ### Server-Settings
 
-To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. While each request is handled in a light-weight Go-routine we cannot stop these routines Go only has a fork-join thread-model. Instead we limit the number of bytes which are read from the client. The default of 1MB is enough for common JSON requests.
+To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. While each request is handled in a light-weight Go-routine we cannot stop these routines Go only has a fork-join thread-model. Instead we limit the number of bytes which are read from the client. The default of 1MB is enough for common JSON requests. The following keys can limit the request sizes:
 
-### Worker
+- `max_request_json_bytes`
+- `max_request_avatar_bytes`
+- `max_request_submission_bytes`
 
-Workers will ignore any queued submissions when `worker_void` is set to `true`. These workers can be turned off by `use_backend_worker: false`.
+### Background-Worker
+
+Background-Workers will ignore any queued submissions when `worker_void` is set to `true`. These workers can be turned off by `use_backend_worker: false`.
 
 ## Roles and Permissions
 
@@ -288,3 +299,9 @@ rm collection-course%d-sheet%d-task%d-group%d.zip
 # API
 
 The definition of all available routes to the RESTful backend is described in our Swagger [definition file](/swagger/).
+
+# Metrics
+
+The metrics for [Prometheus](https://prometheus.io/) are served under `localhost:<port>/metrics`. We highly suggest to not expose these metrics when using a reverse proxy like NGINX.
+
+To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/cgtuebingen/infomark/tree/master/metrics).
