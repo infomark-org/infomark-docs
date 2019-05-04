@@ -135,7 +135,7 @@ To avoid manual interaction with the database InfoMark provides a console to run
 
 The frontend is written in [Elm](https://elm-lang.org/), a functional frontend language which compiles to JavaScript. The application is just a single page application (SPA) which uses fragments for
 routing. So the server only needs to distribute the static HTML page and the REST Api which is used to
-interact with the server. The API is defined in this [repository](https://github.com/cgtuebingen/infomark-swagger)
+interact with the server. The API is defined [here](https://infomark.org/swagger/)
 using [Swagger](https://swagger.io/).
 
 
