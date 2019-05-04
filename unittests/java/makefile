@@ -1,5 +1,7 @@
 .PHONY: clean
 
+DOCKER_CALL = docker run --rm -it --net="none"
+DOCKER_IMAGE = patwie/test_java_submission:v3
 
 clean:
 	rm *.zip || true
@@ -7,18 +9,17 @@ clean:
 	rm */*.class || true
 	rm */*/*.class || true
 	rm */*/*/*.class || true
-	rm tasks/*.pdf || true
-	rm student_template/*.pdf || true
+	rm */*.pdf || true
 
 prepare: clean
 	cd tasks && pdflatex sheet.tex
-	cp tasks/*.pdf student_template/
-	zip -r solution.zip solution/* task/*.pdf
+	zip -r solution.zip \
+		solution/* \
+		task/*.pdf
 
-	cd student_template && \
-		zip -r student_template.zip ./ && \
-		cd .. && \
-		mv student_template/student_template.zip .
+	zip -r student_template.zip  \
+		student_template_0.1 \
+		task/*.pdf
 
 	cd unittest_public_0.1 && \
 		zip -r unittest_public_0.1.zip ./ && \
@@ -37,19 +38,19 @@ simulate-template:
 	cp student_template.zip /tmp/submission.zip
 	cp unittest_public_0.1.zip /tmp/unittest.zip
 
-	docker run --rm -it --net="none"                    \
+	$(DOCKER_CALL)                                      \
 	  -v /tmp/submission.zip:/data/submission.zip:ro    \
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
-	  patwie/test_java_submission:v3
+	  $(DOCKER_IMAGE)
 
 	echo "RUN private tests 0.1"
 	cp student_template.zip /tmp/submission.zip
 	cp unittest_private_0.1.zip /tmp/unittest.zip
 
-	docker run --rm -it --net="none"                    \
+	$(DOCKER_CALL)                                      \
 	  -v /tmp/submission.zip:/data/submission.zip:ro    \
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
-	  patwie/test_java_submission:v3
+	  $(DOCKER_IMAGE)
 
 	sudo rm /tmp/submission.zip
 	sudo rm /tmp/unittest.zip
@@ -60,19 +61,19 @@ simulate-solution:
 	cp solution.zip /tmp/submission.zip
 	cp unittest_public_0.1.zip /tmp/unittest.zip
 
-	docker run --rm -it --net="none"                    \
+	$(DOCKER_CALL)                                      \
 	  -v /tmp/submission.zip:/data/submission.zip:ro    \
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
-	  patwie/test_java_submission:v3
+	  $(DOCKER_IMAGE)
 
 	echo "RUN private tests 0.1"
 	cp solution.zip /tmp/submission.zip
 	cp unittest_private_0.1.zip /tmp/unittest.zip
 
-	docker run --rm -it --net="none"                    \
+	$(DOCKER_CALL)                                      \
 	  -v /tmp/submission.zip:/data/submission.zip:ro    \
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
-	  patwie/test_java_submission:v3
+	  $(DOCKER_IMAGE)
 
 	sudo rm /tmp/submission.zip
 	sudo rm /tmp/unittest.zip

@@ -7,42 +7,52 @@ layout: subpage
 
 # Unit - Tests
 
-There are some ways to ease the task of writing unit-tests. A clean directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed-up the entire process and avoid debugging steps on the server. The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image. Further, specificy the docker-image in the *makefile* helps to setup the task in InfoMark as you will need to specify it there during creating a new exercise task.
+There are some ways to ease the task of writing unit-tests.
+A clean directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed-up the entire process and avoid debugging steps on the server.
+The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
+Further, specificy the docker-image in the *makefile* helps to setup the task in InfoMark as you will need to specify it there during creating a new exercise task.
+
+InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done *within* the docker container.
 
 ## Java
+
+We suggest to use our [docker-image](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests). to run follow the guide below.
 
 We suggest to keep the following directory structure
 
 ```
 exercises
-  exercise01
+  exercise<a>
+    makefile
     tasks
       sheet.tex
     solution
       main
         FileA.java
         FileB.java
-    student_template[a.b]
+    student_template_[<a>.<b>]
       main
         FileA.java
         FileB.java
-    unittest_public[a.b]
+    unittest_public_[<a>.<b>]
       src
         __unittest
           FileAtest.java
           FileBtest.java
-    unittest_private[a.b]
+      build.xml
+    unittest_private[<a>.<b>]
       src
         __unittest
           FileAtest.java
           FileBtest.java
+      build.xml
 ```
 
-where `[a.b]` represents the exercise-task-number.
+where `[a.b]` represents the exercise-task-number. A working example can be found in the [InfoMark-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests).
 
 ### Student-Template
 
-The student-template is usually a zip-file with the exercise tasks as a PDF and a code-template. We suggest to make sure the code template can be uploaded itself to the system such that there are not compilation errors. A very basic example might be
+The student-template is usually a zip-file with the exercise tasks as a PDF and a code-template.  A very basic example might be
 
 ```java
 package main;
@@ -54,10 +64,22 @@ public class Hello {
   }
 
   public static int divide(int a, int b) {
-    return a - b;
+    return 1;
   }
 }
 
+```
+
+We suggest to make sure the code template can be uploaded itself to the system such that there are not compilation errors. The template above gives
+
+```
+[javac] Compiling 3 source files to /build/classes
+[   OK   ] HelloClassStructureTest:
+[ FAILED ] DivideValueTest:
+        Error 1/1
+          - Tag: failure
+          - Typ: junit.framework.AssertionFailedError
+          - Msg: divide(6, 2) expected:<3> but was:<1>
 ```
 
 
@@ -183,3 +205,7 @@ A good candidate for a private Test would be
     // ...
   }
 ```
+
+## Python
+
+To be written...
