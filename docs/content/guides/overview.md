@@ -79,13 +79,12 @@ It is based on several design choices:
 - Auto-Testing of programming assigments must be language-agnostic, isolated and safe.
 - All intense operations must be asynchronously scheduled.
 
+<div class="center"><img src="/images/illustrations/overview.png" /></div>
 
 # System Overview
 
 This section provides a brief overview of the InfoMark system including a description of its parts.
 We use continuous-integration tests to ensure the implementation can be built and passes all tests at any point.
-
-<div class="center"><img src="/images/illustrations/overview.png" /></div>
 
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
