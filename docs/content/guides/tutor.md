@@ -97,7 +97,7 @@ We suggest to have two sub-types of tests:
 - Structure-Tests
 - Value-Tests
 
-We have compose a `Helper.java` file to ease the work with reflections when checking the solutions of the exercise tasks.
+We have composed a [`Helper.java`](https://github.com/cgtuebingen/infomark/blob/master/unittests/java/unittest_private_0.1/src/__unittest/Helper.java) file to ease the work with reflections when checking the solutions of the exercise tasks.
 
 The overall structure should be
 
@@ -120,6 +120,9 @@ public class SomeNameTest {
   @Rule
   public Timeout globalTimeout = Timeout.seconds(5);
 
+  @Test
+  // ...
+
 }
 
 ```
@@ -128,12 +131,12 @@ We will not stop the docker process from the worker. You need to make sure to ad
 
 #### Structure-Tests
 
-A Structure-Test uses reflections to query all expected methods, checks their signatures and naming. All code from uploaded by any user of our system should only be access via reflections as their is no guarantee these called methods exists. Rather than having a compilation error, we would like to check these during runtime to ensure we can give more verbose information of what we expect.
+A Structure-Test uses reflections to query all expected methods, check their signatures and naming. All code uploaded by any user of our system should only be accessed via reflections as there is no guarantee expected methods exists. Rather than having a compilation error, we would like to check these during runtime to ensure we can give more verbose information of what we expect.
 
 
 ```java
 //  unittest_public[a.b]/src/__unittest/FileAtest.java
- @Test
+  @Test
   public void HelloClassStructureTest() {
     // no guarantee here that the class `Hello` exists --> we use Reflections
     Helper.ClassWrapper clazz = new Helper.ClassWrapper("main.Hello");
@@ -145,6 +148,17 @@ A Structure-Test uses reflections to query all expected methods, checks their si
 ```
 
 Running Structure-Tests only make sense in the public tests, so that students get feedback if we cannot test it because of missing methods or wrong signatures.
+
+If the return type of `divide` would be `double` in the uploaded solution (while we expect it to be an `int`) the output will
+
+```
+[ FAILED ] HelloClassStructureTest:
+        Error 1/1
+          - Tag: failure
+          - Typ: junit.framework.AssertionFailedError
+          - Msg: Method `public static double divide (int, int )` in `class Hello` found, but expected return type (`int`) is wrong. I just found `double`
+
+```
 
 #### Value-Tests
 
