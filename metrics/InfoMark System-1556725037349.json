@@ -43,22 +43,22 @@
           {
             "color": "green",
             "index": 1,
-            "value": 1
+            "value": 100
           }
         ],
         "valueMappings": [],
         "valueOptions": {
-          "decimals": null,
+          "decimals": 2,
           "prefix": "",
           "stat": "last",
-          "suffix": "",
+          "suffix": "%",
           "unit": "none"
         }
       },
       "pluginVersion": "6.1.6",
       "targets": [
         {
-          "expr": "sum(worker_submissions_success_total)/(sum(worker_submissions_pushed_total)*2)",
+          "expr": "sum(worker_submissions_success_total)/(sum(worker_submissions_pushed_total)*2)*100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -635,7 +635,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(rate(auth_logins_failed_logins[1h]))",
+          "expr": "sum(increase(auth_logins_failed_logins[1h]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -718,7 +718,7 @@
       "tableColumn": "Value",
       "targets": [
         {
-          "expr": "sum(rate(worker_submissions_pushed_total[1h]))",
+          "expr": "sum(increase(worker_submissions_pushed_total[1h]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -801,7 +801,7 @@
       "tableColumn": "Value",
       "targets": [
         {
-          "expr": "sum(rate(worker_submissions_pushed_total[1h]))",
+          "expr": "sum(increase(worker_submissions_pushed_total[1h]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -884,7 +884,7 @@
       "tableColumn": "Value",
       "targets": [
         {
-          "expr": "sum(rate(worker_submissions_pushed_total[1h]))",
+          "expr": "sum(increase(worker_submissions_pushed_total[1h]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1319,7 +1319,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -1350,5 +1350,5 @@
   "timezone": "",
   "title": "InfoMark System",
   "uid": "HUUForkZk",
-  "version": 32
+  "version": 36
 }
