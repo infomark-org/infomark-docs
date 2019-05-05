@@ -46,7 +46,7 @@ cd infomark-backend
 go build infomark.go
 ```
 
-Building InfoMark requires Go version at least 1.12. We use our custom GO-mod proxy to guarantee availability of go-packages if the package authors remove or silently change some behaviours. To use the exact same dependencies run
+Building InfoMark requires Go version at least 1.12. We use our custom GO-mod proxy to guarantee the availability of go-packages if the package authors remove or silently change some behaviours. To use the exact same dependencies run
 
 ```bash
 export GOPROXY=https://gomods.patwie.com/

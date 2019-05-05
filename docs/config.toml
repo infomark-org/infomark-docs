@@ -4,6 +4,6 @@ title = "InfoMark"
 theme = "infomark.org"
 
 pygmentsCodeFences = true
-pygmentsStyle = "native"
+pygmentsStyle = "friendly"
 pygmentsCodefencesGuessSyntax = true
 pygmentsuseclasses = true

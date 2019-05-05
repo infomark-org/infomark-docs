@@ -7,7 +7,7 @@ layout: subpage
 
 
 InfoMark is a scalable, modern and open-source online
-course management system supporting auto-testing of programming assignments scaling to thousand of students.
+course management system supporting auto-testing of programming assignments scaling to thousands of students.
 
 Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
 
@@ -55,16 +55,16 @@ After registration in the web-interface the email address needs to be confirmed.
 # confirm email
 ./infomark console user confirm your@email.com
 
-# find id of user
+# find the id of a user
 ./infomark console user find your@email.com
 
     1 YourFirstname YourLastname your@email.com
 
-# add user with id "1" to admins.
+# add the user with id "1" to admins.
 ./infomark console admin add 1
 ```
 
-In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark. See the Administartor Guide for different roles.
+In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark. See the Administrator Guide for different roles.
 
 # Design Choices
 
@@ -76,7 +76,7 @@ It is based on several design choices:
 - Every part must be open-source and robust.
 - The backend must be easy to deploy, maintain and scalable.
 - The frontend must be light-weight, fast and responsive.
-- Auto-Testing of programming assigments must be language-agnostic, isolated and safe.
+- Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
 - All intense operations must be asynchronously scheduled.
 
 <div class="center"><img src="/images/illustrations/overview.png" /></div>
@@ -97,15 +97,15 @@ The backend acts as a Restful JSON web server and is written in [Go](https://gol
 - We use a [PostgreSQL](https://www.postgresql.org/) database to store all dynamic data.
 - Computationally intensive operations are scheduled and balanced across several background workers asynchronous via [RabbitMQ](https://www.rabbitmq.com/).
 - It uses [Redis](https://redis.io/) as a light-weight key-value memory store.
-- [Docker](https://www.docker.com/) is used a as light-weight sandbox to run auto-tests of  solutions to programming assignments in a isolated environment.
+- [Docker](https://www.docker.com/) is used as a light-weight sandbox to run auto-tests of  solutions to programming assignments in an isolated environment.
 
-Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed accross multiple machines. We recommmend to use one worker process for 100 students. The workers can be added or removed at any time.
+Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed across multiple machines. We recommend using one worker process for 100 students. The workers can be added or removed at any time.
 
 Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.
 
 ## Console
 
-To avoid manual interaction with the database InfoMark provides a console to run several commands like enroll a student into a course/group, set role of user.
+To avoid manual interaction with the database InfoMark provides a console to run several commands like enrolling a student into a course/group, set the role of a user.
 
 ```bash
 ./infomark console user find jane.doe
@@ -134,7 +134,7 @@ To avoid manual interaction with the database InfoMark provides a console to run
 [![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-ui)
 
 The frontend is written in [Elm](https://elm-lang.org/), a functional frontend language which compiles to JavaScript. The application is just a single page application (SPA) which uses fragments for
-routing. So the server only needs to distribute the static HTML page and the REST Api which is used to
+routing. So the server only needs to distribute the static HTML page and the REST API which is used to
 interact with the server. The API is defined [here](https://infomark.org/swagger/)
 using [Swagger](https://swagger.io/).
 

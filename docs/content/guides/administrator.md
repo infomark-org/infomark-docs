@@ -106,11 +106,11 @@ To upgrade a user to a course-tutor or course-admin use the console
 
 ```bash
 # set permission to student
-./infomark console course enroll [course-id] [the-user-id] 0
+./infomark console course enroll [course-id] [the-user-id] student
 # set permission to tutor
-./infomark console course enroll [course-id] [the-user-id] 1
+./infomark console course enroll [course-id] [the-user-id] tutor
 # set permission to admin
-./infomark console course enroll [course-id] [the-user-id] 2
+./infomark console course enroll [course-id] [the-user-id] admin
 ```
 
 Note, this enrolls the user to a course if the user is not enrolled. Otherwise, it simply updates the role in a course.
