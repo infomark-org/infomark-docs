@@ -48,11 +48,11 @@ Infomark supports two authentications systems:
 
 If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and has to be attached to the header in each request. The refresh token serves the purpose to create a new short-life access token.
 
-The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken. Please note, the frontend frequently does send request to the backend even without explicit user interaction, e.g. polling for new test-logs from auto-testing feature. Hence, these sessions will be kept alive.
+The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken. Please note, the frontend frequently does send requests to the backend even without explicit user interaction, e.g. polling for new test-logs from the auto-testing feature. Hence, these sessions will be kept alive.
 
 ### Email
 
-For technical reasons in our infrastructure we only support sendmail to deliver emails. If you remove the `sendmail_binary` key from the config, outgoing emails will be instead displayed in the terminal. Additionally, each outgoing email will have a footnote
+For technical reasons, our infrastructure only supports sendmail to deliver emails. If you remove the `sendmail_binary` key from the config, outgoing emails will be instead displayed in the terminal. Additionally, each outgoing email will have a footnote
 
 ```
 Sent by: FirstName LastName
@@ -65,7 +65,7 @@ We hard-coded the domain `uni-tuebingen.de` in the front-end such that any regis
 
 ### Directories
 
-We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest to estimate beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings using the key `max_request_submission_bytes`.
+We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest estimating beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings using the key `max_request_submission_bytes`.
 
 ### Server-Settings
 
@@ -187,7 +187,7 @@ echo "--- END --- INFOMARK -- WORKER"
 echo "this line will be ignored"
 ```
 
-The testing-framework, e.g., JUnit has to ensure to supress any potential output from the uploaded user code.
+The testing-framework, e.g., JUnit has to ensure to suppress any potential output from the uploaded user code.
 
 ## Exercise Groups
 
@@ -195,7 +195,7 @@ InfoMark supports multiple exercise groups per course. These are usually weekly 
 
 The system collects *bids* from students. Each bid indicates a preference to different dates of the exercise groups (10 means best choice, 1 means the student would like to take another exercise group). By definition each student is enrolled into one unique group only. But, tutors can advise several exercise groups.
 
-To guarantee the best possible assignment between student and exercise groups -- maximizing the overall happiness -- we solve an Integer-Programm using [Symphony](https://projects.coin-or.org/SYMPHONY). Symphony can solve this problem instance with several exercise groups and thousand of students reliably.
+To guarantee the best possible assignment between student and exercise groups -- maximizing the overall happiness -- we solve an Integer-Programm using [Symphony](https://projects.coin-or.org/SYMPHONY). Symphony can solve this problem instance with several exercise groups and thousands of students reliably.
 
 The folder `assignment_solver` contains the docker image. Alternatively you can pull the docker image `patwie/symphony` from docker-hub.
 
@@ -276,20 +276,20 @@ To load data from a snapshot run
 
 ## Generated Files
 
-The InfoMark-backend generates file in an internal cron-job. The cron-jobs have
+The InfoMark-backend generates files in an internal cron-job. The cron-jobs have
 a setting `cronjob_intervall_*` which specifies the interval these jobs should run.
 One cronjob is `submission_zip`, which will zip all submissions together (per group and task) such that tutors/TAs can download the entire bundle of submissions.
 
 The job will create a lock file to avoid creating the same zip again and to avoid race conditions.
 Setting the interval is done via the setting `cronjob_intervall_submission_zip`.
 
-These files resides in the directory `generated_files_dir` with the name
+These files reside in the directory `generated_files_dir` with the name
 
 ```
 collection-course%d-sheet%d-task%d-group%d.lock
 ```
 
-where each '%d' is replaced by the *id*. To regenerate a specific file (e.g. you extended the due-date for an exercise) simply remove both file
+where each '%d' is replaced by the *id*. To regenerate a specific file (e.g. you extended the due date for an exercise) simply remove both files
 
 ```bash
 rm collection-course%d-sheet%d-task%d-group%d.lock
@@ -302,6 +302,6 @@ The definition of all available routes to the RESTful backend is described in ou
 
 # Metrics
 
-The metrics for [Prometheus](https://prometheus.io/) are served under `localhost:<port>/metrics`. We highly suggest to not expose these metrics when using a reverse proxy like NGINX.
+The metrics for [Prometheus](https://prometheus.io/) are served under `localhost:<port>/metrics`. We highly suggest not to expose these metrics when using a reverse proxy like NGINX.
 
 To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/cgtuebingen/infomark/tree/master/metrics).
