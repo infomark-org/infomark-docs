@@ -52,8 +52,8 @@ simulate-template:
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
 	  $(DOCKER_IMAGE)
 
-	sudo rm /tmp/submission.zip
-	sudo rm /tmp/unittest.zip
+	rm /tmp/submission.zip
+	rm /tmp/unittest.zip
 
 
 simulate-solution:
@@ -75,5 +75,5 @@ simulate-solution:
 	  -v /tmp/unittest.zip:/data/unittest.zip:ro        \
 	  $(DOCKER_IMAGE)
 
-	sudo rm /tmp/submission.zip
-	sudo rm /tmp/unittest.zip
+	rm /tmp/submission.zip
+	rm /tmp/unittest.zip

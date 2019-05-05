@@ -13,8 +13,18 @@ cd ${HOME_DIR}/java/src
 sudo -u simple_ci_runner -H unzip ${SUBMISSION_FILE} >/dev/null 2>&1
 
 # consider the existance of a __unittest folder as attack!
-if [ -d "${HOME_DIR}/java/src/__unittest" ]; then
-  exit 200
+lines=$(find ${HOME_DIR}/java/src/ -type d -name "__unittest" | wc -l)
+if [[ ! $lines -eq 0 ]]; then
+  echo "--- BEGIN --- INFOMARK -- WORKER"
+  echo "Please remove the __unittest folder(s) from your submission."
+  echo "Writing unit-tests is our job not yours :-)"
+  echo "We found the following directories:"
+  find ${HOME_DIR}/java/src/ -type d -name "__unittest" | sed -E 's/\/home\/simple_ci_runner\/java\/src\//  - /g'
+  echo "Please remove them!"
+  echo "--- END --- INFOMARK -- WORKER"
+  exit 0
+  # TODO(): discuss if we simply remove these directories
+  # rm "${HOME_DIR}/java/src/__unittest"
 fi
 
 # unzip tests

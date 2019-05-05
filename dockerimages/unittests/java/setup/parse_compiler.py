@@ -15,4 +15,3 @@ with open("/tmp/compile.log", "r") as f:
     if not ignore:
       if g.startswith("[javac]"):
         print(g.replace('/home/simple_ci_runner/java', ''))
-
