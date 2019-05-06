@@ -1,14 +1,14 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y sudo build-essential unzip openjdk-11-jdk ant python3
-
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   sudo \
   build-essential \
   unzip \
   openjdk-11-jdk \
-  ant python3 \
+  ant \
+  python3 \
+  ant-optional \
   && rm -rf /var/lib/apt/lists/*
 
 

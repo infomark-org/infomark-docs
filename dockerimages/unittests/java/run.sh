@@ -40,6 +40,8 @@ cat /tmp/compile.log
 sudo chmod o+r /tmp/compile.log
 
 echo "--- BEGIN --- INFOMARK -- WORKER"
+java --version
+javac --version
 PYTHONIOENCODING=UTF-8 python3 parse_compiler.py
 PYTHONIOENCODING=UTF-8 python3 junit_xml_report_translator.py
 echo "--- END --- INFOMARK -- WORKER"
