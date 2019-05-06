@@ -222,4 +222,18 @@ A good candidate for a private test would be
 
 ## Python
 
-To be written...
+We provide the a very basic but working test set for checking python programming assignment solutions in our [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/python).
+
+The basic idea is that any upload will be unzipped into a directory together with the unit-test:
+
+```
+/src
+  <name>.py        # from student submission
+  <name>_test.py   # from testing-framework
+```
+
+Hereby, again the submission upload will be extracted first and the test framework will be extracted after such that it cannot be overwritten. Tests are executed via
+
+```bash
+python3 -m unittest discover -s . --verbose -p '*_test.py'
+```

@@ -10,7 +10,7 @@ TEST_FILE="$DATA_DIR/unittest.zip"
 
 # unpack submission
 cd ${HOME_DIR}/java/src
-sudo -u simple_ci_runner -H unzip ${SUBMISSION_FILE} >/dev/null 2>&1
+unzip ${SUBMISSION_FILE}
 
 # consider the existance of a __unittest folder as attack!
 lines=$(find ${HOME_DIR}/java/src/ -type d -name "__unittest" | wc -l)
@@ -33,11 +33,11 @@ unzip ${TEST_FILE} >/dev/null 2>&1
 chmod -R 555 ${HOME_DIR}/java/src/__unittest
 
 # run unit tests
-sudo -u simple_ci_runner -H ant junit > /tmp/compile.log || true
+ant junit > /tmp/compile.log || true
 cat /tmp/compile.log
 
 # run report translator
-sudo chmod o+r /tmp/compile.log
+chmod o+r /tmp/compile.log
 
 echo "--- BEGIN --- INFOMARK -- WORKER"
 java --version

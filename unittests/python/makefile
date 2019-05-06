@@ -1,21 +1,13 @@
-.PHONY: clean
+.PHONY: clean prepare
 
 DOCKER_CALL = docker run --rm -it --net="none"
-DOCKER_IMAGE = patwie/test_java_submission:v3
+DOCKER_IMAGE = patwie/test_python3_submission:v3
 TASKS = 0.1
 
 clean:
-	rm *.zip || true
+	rm */*.pyc || true
 	rm */*.zip || true
-	rm */*.class || true
-	rm */*/*.class || true
-	rm */*/*/*.class || true
 	rm */*.pdf || true
-
-debug:
-	for task in ${TASKS} ; do                                               \
-		echo $$task ;                                                         \
-	done
 
 prepare: clean
 	cd tasks && pdflatex sheet.tex
@@ -46,6 +38,8 @@ prepare: clean
 			mv student_template_$${task}/student_template_$${task}.zip .  ;     \
 	done
 
+
+
 simulate-template:
 	for kind in public private ; do                                         \
 	for task in ${TASKS} ; do                                               \
@@ -65,7 +59,7 @@ simulate-solution:
 	for kind in public private ; do                                         \
 	for task in ${TASKS} ; do                                               \
 		echo "RUN $${kind} tests $${task}" ;                                  \
-		cp solution.zip /tmp/submission.zip ;                                 \
+		cp solution_$${task}.zip /tmp/submission.zip ;                        \
 		cp unittest_$${kind}_$${task}.zip /tmp/unittest.zip ;                 \
 		$(DOCKER_CALL)                                                        \
 		  -v /tmp/submission.zip:/data/submission.zip:ro                      \
