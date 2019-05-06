@@ -29,7 +29,9 @@ fi
 cd ${HOME_DIR}/python/src
 unzip ${TEST_FILE} >/dev/null 2>&1
 
+python3 -m unittest discover -s . --verbose -p '*_test.py' &> /tmp/test.log || true
+
 echo "--- BEGIN --- INFOMARK -- WORKER"
 python3 --version
-python3 -m unittest discover -s . --verbose -p '*_test.py'
+cat /tmp/test.log | sed -E 's/\/home\/simple_ci_runner\/python\/src\///g'
 echo "--- END --- INFOMARK -- WORKER"

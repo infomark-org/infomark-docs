@@ -237,3 +237,50 @@ Hereby, again the submission upload will be extracted first and the test framewo
 ```bash
 python3 -m unittest discover -s . --verbose -p '*_test.py'
 ```
+
+As python-code can be be written without any datatypes you will need to test if the methods with the correct signatue exists.
+
+For a given upload with content
+
+```python
+# hello.py
+def divide(a, b):
+  return a + b  # here is a mistake
+```
+
+A test might look like:
+
+```python
+# hello_test.py
+import unittest
+
+
+class Testdivide(unittest.TestCase):
+
+  def test_divide(self):
+    import hello
+    self.assertTrue(hasattr(hello, 'divide'))
+
+    if hasattr(hello, 'divide'):
+      self.assertEqual(hello.divide(14, 7), 2, "Should be 2")
+```
+
+This would produce the output
+
+```
+Python 3.7.3
+test_divide (divide_test.Testdivide) ... FAIL
+
+======================================================================
+FAIL: test_divide (divide_test.Testdivide)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "divide_test.py", line 11, in test_divide
+    self.assertEqual(hello.divide(14, 7), 2, "Should be 2")
+AssertionError: 21 != 2 : Should be 2
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+```
