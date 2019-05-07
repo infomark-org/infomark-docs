@@ -16,14 +16,9 @@ class Failure:
             self.message = xml_failure.attrib["message"]
 
     def GetMarkdown(self) -> str:
-        markdown = "          - Tag: {FailTag}\n"
-        markdown += "          - Typ: {FailType}\n"
-        markdown += "          - Msg: {FailMessage}\n\n"
-        markdown = markdown.format_map(
-            defaultdict(str,
-                        FailTag=self.failure_tag,
-                        FailType=self.failure_type,
-                        FailMessage=self.message))
+        markdown = "          - Tag: " + self.failure_tag + "\n"
+        markdown += "          - Typ: " + self.failure_type + "\n"
+        markdown += "          - Msg: " + self.message + "\n"
         return markdown
 
 
@@ -50,13 +45,8 @@ class TestCase:
                             Failed=" FAILED "))
             for i in range(len(self.failures)):
                 failure = self.failures[i]
-                markdown += "        Error {FailureNumber}/{FailureCount}\n"
+                markdown += "        Error " + str(i+1) + "/" + str(len(self.failures)) + "\n"
                 markdown += failure.GetMarkdown()
-                print(markdown, i + 1)
-                markdown = markdown.format_map(
-                    defaultdict(str,
-                                FailureNumber=i + 1,
-                                FailureCount=len(self.failures)))
         return markdown
 
 
