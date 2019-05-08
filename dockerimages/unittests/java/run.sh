@@ -27,6 +27,10 @@ if [[ ! $lines -eq 0 ]]; then
   # rm "${HOME_DIR}/java/src/__unittest"
 fi
 
+# remove black listes files
+find ${HOME_DIR}/java/src/ -name "module-info.java" -type f -delete
+
+
 # unzip tests
 cd ${HOME_DIR}/java
 unzip ${TEST_FILE} >/dev/null 2>&1
