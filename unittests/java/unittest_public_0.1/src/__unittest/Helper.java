@@ -29,12 +29,64 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Helper {
+
+  public static class Pair<A, B> {
+    public A a;
+    public B b;
+
+    public Pair(A a, B b) {
+      this.a = a;
+      this.b = b;
+    }
+  }
+
+  public static class Triplet<A, B, C> {
+    public A a;
+    public B b;
+    public C c;
+
+    public Triplet(A a, B b, C c) {
+      this.a = a;
+      this.b = b;
+      this.c = c;
+    }
+  }
+
+  public static class Quadruple<A, B, C, D> {
+    public A a;
+    public B b;
+    public C c;
+    public D d;
+
+    public Quadruple(A a, B b, C c, D d) {
+      this.a = a;
+      this.b = b;
+      this.c = c;
+      this.d = d;
+    }
+  }
+
+
+
   // return "Integer" from "java.class.integer"
   private static String getNameAfterDot(Object str) {
     String in = "" + str;
     String[] s = in.split("\\.");
-    return s[s.length - 1];
+    return clean_array_types(s[s.length - 1]);
   }
+
+  public static String clean_array_types(String parameters){
+      // https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html#getName--
+      parameters = parameters.replaceAll("class \\[Z", "boolean[]");
+      parameters = parameters.replaceAll("class \\[B", "byte[]");
+      parameters = parameters.replaceAll("class \\[S", "short[]");
+      parameters = parameters.replaceAll("class \\[I", "int[]");
+      parameters = parameters.replaceAll("class \\[J", "long[]");
+      parameters = parameters.replaceAll("class \\[F", "float[]");
+      parameters = parameters.replaceAll("class \\[D", "double[]");
+      parameters = parameters.replaceAll("class \\[C", "char[]");
+      return parameters;
+    }
 
   // join a collection into a string with delimiter ","
   public static String join(Object[] s) {
@@ -46,7 +98,7 @@ public class Helper {
     for (int i = 1; i < l; i++) {
       str += ", " + Helper.getNameAfterDot(s[i]);
     }
-    return str;
+    return clean_array_types(str);
   }
 
   // guess the type of the parameters
@@ -154,6 +206,8 @@ public class Helper {
       return methodHnd;
     }
 
+
+
     // nice printout like "do_something(Integer, Integer)" (static)
     public static String toString(
         String method_name, int expected_modifier, Type expected_returnType, Class<?>... values) {
@@ -161,8 +215,9 @@ public class Helper {
       str += " " + Helper.getNameAfterDot(expected_returnType);
       str += " " + method_name;
       str += " (";
-      if (values.length > 0)
+      if (values.length > 0){
         str += Helper.join(values);
+      }
       str += " )";
 
       return str;
@@ -182,6 +237,7 @@ public class Helper {
       str += " " + Helper.getNameAfterDot(methodHnd.getGenericReturnType());
       str += " " + name();
       str += " (";
+
       str += Helper.join(methodHnd.getGenericParameterTypes());
 
       str += " )";
@@ -421,6 +477,8 @@ public class Helper {
         Method[] allExpectedMethods = expected.get().getDeclaredMethods();
         Method[] allActualMethods = get().getDeclaredMethods();
 
+        String msg = "";
+
         for (Method expected_method : allExpectedMethods) {
           boolean exists = false;
           // find exact match in current class
@@ -436,13 +494,17 @@ public class Helper {
             }
           }
           if (!exists) {
-            String msg = "We expected to find `"
-                + (new Helper.MethodWrapper(this, expected_method)).toString() + "` in ";
+            msg += "                  -  " + (new Helper.MethodWrapper(this, expected_method)).toString() + "\n";
             // msg += "you implementation in `class " + name() + "`. But it is not there.";
             // "Could not retrieve method `" + (new Helper.MethodWrapper(this,
             // expected_method)).toString() + "` in `class " + name() + "`."
-            fail(msg);
+
           }
+        }
+
+        if(msg.length() > 0){
+          fail("We expected to find in class `"+ name()  +"` the following method(s):\n"+ msg+
+            "                 But we could not find them.");
         }
 
       } catch (Exception e) {
@@ -614,21 +676,21 @@ public class Helper {
 
   public static class StreamRecorder {
 
-  	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		private final PrintStream originalOut = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
-  	public void start() {
-  		outContent.reset();
-			System.setOut(new PrintStream(outContent));
-		}
+    public void start() {
+      outContent.reset();
+      System.setOut(new PrintStream(outContent));
+    }
 
-		public String stop() {
-			String captured = outContent.toString();
-			System.setOut(originalOut);
-			return captured.trim();
+    public String stop() {
+      String captured = outContent.toString();
+      System.setOut(originalOut);
+      return captured.trim();
       // return "kk";
-		}
-	}
+    }
+  }
 
   public static class StreamTester {
 
@@ -643,7 +705,7 @@ public class Helper {
         String actual_line = "";
 
         if (i < actual_lines.length ){
-        	actual_line = actual_lines[i].trim();
+          actual_line = actual_lines[i].trim();
         }
 
         if(!expected_line.equals(actual_line)){
