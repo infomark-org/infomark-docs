@@ -7,6 +7,24 @@ layout: subpage
 
 # Unit - Tests
 
+Unit-tests consists of
+- a submission `<STUDENT_UPLOAD.ZIP>` made by a student
+- a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
+- a docker-image name `<YOUR_DOCKER_IMAGE>`
+
+Each infomark-worker will fetch a submission from a queue and execute a command which is equal to
+
+```bash
+docker run --rm -it --net="none" \
+  -v <STUDENT_UPLOAD.ZIP>:/data/submission.zip:ro \
+  -v <TASK_SEPCIFIC_TEST.ZIP>:/data/unittest.zip:ro  \
+  <YOUR_DOCKER_IMAGE>
+```
+
+and capture the output which is store in the database and displayed the student resp. the tutor who grades the solution.
+
+## Overview
+
 There are some ways to ease the task of writing unit-tests.
 A clear directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed up the entire process and avoid debugging steps on the server.
 The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
@@ -297,6 +315,22 @@ FAILED (failures=1)
 ## C++
 
 Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp).
+The final directory structure *inside* the docker container will be
+
+```
+/src
+  lib/             # from the upload/student_template
+    divide.cpp     # from the upload/student_template
+    divide.hpp     # from the upload/student_template
+  hello.cpp        # from the upload/student_template
+  hello_test.cpp   # from the test
+  catch.hpp        # from the test
+  CMakeLists.txt   # from the test
+  run.sh           # from the test
+```
+
+Any file from the testing-zip will override a file from the uploaded submission if such a file exists. Further, we automatically remove any "*.sh" from the submission file in our Docker-setup.
+
 Any submission consists of a main file
 
 ```cpp
