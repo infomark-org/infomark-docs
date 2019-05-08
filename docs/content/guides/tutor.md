@@ -9,9 +9,9 @@ layout: subpage
 
 Unit-tests consists of
 
-- a submission `<STUDENT_UPLOAD.ZIP>` made by a student
-- a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
-- a docker-image name `<YOUR_DOCKER_IMAGE>`
+* a submission `<STUDENT_UPLOAD.ZIP>` made by a student
+* a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
+* a docker-image name `<YOUR_DOCKER_IMAGE>`
 
 Each infomark-worker will fetch a submission from a queue and execute a command which is equal to
 
