@@ -1,7 +1,7 @@
 FROM python:3.7
 
-ADD setup/ /app/setup/
-ADD run.sh /app/run.sh
+COPY setup/ /app/setup/
+COPY run.sh /app/run.sh
 RUN chmod -R 705 /app
 
 RUN groupadd -g 999 simple_ci_runner && \

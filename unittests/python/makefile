@@ -7,6 +7,7 @@ TASKS = 0.1
 clean:
 	rm */*.pyc || true
 	rm */*.zip || true
+	rm *.zip || true
 	rm */*.pdf || true
 
 prepare: clean
