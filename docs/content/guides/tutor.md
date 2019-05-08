@@ -37,9 +37,9 @@ We provide several testing-templates and examples
 
 | language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
 |----------|:-------------|:-------:|:------:|
-| Java 11 |  [patwie/test_java_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
-| Python3 |  [patwie/test_python3_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) |
-| C++ |  [patwie/test_cpp_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
+| Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
+| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) | 
+| C++ |  [patwie/test_cpp_submission:latest](https://hub.docker.com/r/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
 
 
 ## Java 11
