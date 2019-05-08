@@ -14,7 +14,16 @@ Further, specifying the docker-image in the *makefile* helps to set up the task 
 
 InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done *within* the docker container.
 
-## Java
+We provide several testing-templates and examples
+
+| language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
+|----------|:-------------|:-------:|:------:|
+| Java 11 |  [patwie/test_java_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
+| Python3 |  [patwie/test_python3_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) |
+| C++ |  [patwie/test_cpp_submission:latest](https://cloud.docker.com/u/patwie/repository/docker/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
+
+
+## Java 11
 
 We suggest using our [docker-image](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests) to run follow the guide below.
 
@@ -220,7 +229,7 @@ A good candidate for a private test would be
   }
 ```
 
-## Python
+## Python 3
 
 We provide the a very basic but working test set for checking python programming assignment solutions in our [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/python).
 
@@ -284,3 +293,99 @@ Ran 1 test in 0.001s
 
 FAILED (failures=1)
 ```
+
+## C++
+
+Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp).
+Any submission consists of a main file
+
+```cpp
+// hello.cpp
+#include <stdio.h>
+#include "lib/divide.h"
+
+int main(int argc, char const *argv[]) {
+  printf("%d / %d = %d\n", 6, 3, divide(6, 3));
+  return 0;
+}
+```
+
+and a implementation in `lib`
+
+```cpp
+// lib/divide.cpp
+#include "divide.h"
+
+int divide(int a, int b) { return a + b; }
+```
+
+with forward-declaration
+
+```cpp
+// lib/divide.h
+#ifndef LIB_DIVIDE_H_
+#define LIB_DIVIDE_H_
+
+int divide(int a, int b);
+
+#endif  // LIB_DIVIDE_H_
+```
+
+As the implementation of `divide` is not correct the output will be:
+
+    Alpine clang version 5.0.1 (tags/RELEASE_501/final) (based on LLVM 5.0.1)
+    Target: x86_64-alpine-linux-musl
+    Thread model: posix
+    InstalledDir: /usr/bin
+    -- The C compiler identification is GNU 6.4.0
+    -- The CXX compiler identification is GNU 6.4.0
+    -- Check for working C compiler: /usr/bin/cc
+    -- Check for working C compiler: /usr/bin/cc -- works
+    -- Detecting C compiler ABI info
+    -- Detecting C compiler ABI info - done
+    -- Detecting C compile features
+    -- Detecting C compile features - done
+    -- Check for working CXX compiler: /usr/bin/c++
+    -- Check for working CXX compiler: /usr/bin/c++ -- works
+    -- Detecting CXX compiler ABI info
+    -- Detecting CXX compiler ABI info - done
+    -- Detecting CXX compile features
+    -- Detecting CXX compile features - done
+    -- Configuring done
+    -- Generating done
+    -- Build files have been written to: /src/build
+    Scanning dependencies of target hello
+    [ 33%] Building CXX object CMakeFiles/hello.dir/hello_test.cpp.o
+    [ 66%] Building CXX object CMakeFiles/hello.dir/lib/divide.cpp.o
+    [100%] Linking CXX executable hello
+    [100%] Built target hello
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    hello is a Catch v2.7.2 host application.
+    Run with -? for options
+    -------------------------------------------------------------------------------
+    Divide should be correct
+    -------------------------------------------------------------------------------
+    /src/hello_test.cpp:7
+    ...............................................................................
+    /src/hello_test.cpp:8: FAILED:
+      REQUIRE( divide(6, 3) == 2 )
+    with expansion:
+      9 == 2
+    ===============================================================================
+    test cases: 1 | 1 failed
+    assertions: 1 | 1 failed
+
+The output would also contain all linking issues (wrongly named function) like
+
+    CMakeFiles/hello.dir/hello_test.cpp.o: In function `____C_A_T_C_H____T_E_S_T____0()':
+    hello_test.cpp:(.text+0x2699e): undefined reference to `divide(double, double)'
+    hello_test.cpp:(.text+0x26afd): undefined reference to `divide(double, double)'
+    collect2: error: ld returned 1 exit status
+    make[2]: *** [CMakeFiles/hello.dir/build.make:99: hello] Error 1
+    make[1]: *** [CMakeFiles/Makefile2:68: CMakeFiles/hello.dir/all] Error 2
+    make: *** [Makefile:84: all] Error 2
+    /src/run.sh: line 8: ./hello: not found
+
+> Currently, there is no way to skip non-existing methods. If a method does not exists or has the wrong signature
+> the output will containg the linking error without any test-results from the run itself. This is caused by the nature
+> of C++.

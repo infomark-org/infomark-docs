@@ -5,6 +5,6 @@
 #include "catch.hpp"
 
 TEST_CASE("Divide should be correct", "[divide]") {
-  REQUIRE(divide(6., 3.) == 2.);
-  REQUIRE(divide(14., 7.) == 2.);
+  REQUIRE(divide(6, -3) == -2);
+  REQUIRE(divide(44, 4) == 11);
 }
