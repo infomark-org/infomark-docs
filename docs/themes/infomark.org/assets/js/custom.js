@@ -31,5 +31,9 @@ $(function() {
                 // navbloglogo.attr('src', 'img/logo-dark.png');
             }
         }
+
+
     });
+
+    new WOW().init();
 });

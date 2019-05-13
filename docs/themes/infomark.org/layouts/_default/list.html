@@ -6,10 +6,10 @@
         <div class="col-md-6 col-sm-12 my-sm-3">
           <h1>InfoMark</h1>
           <div class="lead">
-              a scalable, modern and open-source online course management system supporting auto-testing/grading of programming assignments
+              a scalable, modern and open source solution for programming lectures supporting auto-testing/grading of programming assignments
               <br>
               <br>
-              <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download Latest Release</a>
+              <a class="btn btn-primary" href="https://github.com/cgtuebingen/infomark/releases" target="_blank"><i class="fa fa-download"></i> Download Latest Release</a> <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=ifyUssK6PJ4&list=PL6zYOLctmwtqGGDET0a0SEsrcGtd2Fk_e" target="_blank"><i class="fa fa-youtube"></i> Video</a>
           </div>
         </div>
         <div class="col-md-4 col-sm-12 my-sm-3">
@@ -26,7 +26,7 @@
     <div class="row">
     <div class="col-12">
       <div class="text-justify">
-        We developed InfoMark to support hundreds of students and several TAs in university courses that involve evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
+        InfoMark supported thousand of students and several TAs in recent years at university courses in Tübingen, which involved evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
       </div>
       <p>With the following design goals in mind:</p>
       <ul>
@@ -72,7 +72,7 @@
                         </p>
                         Containing a Single-Page-Application
                     </p>
-                    <a href="https://github.com/cgtuebingen/infomark-ui" class="btn btn-primary">visit on GitHub</a>
+                    <a href="https://github.com/cgtuebingen/infomark-ui" class="btn btn-primary"><i class="fa fa-github"></i> visit on GitHub</a>
                 </div>
             </div>
         </div>
@@ -88,10 +88,59 @@
                         </p>
                         Containing the RESTful JSON webserver
                     </p>
-                    <a href="https://github.com/cgtuebingen/infomark-backend" class="btn btn-primary">visit on GitHub</a>
+                    <a href="https://github.com/cgtuebingen/infomark-backend" class="btn btn-primary"><i class="fa fa-github"></i> visit on GitHub</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6  wow bounceInLeft ">
+        <span class="high">A single binary</span>
+         contains the entire system (server, worker) to easily deploy InfoMark
+        <img src="/images/infomark-server.png" width="100%" />
+      </div>
+      <div class="col-md-6 ">
+      </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6 ">
+      </div>
+      <div class="col-md-6  wow bounceInRight ">
+
+        The front-end is driven by <span class="high"> minimal JavaScript assets</span> (70.23 KB) for a fast SPA experience
+      </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6 wow bounceInLeft  ">
+        <span class="high"> direct feedback</span> for students from our system after testing in a docker <span class="high"> sandbox</span>
+        <img src="/images/autotest.png" width="100%" />
+      </div>
+      <div class="col-md-6 ">
+      </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6 ">
+      </div>
+      <div class="col-md-6  wow bounceInRight ">
+        <span class="high"> Easy interaction</span>: Just drag and drop homework solutions to upload them to the server
+        <img src="/images/uploads.png" width="100%" />
+      </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6 wow bounceInLeft  ">
+        All student infomation in one place
+        <img src="/images/student-information.png" width="100%" />
+      </div>
+      <div class="col-md-6 ">
+      </div>
+    </div>
+    <div class="row" style="margin-top:4rem;">
+      <div class="col-md-6 ">
+      </div>
+      <div class="col-md-6  wow bounceInRight ">
+        Grafana: <span class="high"> live metrics</span> to monitor submission failures and traffic
+        <img src="/images/grafana.png" width="100%" />
+      </div>
     </div>
     <br />
     <!-- content end -->

@@ -1,13 +1,13 @@
 ---
 title: "Tutor's Guide"
 date: 2019-04-21
-lastmod: 2019-04-24
+lastmod: 2019-05-13
 layout: subpage
 ---
 
-# Unit - Tests
+# Auto - Tests
 
-Unit-tests consists of
+Auto-tests (unit-tests) consists of
 
 * a submission `<STUDENT_UPLOAD.ZIP>` made by a student
 * a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
@@ -23,13 +23,46 @@ docker run --rm -it --net="none" \
 ```
 
 and capture the output which is store in the database and displayed the student resp. the tutor who grades the solution.
+The most minimal and simple Dockerfile which handles uploaded solutions is
+
+```docker
+# Dockerfile
+FROM ubuntu:18.04
+ADD scripts/run.sh /app/run.sh
+ENTRYPOINT ["/app/run.sh"]
+```
+
+which uses the script
+
+```bash
+# run.sh
+DATA_DIR="/data"
+SUBMISSION_FILE="$DATA_DIR/submission.zip"
+TEST_FILE="$DATA_DIR/unittest.zip"
+
+echo "this line will be ignored"
+echo "--- BEGIN --- INFOMARK -- WORKER"
+echo ${SUBMISSION_FILE}
+echo ${TEST_FILE}
+echo "--- END --- INFOMARK -- WORKER"
+echo "this line will be ignored"
+```
+
+as an entry point. Please either use [one of our pre-defined test-examples](https://github.com/cgtuebingen/infomark/tree/master/unittests) or create your own.
+By design we assume, that
+
+* The testing-framework, e.g., JUnit, ensures that all stdout from the uploaded user code is suppressed.
+* A timeout is handled in the tests (InfoMark does not kill any running test)
+
+> We currently investigate if we want to add such a timeout-feature.
 
 ## Overview
 
 There are some ways to ease the task of writing unit-tests.
 A clear directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed up the entire process and avoid debugging steps on the server.
+
 The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
-Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task.
+Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task. An [example-Makefile](https://github.com/cgtuebingen/infomark/blob/master/unittests/python/makefile) is given in our repository.
 
 InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done *within* the docker container.
 
@@ -38,7 +71,7 @@ We provide several testing-templates and examples
 | language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
 |----------|:-------------|:-------:|:------:|
 | Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
-| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) | 
+| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) |
 | C++ |  [patwie/test_cpp_submission:latest](https://hub.docker.com/r/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
 
 
@@ -46,29 +79,29 @@ We provide several testing-templates and examples
 
 We suggest using our [docker-image](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests) to run follow the guide below.
 
-We suggest keeping the following directory structure
+We use the following directory structure to reduce the workload of writing re-usable unit-tests.
 
-```
+```bash
 exercises
   exercise<a>
     makefile
-    tasks
+    tasks                             # any LaTeX related content describing the exercise
       sheet.tex
-    solution
+    solution                          # sample solution
       main
         FileA.java
         FileB.java
-    student_template_[<a>.<b>]
+    student_template_[<a>.<b>]        # student-template for each task
       main
         FileA.java
         FileB.java
-    unittest_public_[<a>.<b>]
+    unittest_public_[<a>.<b>]         # all tests without output visible to students
       src
         __unittest
           FileAtest.java
           FileBtest.java
       build.xml
-    unittest_private[<a>.<b>]
+    unittest_private[<a>.<b>]        # all tests without output visible only to tutors/TAs
       src
         __unittest
           FileAtest.java
@@ -366,6 +399,23 @@ int divide(int a, int b);
 #endif  // LIB_DIVIDE_H_
 ```
 
+
+A simple way of testing C++ implementations uses the header-only library catch
+
+```cpp
+#include "lib/divide.h"
+
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do
+                           // this in one cpp file
+#include "catch.hpp"
+
+TEST_CASE("Divide should be correct", "[divide]") {
+  REQUIRE(divide(6, 3) == 2);
+}
+```
+
+> Reminder: InfoMark does not has any timeout when running the tests. We highly recommend to use any mechanism to avoid infinite loops. A potential solution is **timeout** from the **coreutils**.
+
 As the implementation of `divide` is not correct the output will be:
 
     Alpine clang version 5.0.1 (tags/RELEASE_501/final) (based on LLVM 5.0.1)
@@ -424,3 +474,4 @@ The output would also contain all linking issues (wrongly named function) like
 > Currently, there is no way to skip non-existing methods. If a method does not exists or has the wrong signature
 > the output will containg the linking error without any test-results from the run itself. This is caused by the nature
 > of C++.
+

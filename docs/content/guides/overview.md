@@ -11,31 +11,27 @@ course management system supporting auto-testing of programming assignments scal
 
 Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
 
+For more information about writing such tests see our [Tutor's Guide](/guides/tutor/). On how to use the system please refer to the [Administrator's Guide](/guides/administrator/)
+
 # Quick-Start
 
 To locally test the system we suggest to run the following commands:
 
 ```bash
-cd /tmp
-# get latest version
-export VERSION=`curl -s https://api.github.com/repos/cgtuebingen/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
-wget https://github.com/cgtuebingen/infomark/releases/download/${VERSION}/infomark.tar.gz
-tar -xzvf infomark.tar.gz
+cd /tmp && export VERSION=`curl -s https://api.github.com/repos/cgtuebingen/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
+wget -qO- https://github.com/cgtuebingen/infomark/releases/download/${VERSION}/infomark.tar.gz | tar -xzv
 
 cd infomark
-# use default settings
 cp .infomark.example.yml .infomark.yml
 cp docker-compose.example.yml docker-compose.yml
 
 # configure paths for backend
 sed -i 's/\/var\/www\/infomark-staging\/app/\/tmp\/infomark/g' /tmp/infomark/.infomark.yml
 
-
-# run these commands in separate terminals
-# start dependencies
+# start dependencies (redis, postgresql)
 sudo docker-compose up -d
 
-# create database
+# create initial database
 cd database
 PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f schema.sql
 PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha14.sql
@@ -44,7 +40,7 @@ cd ..
 
 # start a single background worker
 # sudo is required for talking to docker
-sudo ./infomark work
+sudo ./infomark work -n 1
 # start Restful JSON web server
 ./infomark serve
 ```
@@ -73,8 +69,8 @@ on your own servers to be compliant with any data privacy issues providing data 
 
 It is based on several design choices:
 
-- Every part must be open-source and robust.
-- The backend must be easy to deploy, maintain and scalable.
+- Every part must be open-source, scalable and robust.
+- The backend must be easy to deploy and to maintain.
 - The frontend must be light-weight, fast and responsive.
 - Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
 - All intense operations must be asynchronously scheduled.

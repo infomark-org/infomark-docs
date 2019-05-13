@@ -9,5 +9,6 @@ layout: subpagewithout
 
 The backend includes a console for common tasks like doing/restoring a backup, manually confirm user accounts or set permissions.
 
-See the [docs](/guides/console/commands/infomark/) for more details about each command.
+> Currently, the console can only be accessed directly on the server. We plan to add a CLI for remote handling of most operations.
 
+<a class="btn btn-secondary" href="/guides/console/commands/infomark/"><i class="fas fa-cloud-download-alt"></i> Documentation InfoMark Console</a>

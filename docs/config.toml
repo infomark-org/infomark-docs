@@ -7,3 +7,4 @@ pygmentsCodeFences = true
 pygmentsStyle = "friendly"
 pygmentsCodefencesGuessSyntax = true
 pygmentsuseclasses = true
+
