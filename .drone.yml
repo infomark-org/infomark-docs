@@ -22,11 +22,18 @@ steps:
   - tar -xzvf infomark-backend.tar.gz
   - rm infomark-backend.tar.gz
   - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
+  - cp /tmp/infomark/.infomark.example.yml /drone/src/.infomark.yml
+  - cp /tmp/infomark/infomark /drone/src/infomark
 
 - name: build_docs
   pull: never
   image: patwie/hugo:v1
   commands:
+  - mkdir /tmp/console_docs
+  - ./infomark console utils doc /tmp/console_docs
+  - cp -r /tmp/console_docs/* /drone/src/docs/content/guides/console
+  - rm /drone/src/infomark
+  - rm /drone/src/.infomark.yml
   - cd /drone/src/docs
   - hugo version
   - hugo
@@ -98,6 +105,6 @@ trigger:
   - tag
 ---
 kind: signature
-hmac: ed289b19dc540f335cb690009203c7a899e22fbd9421a8689e5bad818cdf9c84
+hmac: 2b875a13e0ed8944e00418ae12fe0cbc95912e958c5a92016b16fd0c3ea769b7
 
 ...
