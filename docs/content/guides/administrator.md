@@ -7,6 +7,8 @@ layout: subpage
 
 # General Information
 
+This page gives a brief overview of the underlying system and capabilities. It is meant to be read by people who would like to install the system. If you are provided such an instance please refer to the [Instructor's Guide](/guides/instructor)
+
 The Infomark System can serve multiple courses within a single server instance. The linked background workers will then be shared amongst these courses.
 
 ## Configuration
@@ -18,7 +20,7 @@ The configuration is done within a YAML config file and has the following struct
 # ------------------------------------------------------------------------------
 
 rabbitmq_connection: amqp://user:password@localhost:5672/
-rabbitmq_exchange: test-exchange
+rabbitmq_key: test-key
 ...
 
 # backend
@@ -34,8 +36,9 @@ worker_workdir: /tmp
 ...
 ```
 
-Only the keys `rabbitmq_*` need to be shared between the server. In general, the defaults might do the job. For all secrets like passwords, tokens or keys we suggest to use `openssl rand -base64 32` to generate random high-quality secrets.
+For an example configuration please refer to the `.infomark.example.yml` your downloaded release archive or inspect the file [on GitHub](https://github.com/cgtuebingen/infomark-backend/blob/master/.infomark.example.yml).
 
+Only the keys `rabbitmq_*` need to be shared between the server. In general, the defaults might do the job. For all secrets like passwords, tokens or keys you should use `openssl rand -base64 32` to generate random high-quality secrets.
 
 We discuss some important settings:
 
@@ -52,16 +55,16 @@ The sessions are handled on the server-side using cookies. Any session will stay
 
 ### Email
 
-For technical reasons, our infrastructure only supports sendmail to deliver emails. If you remove the `sendmail_binary` key from the config, outgoing emails will be instead displayed in the terminal. Additionally, each outgoing email will have a footnote
+For technical reasons, our infrastructure only supports the binary `sendmail` to deliver emails. If you remove the `sendmail_binary` key from the config, all emails from the system will be displayed in the terminal. Additionally, each outgoing email will have a footnote
 
 ```
 Sent by: FirstName LastName
 sent via Infomark
 ```
 
-when these are composed by any identity.
+when these are composed by any user.
 
-We hard-coded the domain `uni-tuebingen.de` in the front-end such that any registration attempt outside this domain will get a warning. You might want to see the developer guide to change this value.
+We hard-coded the domain `uni-tuebingen.de` in the front-end such that any registration attempt with an email not mathcing this domain will get a warning. You might want to see the [Developer's Guide](/guides/developer) on how to change this value.
 
 ### Directories
 
@@ -69,21 +72,23 @@ We use several directories to store uploads, generated files or common files lik
 
 ### Server-Settings
 
-To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. While each request is handled in a light-weight Go-routine we cannot stop these routines Go only has a fork-join thread-model. Instead we limit the number of bytes which are read from the client. The default of 1MB is enough for common JSON requests. The following keys can limit the request sizes:
+To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. We limit the number of bytes which are read from the client during a request. The default of 1MB is enough for common JSON requests. You can configure these limits for each kind of request using the following keys:
 
-- `max_request_json_bytes`
-- `max_request_avatar_bytes`
-- `max_request_submission_bytes`
+- `max_request_json_bytes` to limit any JSON request
+- `max_request_avatar_bytes` to limit the image size for the avatar in the profil
+- `max_request_submission_bytes` to limit the size for homework solutions
+
+There is no limit when uploading slides or extra course material.
 
 ### Background-Worker
 
-Background-Workers will ignore any queued submissions when `worker_void` is set to `true`. These workers can be turned off by `use_backend_worker: false`.
+Background-Workers can be turned off when using the config `use_backend_worker: false`.
 
 ## Roles and Permissions
 
-InfoMark has a relatively simple permission system. The permissions are linked to a request identity (the user). Each user can be either a normal user or `global admin`, which gives the user all permissions across all hosted courses.
+InfoMark has a relatively simple permission system. The permissions are linked to a request identity (the user). Each user can be either a normal user or `global admin`. Any global admin will bypass all permission checks and gives the user all permissions across all hosted courses.
 
-To upgrade/downgrade a user to `global admin` just use the console like
+To upgrade/downgrade a user to `global admin` use the console like
 
 ```bash
 # upgrade account
@@ -94,13 +99,13 @@ To upgrade/downgrade a user to `global admin` just use the console like
 
 Only, a global admin can create new courses.
 
+To get granularity in the permission system each user enrolled into a course will be assigned to one the following roles:
 
-Further, every time a user enrolls into a course, there are three roles:
-- admin: Admin for a course -- not a global admin
-- tutor: Teaching assistants who will grade homework and lead exercise groups
-- students: This is the default role.
+- *admin*: Admin for a course -- not a global admin
+- *tutor*: Teaching assistants who will grade homework and lead exercise groups
+- *students*: This is the default role.
 
-These permissions control which resources a user has access to, e.g. students cannot see other students personal information. Slides and material can be targeted to a specific group, e.g., distribute sample solution to TAs. These roles are subsets, i.e., an admin has all permissions a tutor and a student has. Tutors have additional permissions compared to students.
+These permissions control which resources a user has access to, e.g. students cannot see other students personal information. Slides and material can be targeted to a specific role, e.g., distribute sample solution to TAs. These roles are subsets, i.e., an admin has all permissions, which a tutor and a student has. Tutors have additional permissions compared to students.
 
 To upgrade a user to a course-tutor or course-admin use the console
 
@@ -117,10 +122,12 @@ Note, this enrolls the user to a course if the user is not enrolled. Otherwise, 
 
 ## Auto-Tests
 
-Each task of a programming assignment can be linked to a docker-image and a zip file containing the test code.
-Technically, the server process handling acting as a Restful JSON web server will communicate with separate processes, which are called `workers`. These workers can be started at different machines.
+Please refer to the [Tutor's Guide](/guides/tutor) for more details about writing and using auto-tests.
 
->Please note, in the current version these workers have global admin privileges. This will change in the future. Hence, only start these workers on machines you trust!
+Each task of a programming assignment can be linked to a docker-image and a zip file containing the test code.
+Technically, the server process acting as a Restful JSON web server will communicate using AMQP with separate processes, which are called `workers`. These workers can be started at different machines.
+
+>Please note, in the current version these workers have global admin privileges. This will change in the future. Hence, only start these workers on machines you trust (which is anyway a good idea).
 
 ### Conventions
 
@@ -160,34 +167,7 @@ If the docker child returns an exit code != 0 a default message will be sent ins
 
 The workers, will download the student submission over HTTP and run these tests locally. Make sure, the used docker file exists or is already pulled from e.g. docker-hub.
 
-### Example
-
-A basic dockerfile for testing a submission might be
-
-```docker
-# Dockerfile
-FROM ubuntu:18.04
-ADD scripts/run.sh /app/run.sh
-ENTRYPOINT ["/app/run.sh"]
-```
-
-and script
-
-```bash
-# run.sh
-DATA_DIR="/data"
-SUBMISSION_FILE="$DATA_DIR/submission.zip"
-TEST_FILE="$DATA_DIR/unittest.zip"
-
-echo "this line will be ignored"
-echo "--- BEGIN --- INFOMARK -- WORKER"
-echo ${SUBMISSION_FILE}
-echo ${TEST_FILE}
-echo "--- END --- INFOMARK -- WORKER"
-echo "this line will be ignored"
-```
-
-The testing-framework, e.g., JUnit has to ensure to suppress any potential output from the uploaded user code.
+We provide [examples](/guides/tutor) for testing Java, Python and C++ programming assignment solutions.
 
 ## Exercise Groups
 

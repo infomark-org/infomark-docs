@@ -1,13 +1,12 @@
 .PHONY: clean prepare
 
 DOCKER_CALL = docker run --rm -it --net="none"
-DOCKER_IMAGE = patwie/test_python3_submission:v3
+DOCKER_IMAGE = patwie/test_cpp_submission:latest
 TASKS = 0.1
 
 clean:
 	rm */*.pyc || true
 	rm */*.zip || true
-	rm *.zip || true
 	rm */*.pdf || true
 
 prepare: clean

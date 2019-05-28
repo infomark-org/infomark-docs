@@ -26,6 +26,11 @@ $fa-font-path:        "/fonts/font-awesome";
     background-color:$primary;
 }
 
+.high{
+    color:$primary;
+    font-size: 1.2rem;
+}
+
 video {
   width: 100%    !important;
   height: auto   !important;
@@ -219,6 +224,10 @@ main{
             color:$primary;
         }
     }
+
+    table{
+        width: 100%;
+    }
 }
 
 .screenshot-holder {
@@ -346,3 +355,5 @@ code[data-lang]::before{
     // background-color:red !important;
 
 }
+
+@import "animate";

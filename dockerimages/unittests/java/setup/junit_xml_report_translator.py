@@ -16,6 +16,8 @@ class Failure:
             self.message = xml_failure.attrib["message"]
 
     def GetMarkdown(self) -> str:
+        # do not use "{..}".fomat() here this causes issues
+        # when the key it self has "{" or "}" inside
         markdown = "          - Tag: " + self.failure_tag + "\n"
         markdown += "          - Typ: " + self.failure_type + "\n"
         markdown += "          - Msg: " + self.message + "\n"

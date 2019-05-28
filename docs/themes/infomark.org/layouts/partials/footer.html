@@ -6,10 +6,12 @@
     {{ $js1 := resources.Get "js/popper.min.js" }}
     {{ $js2 := resources.Get "js/bootstrap.min.js" }}
     {{ $js3 := resources.Get "js/custom.js" }}
+    {{ $js4 := resources.Get "js/wow.min.js" }}
     <script>window.jQuery || document.write('<script src="{{ $js0.Permalink }}"><\/script>')</script>
     <script src="{{$js1.Permalink}}"></script>
     <script src="{{$js2.Permalink}}"></script>
     <script src="{{$js3.Permalink}}"></script>
+    <script src="{{$js4.Permalink}}"></script>
     </script>
 
 

@@ -1,46 +1,107 @@
 ---
 title: "Tutor's Guide"
 date: 2019-04-21
-lastmod: 2019-04-24
+lastmod: 2019-05-13
 layout: subpage
 ---
 
-# Unit - Tests
+# Auto - Tests
+
+Auto-tests (unit-tests) consists of
+
+* a submission `<STUDENT_UPLOAD.ZIP>` made by a student
+* a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
+* a docker-image name `<YOUR_DOCKER_IMAGE>`
+
+Each infomark-worker will fetch a submission from a queue and execute a command which is equal to
+
+```bash
+docker run --rm -it --net="none" \
+  -v <STUDENT_UPLOAD.ZIP>:/data/submission.zip:ro \
+  -v <TASK_SEPCIFIC_TEST.ZIP>:/data/unittest.zip:ro  \
+  <YOUR_DOCKER_IMAGE>
+```
+
+and capture the output which is store in the database and displayed the student resp. the tutor who grades the solution.
+The most minimal and simple Dockerfile which handles uploaded solutions is
+
+```docker
+# Dockerfile
+FROM ubuntu:18.04
+ADD scripts/run.sh /app/run.sh
+ENTRYPOINT ["/app/run.sh"]
+```
+
+which uses the script
+
+```bash
+# run.sh
+DATA_DIR="/data"
+SUBMISSION_FILE="$DATA_DIR/submission.zip"
+TEST_FILE="$DATA_DIR/unittest.zip"
+
+echo "this line will be ignored"
+echo "--- BEGIN --- INFOMARK -- WORKER"
+echo ${SUBMISSION_FILE}
+echo ${TEST_FILE}
+echo "--- END --- INFOMARK -- WORKER"
+echo "this line will be ignored"
+```
+
+as an entry point. Please either use [one of our pre-defined test-examples](https://github.com/cgtuebingen/infomark/tree/master/unittests) or create your own.
+By design we assume, that
+
+* The testing-framework, e.g., JUnit, ensures that all stdout from the uploaded user code is suppressed.
+* A timeout is handled in the tests (InfoMark does not kill any running test)
+
+> We currently investigate if we want to add such a timeout-feature.
+
+## Overview
 
 There are some ways to ease the task of writing unit-tests.
 A clear directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed up the entire process and avoid debugging steps on the server.
+
 The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
-Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task.
+Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task. An [example-Makefile](https://github.com/cgtuebingen/infomark/blob/master/unittests/python/makefile) is given in our repository.
 
 InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done *within* the docker container.
 
-## Java
+We provide several testing-templates and examples
+
+| language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
+|----------|:-------------|:-------:|:------:|
+| Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
+| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) |
+| C++ |  [patwie/test_cpp_submission:latest](https://hub.docker.com/r/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
+
+
+## Java 11
 
 We suggest using our [docker-image](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests) to run follow the guide below.
 
-We suggest keeping the following directory structure
+We use the following directory structure to reduce the workload of writing re-usable unit-tests.
 
-```
+```bash
 exercises
   exercise<a>
     makefile
-    tasks
+    tasks                             # any LaTeX related content describing the exercise
       sheet.tex
-    solution
+    solution                          # sample solution
       main
         FileA.java
         FileB.java
-    student_template_[<a>.<b>]
+    student_template_[<a>.<b>]        # student-template for each task
       main
         FileA.java
         FileB.java
-    unittest_public_[<a>.<b>]
+    unittest_public_[<a>.<b>]         # all tests without output visible to students
       src
         __unittest
           FileAtest.java
           FileBtest.java
       build.xml
-    unittest_private[<a>.<b>]
+    unittest_private[<a>.<b>]        # all tests without output visible only to tutors/TAs
       src
         __unittest
           FileAtest.java
@@ -220,7 +281,7 @@ A good candidate for a private test would be
   }
 ```
 
-## Python
+## Python 3
 
 We provide the a very basic but working test set for checking python programming assignment solutions in our [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/python).
 
@@ -284,3 +345,133 @@ Ran 1 test in 0.001s
 
 FAILED (failures=1)
 ```
+
+## C++
+
+Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp).
+The final directory structure *inside* the docker container will be
+
+```
+/src
+  lib/             # from the upload/student_template
+    divide.cpp     # from the upload/student_template
+    divide.hpp     # from the upload/student_template
+  hello.cpp        # from the upload/student_template
+  hello_test.cpp   # from the test
+  catch.hpp        # from the test
+  CMakeLists.txt   # from the test
+  run.sh           # from the test
+```
+
+Any file from the testing-zip will override a file from the uploaded submission if such a file exists. Further, we automatically remove any "*.sh" from the submission file in our Docker-setup.
+
+Any submission consists of a main file
+
+```cpp
+// hello.cpp
+#include <stdio.h>
+#include "lib/divide.h"
+
+int main(int argc, char const *argv[]) {
+  printf("%d / %d = %d\n", 6, 3, divide(6, 3));
+  return 0;
+}
+```
+
+and a implementation in `lib`
+
+```cpp
+// lib/divide.cpp
+#include "divide.h"
+
+int divide(int a, int b) { return a + b; }
+```
+
+with forward-declaration
+
+```cpp
+// lib/divide.h
+#ifndef LIB_DIVIDE_H_
+#define LIB_DIVIDE_H_
+
+int divide(int a, int b);
+
+#endif  // LIB_DIVIDE_H_
+```
+
+
+A simple way of testing C++ implementations uses the header-only library catch
+
+```cpp
+#include "lib/divide.h"
+
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do
+                           // this in one cpp file
+#include "catch.hpp"
+
+TEST_CASE("Divide should be correct", "[divide]") {
+  REQUIRE(divide(6, 3) == 2);
+}
+```
+
+> Reminder: InfoMark does not has any timeout when running the tests. We highly recommend to use any mechanism to avoid infinite loops. A potential solution is **timeout** from the **coreutils**.
+
+As the implementation of `divide` is not correct the output will be:
+
+    Alpine clang version 5.0.1 (tags/RELEASE_501/final) (based on LLVM 5.0.1)
+    Target: x86_64-alpine-linux-musl
+    Thread model: posix
+    InstalledDir: /usr/bin
+    -- The C compiler identification is GNU 6.4.0
+    -- The CXX compiler identification is GNU 6.4.0
+    -- Check for working C compiler: /usr/bin/cc
+    -- Check for working C compiler: /usr/bin/cc -- works
+    -- Detecting C compiler ABI info
+    -- Detecting C compiler ABI info - done
+    -- Detecting C compile features
+    -- Detecting C compile features - done
+    -- Check for working CXX compiler: /usr/bin/c++
+    -- Check for working CXX compiler: /usr/bin/c++ -- works
+    -- Detecting CXX compiler ABI info
+    -- Detecting CXX compiler ABI info - done
+    -- Detecting CXX compile features
+    -- Detecting CXX compile features - done
+    -- Configuring done
+    -- Generating done
+    -- Build files have been written to: /src/build
+    Scanning dependencies of target hello
+    [ 33%] Building CXX object CMakeFiles/hello.dir/hello_test.cpp.o
+    [ 66%] Building CXX object CMakeFiles/hello.dir/lib/divide.cpp.o
+    [100%] Linking CXX executable hello
+    [100%] Built target hello
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    hello is a Catch v2.7.2 host application.
+    Run with -? for options
+    -------------------------------------------------------------------------------
+    Divide should be correct
+    -------------------------------------------------------------------------------
+    /src/hello_test.cpp:7
+    ...............................................................................
+    /src/hello_test.cpp:8: FAILED:
+      REQUIRE( divide(6, 3) == 2 )
+    with expansion:
+      9 == 2
+    ===============================================================================
+    test cases: 1 | 1 failed
+    assertions: 1 | 1 failed
+
+The output would also contain all linking issues (wrongly named function) like
+
+    CMakeFiles/hello.dir/hello_test.cpp.o: In function `____C_A_T_C_H____T_E_S_T____0()':
+    hello_test.cpp:(.text+0x2699e): undefined reference to `divide(double, double)'
+    hello_test.cpp:(.text+0x26afd): undefined reference to `divide(double, double)'
+    collect2: error: ld returned 1 exit status
+    make[2]: *** [CMakeFiles/hello.dir/build.make:99: hello] Error 1
+    make[1]: *** [CMakeFiles/Makefile2:68: CMakeFiles/hello.dir/all] Error 2
+    make: *** [Makefile:84: all] Error 2
+    /src/run.sh: line 8: ./hello: not found
+
+> Currently, there is no way to skip non-existing methods. If a method does not exists or has the wrong signature
+> the output will containg the linking error without any test-results from the run itself. This is caused by the nature
+> of C++.
+

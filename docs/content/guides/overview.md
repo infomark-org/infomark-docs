@@ -11,31 +11,27 @@ course management system supporting auto-testing of programming assignments scal
 
 Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
 
+For more information about writing such tests see our [Tutor's Guide](/guides/tutor/). On how to use the system please refer to the [Administrator's Guide](/guides/administrator/)
+
 # Quick-Start
 
 To locally test the system we suggest to run the following commands:
 
 ```bash
-cd /tmp
-# get latest version
-export VERSION=`curl -s https://api.github.com/repos/cgtuebingen/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
-wget https://github.com/cgtuebingen/infomark/releases/download/${VERSION}/infomark.tar.gz
-tar -xzvf infomark.tar.gz
+cd /tmp && export VERSION=`curl -s https://api.github.com/repos/cgtuebingen/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
+wget -qO- https://github.com/cgtuebingen/infomark/releases/download/${VERSION}/infomark.tar.gz | tar -xzv
 
 cd infomark
-# use default settings
 cp .infomark.example.yml .infomark.yml
 cp docker-compose.example.yml docker-compose.yml
 
 # configure paths for backend
 sed -i 's/\/var\/www\/infomark-staging\/app/\/tmp\/infomark/g' /tmp/infomark/.infomark.yml
 
-
-# run these commands in separate terminals
-# start dependencies
+# start dependencies (redis, postgresql)
 sudo docker-compose up -d
 
-# create database
+# create initial database
 cd database
 PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f schema.sql
 PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha14.sql
@@ -44,7 +40,7 @@ cd ..
 
 # start a single background worker
 # sudo is required for talking to docker
-sudo ./infomark work
+sudo ./infomark work -n 1
 # start Restful JSON web server
 ./infomark serve
 ```
@@ -73,8 +69,8 @@ on your own servers to be compliant with any data privacy issues providing data 
 
 It is based on several design choices:
 
-- Every part must be open-source and robust.
-- The backend must be easy to deploy, maintain and scalable.
+- Every part must be open-source, scalable and robust.
+- The backend must be easy to deploy and to maintain.
 - The frontend must be light-weight, fast and responsive.
 - Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
 - All intense operations must be asynchronously scheduled.
@@ -99,9 +95,14 @@ The backend acts as a Restful JSON web server and is written in [Go](https://gol
 - It uses [Redis](https://redis.io/) as a light-weight key-value memory store.
 - [Docker](https://www.docker.com/) is used as a light-weight sandbox to run auto-tests of  solutions to programming assignments in an isolated environment.
 
-Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed across multiple machines. We recommend using one worker process for 100 students. The workers can be added or removed at any time.
-
 Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.
+
+## Workers
+
+Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed across multiple machines.
+We recommend using one worker process for 100 students. The workers can be added or removed at any time. Infomark uses AMPQ as a message broker. Each submission will be held in a queue and each worker will execute one job concurrently to avoid too much system load. Our recommendation is one worker per available CPU core.
+
+The used amount of memory per submission can be configured. Memory-swapping is deactivated.
 
 ## Console
 
@@ -142,3 +143,11 @@ using [Swagger](https://swagger.io/).
 # Development
 
 This system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.
+
+# Requirements
+
+InfoMark has the following minimal requirements:
+- one core for server `infomark serve`  (1GB RAM)
+- one core for each backgound worker `infomark work` (depending on your docker-image size for the programming assignments)
+
+You might want to sp
