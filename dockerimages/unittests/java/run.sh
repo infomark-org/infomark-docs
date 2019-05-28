@@ -10,7 +10,7 @@ TEST_FILE="$DATA_DIR/unittest.zip"
 
 # unpack submission
 cd ${HOME_DIR}/java/src
-unzip -o ${SUBMISSION_FILE}
+unzip -o ${SUBMISSION_FILE} || true
 
 # consider the existance of a __unittest folder as attack!
 lines=$(find ${HOME_DIR}/java/src/ -type d -name "__unittest" | wc -l)
