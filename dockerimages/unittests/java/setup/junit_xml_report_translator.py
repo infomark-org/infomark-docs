@@ -79,7 +79,7 @@ def main():
     markdown = ""
     for r in reports:
         report = ErrorReport(r)
-    markdown += report.GetMarkdown()
+        markdown += report.GetMarkdown()
 
     # TODO PREAMBLE
     # print("--- BEGIN --- INFOMARK -- WORKER")
