@@ -10,7 +10,7 @@ TEST_FILE="$DATA_DIR/unittest.zip"
 
 # unpack submission
 cd ${HOME_DIR}/java/src
-unzip ${SUBMISSION_FILE}
+unzip -u ${SUBMISSION_FILE}
 
 # consider the existance of a __unittest folder as attack!
 lines=$(find ${HOME_DIR}/java/src/ -type d -name "__unittest" | wc -l)
@@ -33,7 +33,7 @@ find ${HOME_DIR}/java/src/ -name "module-info.java" -type f -delete
 
 # unzip tests
 cd ${HOME_DIR}/java
-unzip ${TEST_FILE} >/dev/null 2>&1
+unzip -u ${TEST_FILE} >/dev/null 2>&1
 chmod -R 555 ${HOME_DIR}/java/src/__unittest
 
 # run unit tests
