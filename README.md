@@ -7,7 +7,7 @@
 | [git+source](https://github.com/cgtuebingen/infomark-ui), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest) | [git+source](https://github.com/cgtuebingen/infomark-backend), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest)|
 
 
-InfoMark is an is a scalable, modern and open-source [rewrite of our](https://github.com/cgtuebingen/InfoMark-deprecated) online course management system with auto testing of students submissions [(video)](https://www.youtube.com/watch?v=ifyUssK6PJ4) using unit tests to ease the task of TAs.
+InfoMark is an is a scalable, modern and open-source [rewrite of our](https://github.com/cgtuebingen/InfoMark-deprecated) online course management system with auto testing of students submissions [(video)](https://www.youtube.com/watch?v=ifyUssK6PJ4) to ease the task of TAs.
 
 
 See [https://infomark.org](https://infomark.org) for more details.

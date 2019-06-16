@@ -992,10 +992,10 @@
       "columns": [],
       "fontSize": "100%",
       "gridPos": {
-        "h": 8,
-        "w": 10,
-        "x": 0,
-        "y": 9
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 6
       },
       "id": 16,
       "links": [],
@@ -1108,27 +1108,30 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
+      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "fill": 3,
+      "description": "",
+      "fill": 1,
       "gridPos": {
-        "h": 8,
-        "w": 14,
-        "x": 10,
+        "h": 4,
+        "w": 12,
+        "x": 0,
         "y": 9
       },
-      "id": 22,
+      "id": 26,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "show": true,
+        "show": false,
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
@@ -1139,38 +1142,56 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(worker_submissions_pushed_total) by (task_id)",
+          "expr": "histogram_quantile(0.95, sum(rate(worker_submissions_totalTime_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
+          "legendFormat": "from upload to result",
+          "refId": "C"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(worker_submissions_totalWaitTime_bucket[5m])) by (le))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "from upload to docker test",
           "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(worker_submissions_totalRunTime_bucket[5m])) by (le))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "inside docker test",
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Submissions per task",
+      "title": "Time-Benchmark (95 Quantile)",
       "tooltip": {
-        "shared": true,
+        "shared": false,
         "sort": 0,
         "value_type": "individual"
       },
       "type": "graph",
       "xaxis": {
         "buckets": null,
-        "mode": "time",
+        "mode": "series",
         "name": null,
         "show": true,
-        "values": []
+        "values": [
+          "avg"
+        ]
       },
       "yaxes": [
         {
-          "format": "short",
-          "label": null,
+          "decimals": null,
+          "format": "s",
+          "label": "time",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1199,10 +1220,10 @@
       "description": "submitted testing jobs on queue",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
+        "h": 6,
+        "w": 12,
         "x": 0,
-        "y": 17
+        "y": 13
       },
       "id": 4,
       "interval": "1m",
@@ -1309,6 +1330,177 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 5,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "6.1.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(worker_submissions_pushed_total) by (task_id)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Submissions per task",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "6.1.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(worker_submissions_pushed_total) by (task_id)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Distribution of total uploads per task",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "series",
+        "name": null,
+        "show": true,
+        "values": [
+          "max"
+        ]
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Uploads",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -1319,7 +1511,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {
@@ -1350,5 +1542,5 @@
   "timezone": "",
   "title": "InfoMark System",
   "uid": "HUUForkZk",
-  "version": 36
+  "version": 45
 }
