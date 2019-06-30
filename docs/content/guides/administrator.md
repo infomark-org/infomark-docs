@@ -36,7 +36,7 @@ worker_workdir: /tmp
 ...
 ```
 
-For an example configuration please refer to the `.infomark.example.yml` your downloaded release archive or inspect the file [on GitHub](https://github.com/cgtuebingen/infomark-backend/blob/master/.infomark.example.yml).
+For an example configuration please refer to the `.infomark.example.yml` your downloaded release archive or inspect the file [on GitHub](https://github.com/infomark-org/infomark-backend/blob/master/.infomark.example.yml).
 
 Only the keys `rabbitmq_*` need to be shared between the server. In general, the defaults might do the job. For all secrets like passwords, tokens or keys you should use `openssl rand -base64 32` to generate random high-quality secrets.
 
@@ -284,4 +284,4 @@ The definition of all available routes to the RESTful backend is described in ou
 
 The metrics for [Prometheus](https://prometheus.io/) are served under `localhost:<port>/metrics`. We highly suggest not to expose these metrics when using a reverse proxy like NGINX.
 
-To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/cgtuebingen/infomark/tree/master/metrics).
+To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/infomark-org/infomark/tree/master/metrics).

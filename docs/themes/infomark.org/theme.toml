@@ -3,7 +3,7 @@
 
 name = "InfoMark.org"
 license = "MIT"
-licenselink = "https://github.com/cgtuebingen/infomark/blob/master/LICENSE"
+licenselink = "https://github.com/infomark-org/infomark/blob/master/LICENSE"
 description = ""
 homepage = "http://infomark.org/"
 tags = []

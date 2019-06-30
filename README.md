@@ -3,11 +3,11 @@
 
 |Frontend|Backend|
 |----|----|
-|[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-ui)|[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](http://ci.patwie.com/cgtuebingen/infomark-backend)|
-| [git+source](https://github.com/cgtuebingen/infomark-ui), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest) | [git+source](https://github.com/cgtuebingen/infomark-backend), [download](https://github.com/cgtuebingen/infomark-ui/releases/latest)|
+|[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg)](http://ci.patwie.com/infomark-org/infomark-ui)|[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-backend/status.svg)](http://ci.patwie.com/infomark-org/infomark-backend)|
+| [git+source](https://github.com/infomark-org/infomark-ui), [download](https://github.com/infomark-org/infomark-ui/releases/latest) | [git+source](https://github.com/infomark-org/infomark-backend), [download](https://github.com/infomark-org/infomark-ui/releases/latest)|
 
 
-InfoMark is an is a scalable, modern and open-source [rewrite of our](https://github.com/cgtuebingen/InfoMark-deprecated) online course management system with auto testing of students submissions [(video)](https://www.youtube.com/watch?v=ifyUssK6PJ4) to ease the task of TAs.
+InfoMark is an is a scalable, modern and open-source [rewrite of our](https://github.com/infomark-org/InfoMark-deprecated) online course management system with auto testing of students submissions [(video)](https://www.youtube.com/watch?v=ifyUssK6PJ4) to ease the task of TAs.
 
 
 See [https://infomark.org](https://infomark.org) for more details.

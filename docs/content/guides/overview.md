@@ -18,8 +18,8 @@ For more information about writing such tests see our [Tutor's Guide](/guides/tu
 To locally test the system we suggest to run the following commands:
 
 ```bash
-cd /tmp && export VERSION=`curl -s https://api.github.com/repos/cgtuebingen/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
-wget -qO- https://github.com/cgtuebingen/infomark/releases/download/${VERSION}/infomark.tar.gz | tar -xzv
+cd /tmp && export VERSION=`curl -s https://api.github.com/repos/infomark-org/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
+wget -qO- https://github.com/infomark-org/infomark/releases/download/${VERSION}/infomark.tar.gz | tar -xzv
 
 cd infomark
 cp .infomark.example.yml .infomark.yml
@@ -85,8 +85,8 @@ We use continuous-integration tests to ensure the implementation can be built an
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
 # Backend
-[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-backend/status.svg)](https://ci.patwie.com/cgtuebingen/infomark-backend)
-[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-backend)
+[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-backend/status.svg)](https://ci.patwie.com/infomark-org/infomark-backend)
+[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark-backend)
 
 The backend acts as a Restful JSON web server and is written in [Go](https://golang.org/). All dependencies are encapsulated in a docker-compose configuration file. The dependencies are:
 
@@ -131,8 +131,8 @@ To avoid manual interaction with the database InfoMark provides a console to run
 ```
 
 # Frontend
-[![Build Status](https://ci.patwie.com/api/badges/cgtuebingen/infomark-ui/status.svg)](https://ci.patwie.com/cgtuebingen/infomark-ui)
-[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/cgtuebingen/infomark-ui)
+[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg)](https://ci.patwie.com/infomark-org/infomark-ui)
+[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark-ui)
 
 The frontend is written in [Elm](https://elm-lang.org/), a functional frontend language which compiles to JavaScript. The application is just a single page application (SPA) which uses fragments for
 routing. So the server only needs to distribute the static HTML page and the REST API which is used to

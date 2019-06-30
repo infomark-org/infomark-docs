@@ -48,7 +48,7 @@ echo "--- END --- INFOMARK -- WORKER"
 echo "this line will be ignored"
 ```
 
-as an entry point. Please either use [one of our pre-defined test-examples](https://github.com/cgtuebingen/infomark/tree/master/unittests) or create your own.
+as an entry point. Please either use [one of our pre-defined test-examples](https://github.com/infomark-org/infomark/tree/master/unittests) or create your own.
 By design we assume, that
 
 * The testing-framework, e.g., JUnit, ensures that all stdout from the uploaded user code is suppressed.
@@ -62,7 +62,7 @@ There are some ways to ease the task of writing unit-tests.
 A clear directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed up the entire process and avoid debugging steps on the server.
 
 The *makefile* should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
-Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task. An [example-Makefile](https://github.com/cgtuebingen/infomark/blob/master/unittests/python/makefile) is given in our repository.
+Further, specifying the docker-image in the *makefile* helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task. An [example-Makefile](https://github.com/infomark-org/infomark/blob/master/unittests/python/makefile) is given in our repository.
 
 InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done *within* the docker container.
 
@@ -70,14 +70,14 @@ We provide several testing-templates and examples
 
 | language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
 |----------|:-------------|:-------:|:------:|
-| Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/java) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/java) |
-| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/python) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/python) |
-| C++ |  [patwie/test_cpp_submission:latest](https://hub.docker.com/r/patwie/test_cpp_submission) | [yes](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp) | [yes](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests/cpp) |
+| Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/infomark-org/infomark/tree/master/unittests/java) | [yes](https://github.com/infomark-org/infomark/tree/master/dockerimages/unittests/java) |
+| Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/infomark-org/infomark/tree/master/unittests/python) | [yes](https://github.com/infomark-org/infomark/tree/master/dockerimages/unittests/python) |
+| C++ |  [patwie/test_cpp_submission:latest](https://hub.docker.com/r/patwie/test_cpp_submission) | [yes](https://github.com/infomark-org/infomark/tree/master/unittests/cpp) | [yes](https://github.com/infomark-org/infomark/tree/master/dockerimages/unittests/cpp) |
 
 
 ## Java 11
 
-We suggest using our [docker-image](https://github.com/cgtuebingen/infomark/tree/master/dockerimages/unittests) to run follow the guide below.
+We suggest using our [docker-image](https://github.com/infomark-org/infomark/tree/master/dockerimages/unittests) to run follow the guide below.
 
 We use the following directory structure to reduce the workload of writing re-usable unit-tests.
 
@@ -109,7 +109,7 @@ exercises
       build.xml
 ```
 
-where `[a.b]` represents the exercise-task-number. A working example can be found in the [InfoMark-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests).
+where `[a.b]` represents the exercise-task-number. A working example can be found in the [InfoMark-repository](https://github.com/infomark-org/infomark/tree/master/unittests).
 
 ### Student-Template
 
@@ -158,7 +158,7 @@ We suggest to have two sub-types of tests:
 - Structure-Tests
 - Value-Tests
 
-We have composed a [Helper.java](https://github.com/cgtuebingen/infomark/blob/master/unittests/java/unittest_private_0.1/src/__unittest/Helper.java) file to ease the work with reflections when checking the solutions of the exercise tasks.
+We have composed a [Helper.java](https://github.com/infomark-org/infomark/blob/master/unittests/java/unittest_private_0.1/src/__unittest/Helper.java) file to ease the work with reflections when checking the solutions of the exercise tasks.
 
 The overall structure should be
 
@@ -283,7 +283,7 @@ A good candidate for a private test would be
 
 ## Python 3
 
-We provide the a very basic but working test set for checking python programming assignment solutions in our [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/python).
+We provide the a very basic but working test set for checking python programming assignment solutions in our [git-repository](https://github.com/infomark-org/infomark/tree/master/unittests/python).
 
 The basic idea is that any upload will be unzipped into a directory together with the unit-test:
 
@@ -348,7 +348,7 @@ FAILED (failures=1)
 
 ## C++
 
-Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out [git-repository](https://github.com/cgtuebingen/infomark/tree/master/unittests/cpp).
+Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out [git-repository](https://github.com/infomark-org/infomark/tree/master/unittests/cpp).
 The final directory structure *inside* the docker container will be
 
 ```
