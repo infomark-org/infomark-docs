@@ -75,7 +75,7 @@ steps:
   - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
   - mkdir /tmp/infomark-ui
   - cd /tmp/infomark-ui
-  - wget https://github.com/cgtuebingen/infomark-ui/releases/download/$${FRONTEND_VERSION}/infomark-ui.tar.gz
+  - wget https://github.com/infomark-org/infomark-ui/releases/download/$${FRONTEND_VERSION}/infomark-ui.tar.gz
   - tar -xzvf infomark-ui.tar.gz
   - rm infomark-ui.tar.gz
   - mkdir -p /tmp/infomark/static
@@ -105,6 +105,6 @@ trigger:
   - tag
 ---
 kind: signature
-hmac: a6682fd2590e1afce3a8c719462b1910eb019dddbb5e6c640602bf75cbc3ecb3
+hmac: a8773ab882fd72a225e6d33fdbe7e24687964432809732e7dbf4169f636245cb
 
 ...
