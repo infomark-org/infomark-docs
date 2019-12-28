@@ -85,8 +85,8 @@ We use continuous-integration tests to ensure the implementation can be built an
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
 # Backend
-[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-backend/status.svg)](https://ci.patwie.com/infomark-org/infomark-backend)
-[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark-backend)
+[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg)](https://ci.patwie.com/infomark-org/infomark)
+[![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark)
 
 The backend acts as a Restful JSON web server and is written in [Go](https://golang.org/). All dependencies are encapsulated in a docker-compose configuration file. The dependencies are:
 

@@ -18,7 +18,7 @@ steps:
   - echo $${FRONTEND_VERSION}
   - mkdir /tmp/infomark
   - cd /tmp/infomark
-  - wget https://github.com/infomark-org/infomark-backend/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
+  - wget https://github.com/infomark-org/infomark/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
   - tar -xzvf infomark-backend.tar.gz
   - rm infomark-backend.tar.gz
   - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
@@ -69,7 +69,7 @@ steps:
   - echo $${FRONTEND_VERSION}
   - mkdir /tmp/infomark
   - cd /tmp/infomark
-  - wget https://github.com/infomark-org/infomark-backend/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
+  - wget https://github.com/infomark-org/infomark/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
   - tar -xzvf infomark-backend.tar.gz
   - rm infomark-backend.tar.gz
   - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
@@ -105,6 +105,6 @@ trigger:
   - tag
 ---
 kind: signature
-hmac: a8773ab882fd72a225e6d33fdbe7e24687964432809732e7dbf4169f636245cb
+hmac: c9feb942f88f01bf27229daf7e70e375a7626ce45e7eb4b45a39fe3fbba1b221
 
 ...

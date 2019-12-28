@@ -34,15 +34,15 @@ sed -i 's/localhost:3000/your.domain.com/g' /var/www/path/to/static/js/*.js
 
 # Backend
 
-[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-backend/status.svg)](http://ci.patwie.com/infomark-org/infomark-backend)
-[![source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark-backend)
+[![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg)](http://ci.patwie.com/infomark-org/infomark)
+[![source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark)
 [![download](https://img.shields.io/badge/release-download-blueviolet.svg)](https://github.com/infomark-org/infomark-ui/releases/latest)|
 
 For use in production, we highly recommend using our pre-built releases as they are tested. If you want to compile the backend from source
 
 ```bash
-git clone https://github.com/infomark-org/infomark-backend
-cd infomark-backend
+git clone https://github.com/infomark-org/infomark
+cd infomark
 go build infomark.go
 ```
 
