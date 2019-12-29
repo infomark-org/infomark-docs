@@ -18,11 +18,10 @@ steps:
   - echo $${FRONTEND_VERSION}
   - mkdir /tmp/infomark
   - cd /tmp/infomark
-  - wget https://github.com/infomark-org/infomark/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
-  - tar -xzvf infomark-backend.tar.gz
-  - rm infomark-backend.tar.gz
+  - wget https://github.com/infomark-org/infomark/releases/download/$${BACKEND_VERSION}/infomark.tar.gz
+  - tar -xzvf infomark.tar.gz
+  - rm infomark.tar.gz
   - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
-  - cp /tmp/infomark/.infomark.example.yml /drone/src/.infomark.yml
   - cp /tmp/infomark/infomark /drone/src/infomark
 
 - name: build_docs
@@ -60,28 +59,27 @@ platform:
 steps:
 - name: prepare_files
   pull: default
-  image: alpine:3.7
+  image: golang
   commands:
   - source versions.txt
   - export BACKEND_VERSION
   - export FRONTEND_VERSION
   - echo $${BACKEND_VERSION}
   - echo $${FRONTEND_VERSION}
-  - mkdir /tmp/infomark
-  - cd /tmp/infomark
-  - wget https://github.com/infomark-org/infomark/releases/download/$${BACKEND_VERSION}/infomark-backend.tar.gz
-  - tar -xzvf infomark-backend.tar.gz
-  - rm infomark-backend.tar.gz
-  - cp /tmp/infomark/api.yaml /drone/src/docs/static/swagger/api.yaml
-  - mkdir /tmp/infomark-ui
-  - cd /tmp/infomark-ui
-  - wget https://github.com/infomark-org/infomark-ui/releases/download/$${FRONTEND_VERSION}/infomark-ui.tar.gz
-  - tar -xzvf infomark-ui.tar.gz
-  - rm infomark-ui.tar.gz
-  - mkdir -p /tmp/infomark/static
-  - cp -r /tmp/infomark-ui/build/* /tmp/infomark/static
-  - cd /tmp
+  - go version
+  - WORK_DIR=/tmp/infomark
+  - rm -rf $${WORK_DIR}
+  - mkdir $${WORK_DIR}
+  - git clone --depth 1 --single-branch --branch $${BACKEND_TAG} https://github.com/infomark-org/infomark.git $${WORK_DIR}/infomark
+  - wget -qO-  https://github.com/infomark-org/infomark-ui/releases/download/$${FRONTEND_TAG}/infomark-ui.tar.gz | tar -xvz
+  - cp -r ./build/* $${WORK_DIR}/infomark/static
+  - cd $${WORK_DIR}/infomark
+  - sed -i 's/"YXZ"/"$${BACKEND_VERSION}"/g' symbol/version.go
+  - pkger list
+  - pkger
+  - go build infomark.go
   - ls -ls
+  - cd /tmp/
   - tar -czvf infomark.tar.gz infomark
   - cp /tmp/infomark.tar.gz /drone/src/infomark.tar.gz
   - cd /drone/src
@@ -105,6 +103,6 @@ trigger:
   - tag
 ---
 kind: signature
-hmac: c9feb942f88f01bf27229daf7e70e375a7626ce45e7eb4b45a39fe3fbba1b221
+hmac: 5085a68166dc8830500de7792bb996907c877934e97eaa15aae05e98ed4779b9
 
 ...
