@@ -1,7 +1,7 @@
 ---
 title: "Administrator's Guide"
 date: 2019-04-21
-lastmod: 2019-04-24
+lastmod: 2019-12-30
 layout: subpage
 ---
 
@@ -13,32 +13,10 @@ The Infomark System can serve multiple courses within a single server instance. 
 
 ## Configuration
 
-The configuration is done within a YAML config file and has the following structure:
+The configuration is done within a YAML config file.
+For an example configuration please refer to the [example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml).
 
-```yaml
-# shared configuration for both
-# ------------------------------------------------------------------------------
-
-rabbitmq_connection: amqp://user:password@localhost:5672/
-rabbitmq_key: test-key
-...
-
-# backend
-# ------------------------------------------------------------------------------
-url: http://your.domain.com
-log_level: debug
-...
-# ...
-
-# worker
-# ------------------------------------------------------------------------------
-worker_workdir: /tmp
-...
-```
-
-For an example configuration please refer to the `.infomark.example.yml` your downloaded release archive or inspect the file [on GitHub](https://github.com/infomark-org/infomark/blob/master/.infomark.example.yml).
-
-Only the keys `rabbitmq_*` need to be shared between the server. In general, the defaults might do the job. For all secrets like passwords, tokens or keys you should use `openssl rand -base64 32` to generate random high-quality secrets.
+In general, the defaults might do the job. For all secrets like passwords, tokens or keys you should use `openssl rand -base64 32` to generate random high-quality secrets or generate the configuration using the InfoMark console.
 
 We discuss some important settings:
 
@@ -64,25 +42,23 @@ sent via Infomark
 
 when these are composed by any user.
 
-We hard-coded the domain `uni-tuebingen.de` in the front-end such that any registration attempt with an email not mathcing this domain will get a warning. You might want to see the [Developer's Guide](/guides/developer) on how to change this value.
-
 ### Directories
 
-We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest estimating beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings using the key `max_request_submission_bytes`.
+We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest estimating beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings in `server.http.limits`.
 
 ### Server-Settings
 
 To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. We limit the number of bytes which are read from the client during a request. The default of 1MB is enough for common JSON requests. You can configure these limits for each kind of request using the following keys:
 
-- `max_request_json_bytes` to limit any JSON request
-- `max_request_avatar_bytes` to limit the image size for the avatar in the profil
-- `max_request_submission_bytes` to limit the size for homework solutions
+- `server.http.limits.max_request_json` to limit any JSON request
+- `server.http.limits.max_avatar` to limit the image size for the avatar in the profil
+- `server.http.limits.max_submission` to limit the size for homework solutions
 
 There is no limit when uploading slides or extra course material.
 
 ### Background-Worker
 
-Background-Workers can be turned off when using the config `use_backend_worker: false`.
+Background-Workers can be turned off when using the config `distribute_jobs: false`.
 
 ## Roles and Permissions
 

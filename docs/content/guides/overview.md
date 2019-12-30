@@ -48,13 +48,12 @@ This config file is populated with values to provide a minimal working ([example
     uploads: /path/to/uploads
     common: /path/to/common
     generated_files: /path/to/generated_files
-    fixtures: /path/to/fixtures
 ```
 
 The domain should be `localhost` for deployment on your local machine and the paths should be absolute paths, that exists and are writeable. We use docker-compose for handling dependencies
 
 ```bash
-./infomark console configuration create-compose infomark-config.yml > docker-compose-yml
+./infomark console configuration create-compose infomark-config.yml > docker-compose.yml
 ```
 
 It will create a ready-to-use docker-compose file. For all following commands the configuration file `infomark-config.yml` is required. These commands expect this configuration file to be specified in the environment variable `INFOMARK_CONFIG_FILE`. You might want to specify this information by

@@ -1,7 +1,7 @@
 ---
 title: "Tutor's Guide"
 date: 2019-04-21
-lastmod: 2019-05-13
+lastmod: 2019-12-30
 layout: subpage
 ---
 
@@ -52,9 +52,7 @@ as an entry point. Please either use [one of our pre-defined test-examples](http
 By design we assume, that
 
 * The testing-framework, e.g., JUnit, ensures that all stdout from the uploaded user code is suppressed.
-* A timeout is handled in the tests (InfoMark does not kill any running test)
-
-> We currently investigate if we want to add such a timeout-feature.
+* The tests are fast enough to  finish before the timeout from your configuration file is reached.
 
 ## Overview
 
