@@ -6,10 +6,10 @@
         <div class="col-md-6 col-sm-12 my-sm-3">
           <h1>InfoMark</h1>
           <div class="lead">
-              a scalable, modern and open source solution for programming lectures supporting auto-testing/grading of programming assignments
+              a free, scalable, modern and open source solution for programming lectures supporting auto-testing/grading of programming assignments scaling to thousands of students and several courses.
               <br>
               <br>
-              <a class="btn btn-primary" href="https://github.com/infomark-org/infomark/releases" target="_blank"><i class="fa fa-download"></i> Download Latest Release</a> <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=ifyUssK6PJ4&list=PL6zYOLctmwtqGGDET0a0SEsrcGtd2Fk_e" target="_blank"><i class="fa fa-youtube"></i> Video</a>
+              <a class="btn btn-primary" href="https://github.com/infomark-org/infomark/releases" target="_blank"><i class="fa fa-download"></i> Download Latest Release</a> <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=ifyUssK6PJ4&list=PL6zYOLctmwtqGGDET0a0SEsrcGtd2Fk_e" target="_blank"><i class="fa fa-youtube"></i> Video</a> <a class="btn btn-primary" href="/guides/overview/"><i class="fa fa-book"></i> Quickstart</a>
           </div>
         </div>
         <div class="col-md-4 col-sm-12 my-sm-3">
@@ -26,16 +26,16 @@
     <div class="row">
     <div class="col-12">
       <div class="text-justify">
-        InfoMark supported thousand of students and several TAs in recent years at university courses in Tübingen, which involved evaluating weekly programming tasks. Students can upload their homework solution and get instant feedback from the system as unit tests automatically verify the solution after uploading. TAs will see more test outputs and can write feedback.
+        InfoMark has supported thousands of students and several teaching assistants during university courses in Tübingen in the last few years. It evaluated weekly programming homeworks automatically. Students can upload their homework solution and receive immediate feedback from the system, as the solution is automatically checked by unit tests after uploading. The TAs see more test outputs and can write feedback.
       </div>
-      <p>With the following design goals in mind:</p>
+      <p>Features and Design goals:</p>
       <ul>
-        <li>language-agnostic: one system to test and grade programming assignments in any programming language</li>
-        <li>fast: minimal javascript assets required</li>
-        <li>cross-platform: RESTful JSON backend runs on OSX, Linux and Windows</li>
-        <li>easy to install: a single binary contains the entire RESTful backend</li>
-        <li>minimal dependencies: just RabbitMQ, Redis and PostgreSQL bundled in docker-compose</li>
-        <li>highly-scalable: background workers can be deployed on different machines and the unit-test workload will be distributed amongst them</li>
+        <li>language-agnostic: One system to test and grade programming assignments in any programming language you can imagine.</li>
+        <li>easy-to-use, easy-to-install: All magic is packed into a single binary: Frontend, Backend, Workers and Console. </li>
+        <li>modern: A RESTful JSON backend and a Single-Page-Application that is mobile-friendly.</li>
+        <li>minimal dependencies: Just requires docker and docker-compose.</li>
+        <li>reliable system: We insists on high code quality and unit tests following best practise using CI.</li>
+        <li>highly scalable: background workers can be deployed on different machines and the unit-test workload will be distributed amongst them.</li>
       </ul>
       <p>
         The system uses the following frameworks and technologies:
@@ -63,40 +63,38 @@
         <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Frontend (Elm)</h5>
+                    <h5 class="card-title">Backend (Go)</h5>
                     <p class="card-text">
                         <p>
-                            <a href="http://ci.patwie.com/infomark-org/infomark-ui"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg" alt="Build Status"></a>
-                            <a href="https://github.com/infomark-org/infomark-ui"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
-                            <a href="https://github.com/infomark-org/infomark-ui/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a>
+                            <a href="http://ci.patwie.com/infomark-org/infomark"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg" alt="Build Status"></a>
+                            <a href="https://github.com/infomark-org/infomark"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
+                            <a href="https://goreportcard.com/report/github.com/infomark-org/infomark"><img src="https://goreportcard.com/badge/github.com/infomark-org/infomark" alt="source"></a>
                         </p>
-                        Containing a Single-Page-Application
+                        Containing the RESTful JSON webserver and bundles the front-end
                     </p>
-                    <a href="https://github.com/infomark-org/infomark-ui" class="btn btn-primary"><i class="fa fa-github"></i> visit on GitHub</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Backend (Go)</h5>
+                    <h5 class="card-title">Frontend (Elm)</h5>
                     <p class="card-text">
                         <p>
-                            <a href="http://ci.patwie.com/infomark-org/infomark"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg" alt="Build Status"></a>
-                            <a href="https://github.com/infomark-org/infomark"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
-                            <a href="https://github.com/infomark-org/infomark/releases/latest"><img src="https://img.shields.io/badge/release-download-blueviolet.svg" alt="download"></a>
+                            <a href="http://ci.patwie.com/infomark-org/infomark-ui"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg" alt="Build Status"></a>
+                            <a href="https://github.com/infomark-org/infomark-ui"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="source"></a>
                         </p>
-                        Containing the RESTful JSON webserver
+                        Containing a Single-Page-Application
                     </p>
-                    <a href="https://github.com/infomark-org/infomark" class="btn btn-primary"><i class="fa fa-github"></i> visit on GitHub</a>
                 </div>
             </div>
         </div>
     </div>
+    <h2>Highlights</h2>
     <div class="row" style="margin-top:4rem;">
       <div class="col-md-6  wow bounceInLeft ">
         <span class="high">A single binary</span>
-         contains the entire system (server, worker) to easily deploy InfoMark
+         contains the entire system (server, worker, assets) making deployment of InfoMark a breeze
         <img src="/images/infomark-server.png" width="100%" />
       </div>
       <div class="col-md-6 ">
@@ -106,13 +104,12 @@
       <div class="col-md-6 ">
       </div>
       <div class="col-md-6  wow bounceInRight ">
-
-        The front-end is driven by <span class="high"> minimal JavaScript assets</span> (70.23 KB) for a fast SPA experience
+        The front-end is driven by <span class="high"> minimal JavaScript assets</span> (70.23 KB) for a fast SPA experience.
       </div>
     </div>
     <div class="row" style="margin-top:4rem;">
       <div class="col-md-6 wow bounceInLeft  ">
-        <span class="high"> direct feedback</span> for students from our system after testing in a docker <span class="high"> sandbox</span>
+        <span class="high"> Direct feedback</span> for students from our system after testing their homework automatically in a docker <span class="high"> sandbox</span>
         <img src="/images/autotest.png" width="100%" />
       </div>
       <div class="col-md-6 ">

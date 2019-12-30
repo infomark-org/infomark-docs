@@ -1,51 +1,108 @@
 ---
 title: "Overview"
 date: 2019-04-21
-lastmod: 2019-04-21
+lastmod: 2019-12-30
 layout: subpage
 ---
 
 
-InfoMark is a scalable, modern and open-source online
-course management system supporting auto-testing of programming assignments scaling to thousands of students.
+InfoMark is a free, scalable, modern and open-source online
+course management system supporting auto-testing of programming assignments scaling to thousands of students and several courses.
 
-Uploaded solutions to programming assignments are tested automatically. TAs can grade these solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material.
+Uploaded solutions to programming assignments are tested automatically.
+For more information about writing such tests see our [Tutor's Guide](/guides/tutor/). On how to use the system please refer to the [Administrator's Guide](/guides/administrator/). And for development please refer to our [Developer's Guide](/guides/developer/).
 
-For more information about writing such tests see our [Tutor's Guide](/guides/tutor/). On how to use the system please refer to the [Administrator's Guide](/guides/administrator/)
+Teaching assistants (tutors) can grade these homework solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material. The backend server talks RESTful JSON such that you can write your own scripts using eg. Python.
 
 # Quick-Start
 
-To locally test the system we suggest to run the following commands:
+These commands are the *same* for deployment on your local machine or deployment in production on a server.
+Please download the latest release from the [release page](https://github.com/infomark-org/infomark/releases/).
+These releases ship a single binary containing all required files. The only dependency is docker and docker-compose.
+
+We will explain necessary steps to spin up a fully production-ready system on your machine. Infomark is implemented as modern CLI with POSIX-compliant flags.
+
+
+## Requirements
+
+InfoMark has the following minimal requirements:
+- one CPU core for server `infomark serve`  (1GB RAM)
+- one CPU core for each backgound worker `infomark work` (memory requirement depends on your docker-image size for the programming assignments)
+
+We assume an Ubuntu system. But InfoMark will also happily do its business on other systems that provide docker and docker-compose.
+
+## Setup
+
+First create a configuration using InfoMark and write it to `infomark-config.yml`.
 
 ```bash
-cd /tmp && export VERSION=`curl -s https://api.github.com/repos/infomark-org/infomark/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
-wget -qO- https://github.com/infomark-org/infomark/releases/download/${VERSION}/infomark.tar.gz | tar -xzv
+./infomark console configuration create > infomark-config.yml
+```
 
-cd infomark
-cp .infomark.example.yml .infomark.yml
-cp docker-compose.example.yml docker-compose.yml
+This config file is populated with values to provide a minimal working ([example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml)). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at a first glance, but for now you just need to adapt the following values:
 
-# configure paths for backend
-sed -i 's/\/var\/www\/infomark-staging\/app/\/tmp\/infomark/g' /tmp/infomark/.infomark.yml
+```yaml
+  http:
+    domain: sub.domain.com
+  paths:
+    uploads: /path/to/uploads
+    common: /path/to/common
+    generated_files: /path/to/generated_files
+    fixtures: /path/to/fixtures
+```
 
-# start dependencies (redis, postgresql)
-sudo docker-compose up -d
+The domain should be `localhost` for deployment on your local machine and the paths should be absolute paths, that exists and are writeable. We use docker-compose for handling dependencies
 
-# create initial database
-cd database
-PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f schema.sql
-PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha14.sql
-PGPASSWORD=pass psql -h 127.0.0.1 -U user -p 5433 -d db -f migrations/0.0.1alpha21.sql
-cd ..
+```bash
+./infomark console configuration create-compose infomark-config.yml > docker-compose-yml
+```
 
-# start a single background worker
-# sudo is required for talking to docker
-sudo ./infomark work -n 1
-# start Restful JSON web server
+It will create a ready-to-use docker-compose file. For all following commands the configuration file `infomark-config.yml` is required. These commands expect this configuration file to be specified in the environment variable `INFOMARK_CONFIG_FILE`. You might want to specify this information by
+
+```bash
+export INFOMARK_CONFIG_FILE=/absolute/path/to/infomark-config.yml
+```
+
+If you do forget to set this environment variable, the following commands will remind you to do so.
+
+## Run
+To start all dependencies just run the newly generated docker-compose file via
+
+```bash
+docker-compose up
+```
+
+Before starting the server, you might want to check your configuration
+
+```bash
+./infomark console configuration test infomark-config.yml
+```
+
+This will make InfoMark try to speak to the database, rabbitMQ and redis from the docker-compose setup. It will also test if it can save uploads.
+
+If everything is green, start the server by
+
+```bash
 ./infomark serve
 ```
 
-After registration in the web-interface the email address needs to be confirmed. This can be done manually over the console. Further, you might want to upgrade the permission to root:
+That's all! To further enable 2 background workers, just run
+
+```bash
+./infomark work -n 2
+```
+
+The `serve` command will take care of initializing the database when starting the first time.
+
+Point your browser to http://localhost:3000. This will display the login page of InfoMark.
+
+Upgrading InfoMark is also easy: Simply stop the infomark server and worker, replace the binary and start the server and worker again.
+
+## First User
+To add a user, please register your user in the web interface.
+After registration the email address needs to be confirmed. If sendmail is configured you will receive an instruction email containing a link to activate this account.
+
+Let us do this procedure manually using the console. Further, we will upgrade the permission of this user to have root privileges :
 
 ```bash
 # confirm email
@@ -54,13 +111,13 @@ After registration in the web-interface the email address needs to be confirmed.
 # find the id of a user
 ./infomark console user find your@email.com
 
-    1 YourFirstname YourLastname your@email.com
+    42 YourFirstname YourLastname your@email.com
 
 # add the user with id "1" to admins.
-./infomark console admin add 1
+./infomark console admin add 42
 ```
 
-In a production setup we recommend to use [NGINX](https://www.nginx.org/) as a proxy in front of InfoMark to increase security, performance and the ability to monitor and shape traffic connecting to InfoMark. See the Administrator Guide for different roles.
+When running InfoMark on a server in production, we recommend to use [NGINX](https://www.nginx.org/) or [Caddy](https://caddyserver.com/) as a reverse-proxy in front of InfoMark.
 
 # Design Choices
 
@@ -69,13 +126,23 @@ on your own servers to be compliant with any data privacy issues providing data 
 
 It is based on several design choices:
 
-- Every part must be open-source, scalable and robust.
-- The backend must be easy to deploy and to maintain.
-- The frontend must be light-weight, fast and responsive.
-- Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
-- All intense operations must be asynchronously scheduled.
+**Be open, Never lock-in to expand**<br>
+Every part must be open-source, scalable, reliable and robust. It must be easy to extract and use the information outside of InfoMark.
+Development must be open and adapting the implementation has to be possible. Writing scripts (eg in Python) for common jobs must be easy. We provide an [API description](/swagger/).
 
-<div class="center"><img src="/images/illustrations/overview.png" /></div>
+**Be user-friendly to grow**<br>
+The entire system must be easy to deploy, to maintain and to update
+even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have near-zero administration. You probably have better things to do than playing a server administration.
+
+**Be robust and reliable to earn trust**<br>
+Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
+All intense operations must be asynchronously scheduled.
+The frontend must be light-weight, fast and responsive. Creating and restoring a database backup is not supposed to be a nervous breakdown.
+
+**Be modern and simple to stay**<br>
+We deliberately chose GO for the backend and ELM for for the frontend. We had a hard time to re-deploy our [old system](https://github.com/infomark-org/InfoMark-deprecated) written in Ruby-On-Rails. There should be no magic behind the scene which breaks when updating the dependencies.
+
+
 
 # System Overview
 
@@ -84,7 +151,9 @@ We use continuous-integration tests to ensure the implementation can be built an
 
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
 
-# Backend
+<div class="center"><img src="/images/illustrations/overview.png" /></div>
+
+## Backend
 [![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg)](https://ci.patwie.com/infomark-org/infomark)
 [![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark)
 
@@ -97,14 +166,18 @@ The backend acts as a Restful JSON web server and is written in [Go](https://gol
 
 Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.
 
-## Workers
+### Server
+Part of the backend is the **server**.
+The server talks RESTful JSON to remote CLI, the Web-interface and workers.
+
+### Workers
 
 Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed across multiple machines.
 We recommend using one worker process for 100 students. The workers can be added or removed at any time. Infomark uses AMPQ as a message broker. Each submission will be held in a queue and each worker will execute one job concurrently to avoid too much system load. Our recommendation is one worker per available CPU core.
 
 The used amount of memory per submission can be configured. Memory-swapping is deactivated.
 
-## Console
+### Console
 
 To avoid manual interaction with the database InfoMark provides a console to run several commands like enrolling a student into a course/group, set the role of a user.
 
@@ -130,7 +203,7 @@ To avoid manual interaction with the database InfoMark provides a console to run
 
 ```
 
-# Frontend
+## Frontend
 [![Build Status](https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg)](https://ci.patwie.com/infomark-org/infomark-ui)
 [![Source](https://img.shields.io/badge/source-download-blue.svg)](https://github.com/infomark-org/infomark-ui)
 
@@ -142,12 +215,4 @@ using [Swagger](https://swagger.io/).
 
 # Development
 
-This system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.
-
-# Requirements
-
-InfoMark has the following minimal requirements:
-- one core for server `infomark serve`  (1GB RAM)
-- one core for each backgound worker `infomark work` (depending on your docker-image size for the programming assignments)
-
-You might want to sp
+The initial system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.
