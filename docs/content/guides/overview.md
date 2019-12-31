@@ -26,10 +26,11 @@ We will explain necessary steps to spin up a fully production-ready system on yo
 ## Requirements
 
 InfoMark has the following minimal requirements:
-- one CPU core for server `infomark serve`  (1GB RAM)
-- one CPU core for each backgound worker `infomark work` (memory requirement depends on your docker-image size for the programming assignments)
 
-We assume an Ubuntu system. But InfoMark will also happily do its business on other systems that provide docker and docker-compose.
+* one CPU core for server `infomark serve`  (1GB RAM)
+* one CPU core for each backgound worker `infomark work` (memory requirement depends on your docker-image size for the programming assignments)
+
+We assume an Ubuntu system. But InfoMark will also happily do its business on other systems that provide docker (>= v1.13) and docker-compose. There are no other dependencies you need to juggle with.
 
 ## Setup
 
@@ -78,6 +79,7 @@ Before starting the server, you might want to check your configuration
 ```
 
 This will make InfoMark try to speak to the database, rabbitMQ and redis from the docker-compose setup. It will also test if it can save uploads.
+You will probably get the feedback, that a privacy statement file does not exists. We ship one example of a privacy statement in german.
 
 If everything is green, start the server by
 
@@ -85,15 +87,16 @@ If everything is green, start the server by
 ./infomark serve
 ```
 
-That's all! To further enable 2 background workers, just run
+That's all!
+The `serve` command will take care of initializing the database when starting the first time.
+Point your browser to http://localhost:3000. This will display the login page of InfoMark.
+To further enable 2 background workers, just run
 
 ```bash
-./infomark work -n 2
+sudo ./infomark work -n 2
 ```
 
-The `serve` command will take care of initializing the database when starting the first time.
-
-Point your browser to http://localhost:3000. This will display the login page of InfoMark.
+Sudo is required to start docker containers on behalf of the system.
 
 Upgrading InfoMark is also easy: Simply stop the infomark server and worker, replace the binary and start the server and worker again.
 
