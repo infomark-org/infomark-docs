@@ -22,6 +22,20 @@ These releases ship a single binary containing all required files. The only depe
 
 We will explain necessary steps to spin up a fully production-ready system on your machine. Infomark is implemented as modern CLI with POSIX-compliant flags.
 
+Without any lengthly explanation, you can spin up an instance of infomark from scratch via:
+
+```bash
+# Create configuration
+./infomark console configuration create > infomark-config.yml
+# Create docker-compose for database, rabbitMQ, redis
+./infomark console configuration create-compose infomark-config.yml > docker-compose.yml
+# Start dependencies
+sudo docker-compose up -d
+# Start InfoMark server
+export INFOMARK_CONFIG_FILE=`realpath infomark-config.yml`
+./infomark serve
+# point your browser to http://localhost:2020
+```
 
 ## Requirements
 
@@ -40,18 +54,9 @@ First create a configuration using InfoMark and write it to `infomark-config.yml
 ./infomark console configuration create > infomark-config.yml
 ```
 
-This config file is populated with values to provide a minimal working ([example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml)). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at a first glance, but for now you just need to adapt the following values:
+This config file is populated with values to provide a minimal working ([example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml)). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at a first glance, but it should work out-of-the-box.
 
-```yaml
-  http:
-    domain: sub.domain.com
-  paths:
-    uploads: /path/to/uploads
-    common: /path/to/common
-    generated_files: /path/to/generated_files
-```
-
-The domain should be `localhost` for deployment on your local machine and the paths should be absolute paths, that exists and are writeable. We use docker-compose for handling dependencies
+We use docker-compose for handling dependencies in a sandbox
 
 ```bash
 ./infomark console configuration create-compose infomark-config.yml > docker-compose.yml
@@ -89,14 +94,18 @@ If everything is green, start the server by
 
 That's all!
 The `serve` command will take care of initializing the database when starting the first time.
-Point your browser to http://localhost:3000. This will display the login page of InfoMark.
+Point your browser to http://localhost:2020. This will display the login page of InfoMark.
 To further enable 2 background workers, just run
 
 ```bash
 sudo ./infomark work -n 2
 ```
 
-Sudo is required to start docker containers on behalf of the system.
+Sudo is required to start docker containers on behalf of the current user (unless you added the user to the docker-group). The configuration for the work and docker environment can be tested as well by
+
+```bash
+./infomark console configuration test infomark-config.yml --test worker
+```
 
 Upgrading InfoMark is also easy: Simply stop the infomark server and worker, replace the binary and start the server and worker again.
 
@@ -104,7 +113,7 @@ Upgrading InfoMark is also easy: Simply stop the infomark server and worker, rep
 To add a user, please register your user in the web interface.
 After registration the email address needs to be confirmed. If sendmail is configured you will receive an instruction email containing a link to activate this account.
 
-Let us do this procedure manually using the console. Further, we will upgrade the permission of this user to have root privileges :
+Let us verify the user manually using the console. Further, we will upgrade the permission of this user to have root privileges:
 
 ```bash
 # confirm email
@@ -113,10 +122,10 @@ Let us do this procedure manually using the console. Further, we will upgrade th
 # find the id of a user
 ./infomark console user find your@email.com
 
-    42 YourFirstname YourLastname your@email.com
+    1 YourFirstname YourLastname your@email.com
 
 # add the user with id "1" to admins.
-./infomark console admin add 42
+./infomark console admin add 1
 ```
 
 When running InfoMark on a server in production, we recommend to use [NGINX](https://www.nginx.org/) or [Caddy](https://caddyserver.com/) as a reverse-proxy in front of InfoMark.
@@ -134,7 +143,7 @@ Development must be open and adapting the implementation has to be possible. Wri
 
 **Be user-friendly to grow**<br>
 The entire system must be easy to deploy, to maintain and to update
-even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have near-zero administration. You probably have better things to do than playing a server administration.
+even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have near-zero administration. You probably have better things to do than playing a server administrator.
 
 **Be robust and reliable to earn trust**<br>
 Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
@@ -144,7 +153,8 @@ The frontend must be light-weight, fast and responsive. Creating and restoring a
 **Be modern and simple to stay**<br>
 We deliberately chose GO for the backend and ELM for for the frontend. We had a hard time to re-deploy our [old system](https://github.com/infomark-org/InfoMark-deprecated) written in Ruby-On-Rails. There should be no magic behind the scene which breaks when updating the dependencies.
 
-
+**Be as general as necessary and not as possible**<br>
+We deliberately narrowed down the feature set to be robust. Any discussion board or support of pdf annotation is out-of-scope by our design. InfoMark solves a very specific problem: automated testing of homework programming exercises.
 
 # System Overview
 
@@ -218,3 +228,10 @@ using [Swagger](https://swagger.io/).
 # Development
 
 The initial system was developed in the [computer graphics groups](https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/) of the University of Tübingen because there are no comparable systems that meet our requirements.
+
+### Things that could be different
+
+During the design of the system we had to make compromises given some constraints:
+
+* The system has its own user-management. Unfortunately, we had not the option to rely on external OAuth2. This bad (as user management is difficult) and good (this help to be compliant with GDPR).
+* To avoid any hassle of creating a proper email setups, we use a pre-installed sendmail configuration. Creating a working email service is hard. Creating a proper and secure email service is almost impossible.

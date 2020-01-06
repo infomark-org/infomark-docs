@@ -260,4 +260,4 @@ The definition of all available routes to the RESTful backend is described in ou
 
 The metrics for [Prometheus](https://prometheus.io/) are served under `localhost:<port>/metrics`. We highly suggest not to expose these metrics when using a reverse proxy like NGINX.
 
-To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/infomark-org/infomark/tree/master/metrics).
+To visualize these metrics we have assembled a [custom Grafana-Board](https://github.com/infomark-org/infomark-docs/tree/master/metrics).

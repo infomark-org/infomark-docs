@@ -23,6 +23,10 @@ docker run --rm -it --net="none" \
 ```
 
 and capture the output which is store in the database and displayed the student resp. the tutor who grades the solution.
+
+> In fact, the command is slightly more complicated as the test are running with a maximum amount of memory (without swap) and a maximum amount of cores to avoid overloading the system (infinite loops, memory leaks in submissions). These settings can be defined in the InfoMark configuration file.
+
+
 The most minimal and simple Dockerfile which handles uploaded solutions is
 
 ```docker
@@ -411,8 +415,6 @@ TEST_CASE("Divide should be correct", "[divide]") {
   REQUIRE(divide(6, 3) == 2);
 }
 ```
-
-> Reminder: InfoMark does not has any timeout when running the tests. We highly recommend to use any mechanism to avoid infinite loops. A potential solution is **timeout** from the **coreutils**.
 
 As the implementation of `divide` is not correct the output will be:
 
