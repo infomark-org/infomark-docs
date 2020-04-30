@@ -1,7 +1,7 @@
 ---
 title: "Administrator's Guide"
 date: 2019-04-21
-lastmod: 2019-12-30
+lastmod: 2020-04-30
 layout: subpage
 ---
 
@@ -13,7 +13,7 @@ The InfoMark System can serve multiple courses within a single server instance. 
 
 ## Configuration
 
-The configuration is done within a YAML config file.
+The configuration is done within a YAML configuration file.
 For an example configuration, please refer to the [example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml).
 
 In general, the defaults might do the job. For all secrets like passwords, tokens or keys, you should use `openssl rand -base64 32` to generate random high-quality secrets or generate the configuration using the InfoMark console.
