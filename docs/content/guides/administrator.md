@@ -7,29 +7,29 @@ layout: subpage
 
 # General Information
 
-This page gives a brief overview of the underlying system and capabilities. It is meant to be read by people who would like to install the system. If you are provided such an instance please refer to the [Instructor's Guide](/guides/instructor)
+This page gives a brief overview of the underlying system and capabilities. It is meant to be read by people who would like to install the system. If you are provided such an instance, please refer to the [Instructor's Guide](/guides/instructor)
 
-The Infomark System can serve multiple courses within a single server instance. The linked background workers will then be shared amongst these courses.
+The InfoMark System can serve multiple courses within a single server instance. The linked background workers will then be shared amongst these courses.
 
 ## Configuration
 
 The configuration is done within a YAML config file.
-For an example configuration please refer to the [example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml).
+For an example configuration, please refer to the [example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml).
 
-In general, the defaults might do the job. For all secrets like passwords, tokens or keys you should use `openssl rand -base64 32` to generate random high-quality secrets or generate the configuration using the InfoMark console.
+In general, the defaults might do the job. For all secrets like passwords, tokens or keys, you should use `openssl rand -base64 32` to generate random high-quality secrets or generate the configuration using the InfoMark console.
 
 We discuss some important settings:
 
 ### Auth_JWT
 
-Infomark supports two authentications systems:
+InfoMark supports two authentications systems:
 
 - JSON-Web-Token (JWT) and
 - sessions.
 
-If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and has to be attached to the header in each request. The refresh token serves the purpose to create a new short-life access token.
+If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and has to be attached to the header in each request. The refresh token serves the purpose of creating a new short-life access token.
 
-The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken. Please note, the frontend frequently does send requests to the backend even without explicit user interaction, e.g. polling for new test-logs from the auto-testing feature. Hence, these sessions will be kept alive.
+The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken (using a default configuration). Please note, the frontend frequently does send requests to the backend even without explicit user interaction, e.g. polling for new test-logs from the auto-testing feature. Hence, these sessions will be kept alive.
 
 ### Email
 
@@ -81,7 +81,7 @@ To get granularity in the permission system each user enrolled into a course wil
 - *tutor*: Teaching assistants who will grade homework and lead exercise groups
 - *students*: This is the default role.
 
-These permissions control which resources a user has access to, e.g. students cannot see other students personal information. Slides and material can be targeted to a specific role, e.g., distribute sample solution to TAs. These roles are subsets, i.e., an admin has all permissions, which a tutor and a student has. Tutors have additional permissions compared to students.
+These permissions control which resources a user has access to, e.g., students cannot see other students personal information. Slides and material can be targeted to a specific role, e.g., distribute sample solution to TAs. These roles are subsets, i.e., an admin has all permissions, which a tutor and a student has. Tutors have additional permissions compared to students.
 
 To upgrade a user to a course-tutor or course-admin use the console
 

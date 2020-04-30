@@ -13,7 +13,7 @@ Auto-tests (unit-tests) consists of
 * a testing framework `<TASK_SEPCIFIC_TEST.ZIP>` written by one of the tutors/instructors
 * a docker-image name `<YOUR_DOCKER_IMAGE>`
 
-Each infomark-worker will fetch a submission from a queue and execute a command which is equal to
+Each infomark-worker will fetch a submission from a queue and execute a command which is similar to
 
 ```bash
 docker run --rm -it --net="none" \
@@ -22,7 +22,7 @@ docker run --rm -it --net="none" \
   <YOUR_DOCKER_IMAGE>
 ```
 
-and capture the output which is store in the database and displayed the student resp. the tutor who grades the solution.
+The output will be stored in the database and displayed to the student resp. the tutor who grades the solution.
 
 > In fact, the command is slightly more complicated as the test are running with a limited amount of memory (without swap) and a limited amount of cores to avoid overloading the system (infinite loops, memory leaks in submissions). These settings can be defined in the InfoMark configuration file.
 
@@ -70,7 +70,7 @@ InfoMark is language-agnostic. The system only records the docker-output. All po
 
 We provide several testing-templates and examples
 
-| language   |      dockerimage  (hub.docker.com)     |  test example | dockerfile |
+| Language   |      Dockerimage  (hub.docker.com)     |  Test Example | Dockerfile |
 |----------|:-------------|:-------:|:------:|
 | Java 11 |  [patwie/test_java_submission:latest](https://hub.docker.com/r/patwie/test_java_submission) | [yes](https://github.com/infomark-org/infomark-docs/tree/master/unittests/java) | [yes](https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests/java) |
 | Python3 |  [patwie/test_python3_submission:latest](https://hub.docker.com/r/patwie/test_python3_submission) | [yes](https://github.com/infomark-org/infomark-docs/tree/master/unittests/python) | [yes](https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests/python) |
@@ -133,7 +133,7 @@ public class Hello {
 
 ```
 
-We suggest making sure the code template can be uploaded itself to the system such that there are no compilation errors.Testing the code-template above against the unit-tests gives
+We suggest to create a code-template that can be uploaded itself to the system, such that there are no compilation errors. Testing the code-template above against the unit-tests gives
 
 ```
 [javac] Compiling 3 source files to /build/classes
@@ -148,12 +148,12 @@ We suggest making sure the code template can be uploaded itself to the system su
 
 ### Tests
 
-Public tests will convey their results back to the student in our system. These are tests which should help a student to make sure their solution for a programming assignment is roughly correct. They have to be:
+Public tests will convey their results back to the student in our system. These are tests that should help a student to make sure their solution for a programming assignment is roughly correct. They have to be:
 
 - verbose
 - deterministic and reproducible
 
-Private test logs are not visible to the student. Only tutors can access these infomation which should test if the submitted solution is completely correct by checking several corner cases. Tutors will see both test results (public and private test outputs).
+Private test logs are not visible to the student. Only tutors can access this information which should test if the submitted solution is completely correct by checking several corner cases. Tutors will see both test results (public and private test outputs).
 
 We suggest to have two sub-types of tests:
 
@@ -190,11 +190,11 @@ public class SomeNameTest {
 
 ```
 
-We *will* stop the docker process from the worker. You need to make sure to use a large enough timeout *inside* the informark-configuration file.
+We *will* stop the docker process from the worker. You need to make sure to use a large enough timeout *inside* the InfoMark-configuration file.
 
 #### Structure-Tests
 
-A Structure-Test uses reflections to query all expected methods, check their signatures and naming. All code uploaded by any user of our system should only be accessed via nreflections as there is no guarantee that the expected methods exist. Rather than having a compilation error, we would like to check these during runtime to ensure we can give more verbose information about what we expect.
+A Structure-Test uses reflections to query all expected methods, check their signatures and naming. All code uploaded by any user of our system should only be accessed via reflections as there is no guarantee that the expected methods exist. Rather than having a compilation error, we would like to check these during runtime to ensure we can give more verbose information about what we expect.
 
 
 ```java
@@ -301,7 +301,7 @@ Hereby, again the submission upload will be extracted first and the test framewo
 python3 -m unittest discover -s . --verbose -p '*_test.py'
 ```
 
-As python-code can be be written without any datatypes you will need to test if the methods with the correct signatue exists.
+As python-code can be be written without any datatypes you will need to test if the methods with the correct signature exists.
 
 For a given upload with content
 
@@ -472,6 +472,6 @@ The output would also contain all linking issues (wrongly named function) like
     /src/run.sh: line 8: ./hello: not found
 
 > Currently, there is no way to skip non-existing methods. If a method does not exists or has the wrong signature
-> the output will containg the linking error without any test-results from the run itself. This is caused by the nature
+> the output will containing the linking error without any test-results from the run itself. This is caused by the nature
 > of C++.
 

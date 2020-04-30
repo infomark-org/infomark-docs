@@ -41,7 +41,7 @@ Building InfoMark requires Go version at least 1.13.
 
 To guarantee a stable version each commit is tested against some unit-tests.
 
-> While most projects just test a mock we really test the behaviour of the endpoints with a Postgres database.
+> While most projects just test a mock we really test the behavior of the endpoints with a Postgres database.
 
 To run the tests you will need to set up the dependencies as described in the [Overview Chapter](/guides/overview). Please make sure, the database is empty but migrated to latest version. This can be done by dropping all data
 

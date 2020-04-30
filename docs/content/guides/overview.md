@@ -6,13 +6,13 @@ layout: subpage
 ---
 
 
-InfoMark is a free, scalable, modern and open-source online
+InfoMark is a free, scalable, modern, and open-source online
 course management system supporting auto-testing of programming assignments scaling to thousands of students and several courses.
 
 Uploaded solutions to programming assignments are tested automatically.
-For more information about writing such tests see our [Tutor's Guide](/guides/tutor/). On how to use the system please refer to the [Administrator's Guide](/guides/administrator/). And for development please refer to our [Developer's Guide](/guides/developer/).
+For more information about writing such tests, see our [Tutor's Guide](/guides/tutor/). On how to use the system, please refer to the [Administrator's Guide](/guides/administrator/). And for development, please refer to our [Developer's Guide](/guides/developer/).
 
-Teaching assistants (tutors) can grade these homework solutions online. The platform supports multiple courses each with multiple exercise groups, slides and course material. The backend server talks RESTful JSON such that you can write your own scripts using eg. Python.
+Teaching assistants (tutors) can grade these homework solutions online. The platform supports multiple courses, each with various exercise groups, slides and course material. The backend server talks RESTful JSON such that you can write your scripts using ,e.g.,  Python.
 
 # Quick-Start
 
@@ -20,9 +20,9 @@ These commands are the *same* for deployment on your local machine or deployment
 Please download the latest release from the [release page](https://github.com/infomark-org/infomark/releases/).
 These releases ship a single binary containing all required files. The only dependency is docker and docker-compose.
 
-We will explain necessary steps to spin up a fully production-ready system on your machine. Infomark is implemented as modern CLI with POSIX-compliant flags.
+We will explain the necessary steps to spin up a fully production-ready system on your machine. InfoMark is implemented as a modern CLI with POSIX-compliant flags.
 
-Without any lengthly explanation, you can spin up an instance of infomark from scratch via:
+Without any lengthy explanation, you can spin up an instance of InfoMark from scratch via:
 
 ```bash
 # Create configuration
@@ -42,7 +42,7 @@ export INFOMARK_CONFIG_FILE=`realpath infomark-config.yml`
 InfoMark has the following minimal requirements:
 
 * one CPU core for server `infomark serve`  (1GB RAM)
-* one CPU core for each backgound worker `infomark work` (memory requirement depends on your docker-image size for the programming assignments)
+* one CPU core for each background worker `infomark work` (memory requirement depends on your docker-image size for the programming assignments)
 
 We assume an Ubuntu system. But InfoMark will also happily do its business on other systems that provide docker (>= v1.13) and docker-compose. There are no other dependencies you need to juggle with.
 
@@ -54,7 +54,7 @@ First create a configuration using InfoMark and write it to `infomark-config.yml
 ./infomark console configuration create > infomark-config.yml
 ```
 
-This config file is populated with values to provide a minimal working ([example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml)). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at a first glance, but it should work out-of-the-box.
+This config file is populated with values to provide a minimal working ([example](https://github.com/infomark-org/infomark/blob/master/configuration/example.yml)). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at first glance, but it should work out-of-the-box.
 
 We use docker-compose for handling dependencies in a sandbox
 
@@ -62,7 +62,7 @@ We use docker-compose for handling dependencies in a sandbox
 ./infomark console configuration create-compose infomark-config.yml > docker-compose.yml
 ```
 
-It will create a ready-to-use docker-compose file. For all following commands the configuration file `infomark-config.yml` is required. These commands expect this configuration file to be specified in the environment variable `INFOMARK_CONFIG_FILE`. You might want to specify this information by
+It will create a ready-to-use docker-compose file. For all following commands, the configuration file `infomark-config.yml` is required. These commands expect this configuration file to be specified in the environment variable `INFOMARK_CONFIG_FILE`. You might want to specify this information by
 
 ```bash
 export INFOMARK_CONFIG_FILE=/absolute/path/to/infomark-config.yml
@@ -83,8 +83,8 @@ Before starting the server, you might want to check your configuration
 ./infomark console configuration test infomark-config.yml
 ```
 
-This will make InfoMark try to speak to the database, rabbitMQ and redis from the docker-compose setup. It will also test if it can save uploads.
-You will probably get the feedback, that a privacy statement file does not exists. We ship one example of a privacy statement in german.
+This will make InfoMark try to speak to the database, RabbitMQ and Redis from the Docker-Compose setup. It will also test if it can save uploads.
+You will probably get the feedback, that a privacy statement file does not exist. We ship one example of a privacy statement in German.
 
 If everything is green, start the server by
 
@@ -95,7 +95,7 @@ If everything is green, start the server by
 That's all!
 The `serve` command will take care of initializing the database when starting the first time.
 Point your browser to http://localhost:2020. This will display the login page of InfoMark.
-To further enable 2 background workers, just run
+To further enable two background workers, just run
 
 ```bash
 sudo ./infomark work -n 2
@@ -107,13 +107,13 @@ Sudo is required to start docker containers on behalf of the current user (unles
 ./infomark console configuration test infomark-config.yml --test worker
 ```
 
-Upgrading InfoMark is also easy: Simply stop the infomark server and worker, replace the binary and start the server and worker again.
+Upgrading InfoMark is also easy: Stop the InfoMark server and worker, replace the binary and start the server and worker again.
 
 ## First User
 To add a user, please register your user in the web interface.
-After registration the email address needs to be confirmed. If sendmail is configured you will receive an instruction email containing a link to activate this account.
+After registration, the email address needs to be confirmed. If sendmail is configured, you will receive an instruction email containing a link to activate this account.
 
-Let us verify the user manually using the console. Further, we will upgrade the permission of this user to have root privileges:
+Let us activate the user manually using the console. Further, we will upgrade the permission of this user to have root privileges:
 
 ```bash
 # confirm email
@@ -128,7 +128,7 @@ Let us verify the user manually using the console. Further, we will upgrade the 
 ./infomark console admin add 1
 ```
 
-When running InfoMark on a server in production, we recommend to use [NGINX](https://www.nginx.org/) or [Caddy](https://caddyserver.com/) as a reverse-proxy in front of InfoMark.
+When running InfoMark on a server in production, we recommend using [NGINX](https://www.nginx.org/) or [Caddy](https://caddyserver.com/) as a reverse-proxy in front of InfoMark.
 
 # Design Choices
 
@@ -139,26 +139,26 @@ It is based on several design choices:
 
 **Be open, Never lock-in to expand**<br>
 Every part must be open-source, scalable, reliable and robust. It must be easy to extract and use the information outside of InfoMark.
-Development must be open and adapting the implementation has to be possible. Writing scripts (eg in Python) for common jobs must be easy. We provide an [API description](/swagger/).
+Development must be open and adapting the implementation has to be possible. Writing scripts (e.g. in Python) for common jobs must be easy. We provide an [API description](/swagger/).
 
 **Be user-friendly to grow**<br>
-The entire system must be easy to deploy, to maintain and to update
-even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have near-zero administration. You probably have better things to do than playing a server administrator.
+The entire system must be easy to deploy, maintain and update
+even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have a near-zero administration. You probably have better things to do than playing a server administrator.
 
 **Be robust and reliable to earn trust**<br>
 Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
 All intense operations must be asynchronously scheduled.
 The frontend must be light-weight, fast and responsive. Creating and restoring a database backup is not supposed to be a nervous breakdown.
 
-**Be modern and simple to stay**<br>
-We deliberately chose GO for the backend and ELM for for the frontend. We had a hard time to re-deploy our [old system](https://github.com/infomark-org/InfoMark-deprecated) written in Ruby-On-Rails. There should be no magic behind the scene which breaks when updating the dependencies.
+**Be modern and simple**<br>
+We deliberately chose GO for the backend and ELM for for the frontend. We had a hard time to re-deploy our [old system](https://github.com/infomark-org/InfoMark-deprecated) written in Ruby-On-Rails. There should be no magic behind the scene, which breaks when updating the dependencies.
 
 **Be as general as necessary and not as possible**<br>
 We deliberately narrowed down the feature set to be robust. Any discussion board or support of pdf annotation is out-of-scope by our design. InfoMark solves a very specific problem: automated testing of homework programming exercises.
 
 # System Overview
 
-This section provides a brief overview of the InfoMark system including a description of its parts.
+This section provides a brief overview of the InfoMark system, including a description of its parts.
 We use continuous-integration tests to ensure the implementation can be built and passes all tests at any point.
 
 At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using [Swagger](https://swagger.io/)) [here](https://infomark.org/swagger/).
@@ -184,14 +184,14 @@ The server talks RESTful JSON to remote CLI, the Web-interface and workers.
 
 ### Workers
 
-Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These worker *can* be distributed across multiple machines.
-We recommend using one worker process for 100 students. The workers can be added or removed at any time. Infomark uses AMPQ as a message broker. Each submission will be held in a queue and each worker will execute one job concurrently to avoid too much system load. Our recommendation is one worker per available CPU core.
+Part of the backend are **workers**, which are separate processes that handle the auto-testing of uploads. These workers *can* be distributed across multiple machines.
+We recommend using one worker process for 100 students. The workers can be added or removed at any time. InfoMark uses AMPQ as a message broker. Each submission will be held in a queue and each worker will execute one job concurrently to avoid too much system load. Our recommendation is one worker per available CPU core.
 
 The used amount of memory per submission can be configured. Memory-swapping is deactivated.
 
 ### Console
 
-To avoid manual interaction with the database InfoMark provides a console to run several commands like enrolling a student into a course/group, set the role of a user.
+To avoid manual interaction with the database, InfoMark provides a console to run several commands like enrolling a student into a course/group, set the role of a user.
 
 ```bash
 ./infomark console user find jane.doe
