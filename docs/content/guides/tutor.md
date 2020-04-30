@@ -24,7 +24,7 @@ docker run --rm -it --net="none" \
 
 The output will be stored in the database and displayed to the student resp. the tutor who grades the solution.
 
-> In fact, the command is slightly more complicated as the test are running with a limited amount of memory (without swap) and a limited amount of cores to avoid overloading the system (infinite loops, memory leaks in submissions). These settings can be defined in the InfoMark configuration file.
+> In fact, the command is slightly more complicated as the test are running with a limited amount of memory (without swap) and a limited amount of cores to avoid overloading the system (infinite loops, memory leaks in submissions). These settings can be defined in the InfoMark configuration file. And we directly act as a Docker client instead of calling a plain shell-command.
 
 
 The most minimal and simple Dockerfile which handles uploaded solutions is
