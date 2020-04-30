@@ -1,0 +1,542 @@
+<!doctype html>
+<html>
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+<link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#ff0000">
+<meta name="msapplication-TileColor" content="#b91d47">
+
+<title>InfoMark</title>
+<link href="//fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+
+<link rel="stylesheet" href="https://infomark.org/sass/main.min.037df327d39daba9481f1c90f50e888d8e9991bb8e907e31300f2c85ec4067ad.css" data></head>
+    <body class="documentation"><nav class="navbar navbar-expand-md navbar-light bg-light fixed-top nav-border nav-scroll">
+
+  <a class="navbar-brand"  href="/">
+    <img src="/images/Logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    InfoMark
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Start</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/guides/overview/">Overview</a>
+          <a class="dropdown-item" href="/guides/administrator/">Administrator's Guide</a>
+          <a class="dropdown-item" href="/guides/developer/">Developer's Guide</a>
+          <a class="dropdown-item" href="/guides/tutor">Tutor's Guide</a>
+          <a class="dropdown-item" href="/guides/queries/">Queries</a>
+          <a class="dropdown-item" href="/guides/console">Console</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/swagger" target="_blank">API</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <a href="https://github.com/infomark-org/infomark" tagrt="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style=" position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+                <div class="row flex-xl-nowrap docs">
+                    <div class="col-xl-2 col-md-1">
+                        <div class="d-none d-xl-block bd-toc">
+                            <div class="title">What's on this page?</div>
+                            <nav id="TableOfContents">
+<ul>
+<li><a href="#auto-tests">Auto - Tests</a>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#java-11">Java 11</a>
+<ul>
+<li><a href="#student-template">Student-Template</a></li>
+<li><a href="#tests">Tests</a>
+<ul>
+<li><a href="#structure-tests">Structure-Tests</a></li>
+<li><a href="#value-tests">Value-Tests</a>
+<ul>
+<li><a href="#public-test">Public Test</a></li>
+<li><a href="#private-test">Private Test</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#python-3">Python 3</a></li>
+<li><a href="#c">C++</a></li>
+</ul></li>
+</ul>
+</nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-9  col-md-10" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                        <div id="doc-header" class="doc-header text-center">
+                            <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> &nbsp;Tutor&#39;s Guide</h1>
+                            <div class="meta">
+                                <i class="far fa-clock"></i> &nbsp;Last updated:  April 30, 2020
+                            </div>
+                        </div>
+                        <main role="main">
+                            
+                            
+                            
+
+<h1 id="auto-tests">Auto - Tests</h1>
+
+<p>Auto-tests (unit-tests) consists of</p>
+
+<ul>
+<li>a submission <code>&lt;STUDENT_UPLOAD.ZIP&gt;</code> made by a student</li>
+<li>a testing framework <code>&lt;TASK_SEPCIFIC_TEST.ZIP&gt;</code> written by one of the tutors/instructors</li>
+<li>a docker-image name <code>&lt;YOUR_DOCKER_IMAGE&gt;</code></li>
+</ul>
+
+<p>Each infomark-worker will fetch a submission from a queue and execute a command which is similar to</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run --rm -it --net<span class="o">=</span><span class="s2">&#34;none&#34;</span> <span class="se">\
+</span><span class="se"></span>  -v &lt;STUDENT_UPLOAD.ZIP&gt;:/data/submission.zip:ro <span class="se">\
+</span><span class="se"></span>  -v &lt;TASK_SEPCIFIC_TEST.ZIP&gt;:/data/unittest.zip:ro  <span class="se">\
+</span><span class="se"></span>  &lt;YOUR_DOCKER_IMAGE&gt;</code></pre></div>
+<p>The output will be stored in the database and displayed to the student resp. the tutor who grades the solution.</p>
+
+<blockquote>
+<p>In fact, the command is slightly more complicated as the test are running with a limited amount of memory (without swap) and a limited amount of cores to avoid overloading the system (infinite loops, memory leaks in submissions). These settings can be defined in the InfoMark configuration file. And we directly act as a Docker client instead of calling a plain shell-command.</p>
+</blockquote>
+
+<p>The most minimal and simple Dockerfile which handles uploaded solutions is</p>
+<div class="highlight"><pre class="chroma"><code class="language-docker" data-lang="docker"><span class="c"># Dockerfile</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> ubuntu:18.04</span><span class="err">
+</span><span class="err"></span><span class="k">ADD</span><span class="s"> scripts/run.sh /app/run.sh</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span><span class="s"> [&#34;/app/run.sh&#34;]</span></code></pre></div>
+<p>which uses the script</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># run.sh</span>
+<span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&#34;/data&#34;</span>
+<span class="nv">SUBMISSION_FILE</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$DATA_DIR</span><span class="s2">/submission.zip&#34;</span>
+<span class="nv">TEST_FILE</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$DATA_DIR</span><span class="s2">/unittest.zip&#34;</span>
+
+<span class="nb">echo</span> <span class="s2">&#34;this line will be ignored&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;--- BEGIN --- INFOMARK -- WORKER&#34;</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">SUBMISSION_FILE</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">TEST_FILE</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s2">&#34;--- END --- INFOMARK -- WORKER&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;this line will be ignored&#34;</span></code></pre></div>
+<p>as an entry point. Please either use <a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests">one of our pre-defined test-examples</a> or create your own.
+By design we assume, that</p>
+
+<ul>
+<li>The testing-framework, e.g., JUnit, ensures that all stdout from the uploaded user code is suppressed.</li>
+<li>The tests are fast enough to  finish before the timeout from your configuration file is reached.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>There are some ways to ease the task of writing unit-tests.
+A clear directory structure and a Makefile to automatically pack all necessary archives or/and run the unit-test locally can dramatically speed up the entire process and avoid debugging steps on the server.</p>
+
+<p>The <em>makefile</em> should be able to clean temporary files, zip files and simulate the test result locally using the correct docker-image.
+Further, specifying the docker-image in the <em>makefile</em> helps to set up the task in InfoMark as you will need to specify it there while creating a new exercise task. An <a href="https://github.com/infomark-org/infomark-docs/blob/master/unittests/python/makefile">example-Makefile</a> is given in our repository.</p>
+
+<p>InfoMark is language-agnostic. The system only records the docker-output. All post-processing of runs (processing JUNIT outputs) must be done <em>within</em> the docker container.</p>
+
+<p>We provide several testing-templates and examples</p>
+
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th align="left">Dockerimage  (hub.docker.com)</th>
+<th align="center">Test Example</th>
+<th align="center">Dockerfile</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Java 11</td>
+<td align="left"><a href="https://hub.docker.com/r/patwie/test_java_submission">patwie/test_java_submission:latest</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests/java">yes</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests/java">yes</a></td>
+</tr>
+
+<tr>
+<td>Python3</td>
+<td align="left"><a href="https://hub.docker.com/r/patwie/test_python3_submission">patwie/test_python3_submission:latest</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests/python">yes</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests/python">yes</a></td>
+</tr>
+
+<tr>
+<td>C++</td>
+<td align="left"><a href="https://hub.docker.com/r/patwie/test_cpp_submission">patwie/test_cpp_submission:latest</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests/cpp">yes</a></td>
+<td align="center"><a href="https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests/cpp">yes</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="java-11">Java 11</h2>
+
+<p>We suggest using our <a href="https://github.com/infomark-org/infomark-docs/tree/master/dockerimages/unittests">docker-image</a> to run follow the guide below.</p>
+
+<p>We use the following directory structure to reduce the workload of writing re-usable unit-tests.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">exercises
+  exercise&lt;a&gt;
+    makefile
+    tasks                             <span class="c1"># any LaTeX related content describing the exercise</span>
+      sheet.tex
+    solution                          <span class="c1"># sample solution</span>
+      main
+        FileA.java
+        FileB.java
+    student_template_<span class="o">[</span>&lt;a&gt;.&lt;b&gt;<span class="o">]</span>        <span class="c1"># student-template for each task</span>
+      main
+        FileA.java
+        FileB.java
+    unittest_public_<span class="o">[</span>&lt;a&gt;.&lt;b&gt;<span class="o">]</span>         <span class="c1"># all tests without output visible to students</span>
+      src
+        __unittest
+          FileAtest.java
+          FileBtest.java
+      build.xml
+    unittest_private<span class="o">[</span>&lt;a&gt;.&lt;b&gt;<span class="o">]</span>        <span class="c1"># all tests without output visible only to tutors/TAs</span>
+      src
+        __unittest
+          FileAtest.java
+          FileBtest.java
+      build.xml</code></pre></div>
+<p>where <code>[a.b]</code> represents the exercise-task-number. A working example can be found in the <a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests">InfoMark-repository</a>.</p>
+
+<h3 id="student-template">Student-Template</h3>
+
+<p>The student-template is usually a zip-file with the exercise tasks as a PDF and a code-template.  A very basic example might be</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">main</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;6 / 2 = &#34;</span> <span class="o">+</span> <span class="n">divide</span><span class="o">(</span><span class="n">6</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">divide</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<p>We suggest to create a code-template that can be uploaded itself to the system, such that there are no compilation errors. Testing the code-template above against the unit-tests gives</p>
+<div class="highlight"><pre class="chroma">[javac] Compiling 3 source files to /build/classes
+[   OK   ] HelloClassStructureTest:
+[ FAILED ] DivideValueTest:
+        Error 1/1
+          - Tag: failure
+          - Typ: junit.framework.AssertionFailedError
+          - Msg: divide(6, 2) expected:&lt;3&gt; but was:&lt;1&gt;</pre></div>
+<h3 id="tests">Tests</h3>
+
+<p>Public tests will convey their results back to the student in our system. These are tests that should help a student to make sure their solution for a programming assignment is roughly correct. They have to be:</p>
+
+<ul>
+<li>verbose</li>
+<li>deterministic and reproducible</li>
+</ul>
+
+<p>Private test logs are not visible to the student. Only tutors can access this information which should test if the submitted solution is completely correct by checking several corner cases. Tutors will see both test results (public and private test outputs).</p>
+
+<p>We suggest to have two sub-types of tests:</p>
+
+<ul>
+<li>Structure-Tests</li>
+<li>Value-Tests</li>
+</ul>
+
+<p>We have composed a <a href="https://github.com/infomark-org/infomark-docs/blob/master/unittests/java/unittest_private_0.1/src/__unittest/Helper.java">Helper.java</a> file to ease the work with reflections when checking the solutions of the exercise tasks.</p>
+
+<p>The overall structure should be</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">__unittest</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.*</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Modifier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.rules.Timeout</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">__unittest.Helper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Rule</span><span class="o">;</span>
+
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeNameTest</span> <span class="o">{</span>
+
+  <span class="c1">// We set this timeout for each single test-case.
+</span><span class="c1"></span>  <span class="nd">@Rule</span>
+  <span class="kd">public</span> <span class="n">Timeout</span> <span class="n">globalTimeout</span> <span class="o">=</span> <span class="n">Timeout</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="n">5</span><span class="o">);</span>
+
+  <span class="nd">@Test</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>
+<span class="o">}</span></code></pre></div>
+<p>We <em>will</em> stop the docker process from the worker. You need to make sure to use a large enough timeout <em>inside</em> the InfoMark-configuration file.</p>
+
+<h4 id="structure-tests">Structure-Tests</h4>
+
+<p>A Structure-Test uses reflections to query all expected methods, check their signatures and naming. All code uploaded by any user of our system should only be accessed via reflections as there is no guarantee that the expected methods exist. Rather than having a compilation error, we would like to check these during runtime to ensure we can give more verbose information about what we expect.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//  unittest_public[a.b]/src/__unittest/FileAtest.java
+</span><span class="c1"></span>  <span class="nd">@Test</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">HelloClassStructureTest</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// no guarantee here that the class `Hello` exists --&gt; we use Reflections
+</span><span class="c1"></span>    <span class="n">Helper</span><span class="o">.</span><span class="na">ClassWrapper</span> <span class="n">clazz</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Helper</span><span class="o">.</span><span class="na">ClassWrapper</span><span class="o">(</span><span class="s">&#34;main.Hello&#34;</span><span class="o">);</span>
+    <span class="c1">// no guarantee here that the method `divide` exists --&gt; we tests existence here
+</span><span class="c1"></span>    <span class="c1">// this will fail if the method does not exists (run-time error with verbose message)
+</span><span class="c1"></span>    <span class="c1">//                   name       expect (public static)          return     param 1    param 2
+</span><span class="c1"></span>    <span class="n">clazz</span><span class="o">.</span><span class="na">mustHasMethod</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="n">Modifier</span><span class="o">.</span><span class="na">PUBLIC</span><span class="o">|</span><span class="n">Modifier</span><span class="o">.</span><span class="na">STATIC</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kt">int</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+  <span class="o">}</span></code></pre></div>
+<p>Running Structure-Tests only make sense in the public tests, so that students get feedback if we cannot test it because of missing methods or wrong signatures.</p>
+
+<p>If the return type of <code>divide</code> would be <code>double</code> in the uploaded solution (while we expect it to be an <code>int</code>) the output will</p>
+<div class="highlight"><pre class="chroma">[ FAILED ] HelloClassStructureTest:
+        Error 1/1
+          - Tag: failure
+          - Typ: junit.framework.AssertionFailedError
+          - Msg: Method `public static double divide (int, int )` in `class Hello` found, but expected return type (`int`) is wrong. I just found `double`</pre></div>
+<h4 id="value-tests">Value-Tests</h4>
+
+<p>Assuming the structure is valid, we will check the solution itself. Again, any wrong method signature would be a compilation error. Hence, we use reflection here as well.</p>
+
+<h5 id="public-test">Public Test</h5>
+
+<p>A good candidate for a public test would be</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//  unittest_public[a.b]/src/__unittest/FileAtest.java
+</span><span class="c1"></span>  <span class="nd">@Test</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">DivideValueTest</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Helper</span><span class="o">.</span><span class="na">InstanceWrapper</span> <span class="n">actual_class</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Helper</span><span class="o">.</span><span class="na">ClassWrapper</span><span class="o">(</span><span class="s">&#34;main.Hello&#34;</span><span class="o">).</span><span class="na">create</span><span class="o">();</span>
+
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;divide(6, 2)&#34;</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">actual_class</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="n">6</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;divide(12, 3)&#34;</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">actual_class</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="n">12</span><span class="o">,</span> <span class="n">3</span><span class="o">));</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>  <span class="o">}</span></code></pre></div>
+<h5 id="private-test">Private Test</h5>
+
+<p>Corner cases should be part of private tests, e.g. division by zero. Further, as the output of the public tests is visible solutions can overfit the tests. A solution which passes the public test is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">divide</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">((</span><span class="n">a</span> <span class="o">==</span> <span class="n">6</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">b</span><span class="o">==</span><span class="n">2</span><span class="o">)){</span>
+      <span class="k">return</span> <span class="n">3</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span><span class="o">((</span><span class="n">a</span> <span class="o">==</span> <span class="n">12</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">b</span><span class="o">==</span><span class="n">3</span><span class="o">)){</span>
+      <span class="k">return</span> <span class="n">4</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">42</span><span class="o">;</span>
+  <span class="o">}</span></code></pre></div>
+<p>However, we want to avoid these kinds of solutions. A possible solution would be to test random numbers. But in some cases, this is not possible. Further, we want to have reproducible tests. Otherwise, learning from test-output is hardly possible.
+The better way of testing overfitting is to test several additional input-combinations.
+A good candidate for a private test would be</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//  unittest_private[a.b]/src/__unittest/FileAtest.java
+</span><span class="c1"></span>  <span class="nd">@Test</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">DivideValueTest</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Helper</span><span class="o">.</span><span class="na">InstanceWrapper</span> <span class="n">actual_class</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Helper</span><span class="o">.</span><span class="na">ClassWrapper</span><span class="o">(</span><span class="s">&#34;main.Hello&#34;</span><span class="o">).</span><span class="na">create</span><span class="o">();</span>
+
+    <span class="c1">// to avoid &#34;overfitting&#34;
+</span><span class="c1"></span>    <span class="c1">// this test would fail when hard-coding a solution against the public test
+</span><span class="c1"></span>    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;divide(99, 3)&#34;</span><span class="o">,</span> <span class="n">33</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">actual_class</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="n">99</span><span class="o">,</span> <span class="n">3</span><span class="o">));</span>
+
+    <span class="c1">// we might write in the exercise task, that x/0 should be 0
+</span><span class="c1"></span>    <span class="c1">// we should test this corner-case here as well
+</span><span class="c1"></span>    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;divide(6, 0)&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">actual_class</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="n">6</span><span class="o">,</span> <span class="n">0</span><span class="o">));</span>
+    <span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;divide(-12, 3)&#34;</span><span class="o">,</span> <span class="o">-</span><span class="n">4</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">actual_class</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;divide&#34;</span><span class="o">,</span> <span class="o">-</span><span class="n">12</span><span class="o">,</span> <span class="n">3</span><span class="o">));</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>  <span class="o">}</span></code></pre></div>
+<h2 id="python-3">Python 3</h2>
+
+<p>We provide the a very basic but working test set for checking python programming assignment solutions in our <a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests/python">git-repository</a>.</p>
+
+<p>The basic idea is that any upload will be unzipped into a directory together with the unit-test:</p>
+<div class="highlight"><pre class="chroma">/src
+  &lt;name&gt;.py        # from student submission
+  &lt;name&gt;_test.py   # from testing-framework</pre></div>
+<p>Hereby, again the submission upload will be extracted first and the test framework will be extracted after such that it cannot be overwritten. Tests are executed via</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 -m unittest discover -s . --verbose -p <span class="s1">&#39;*_test.py&#39;</span></code></pre></div>
+<p>As python-code can be be written without any datatypes you will need to test if the methods with the correct signature exists.</p>
+
+<p>For a given upload with content</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># hello.py</span>
+<span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c1"># here is a mistake</span></code></pre></div>
+<p>A test might look like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># hello_test.py</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+
+<span class="k">class</span> <span class="nc">Testdivide</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">test_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">hello</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="s1">&#39;divide&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="s1">&#39;divide&#39;</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">hello</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;Should be 2&#34;</span><span class="p">)</span></code></pre></div>
+<p>This would produce the output</p>
+<div class="highlight"><pre class="chroma">Python 3.7.3
+test_divide (divide_test.Testdivide) ... FAIL
+
+======================================================================
+FAIL: test_divide (divide_test.Testdivide)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &#34;divide_test.py&#34;, line 11, in test_divide
+    self.assertEqual(hello.divide(14, 7), 2, &#34;Should be 2&#34;)
+AssertionError: 21 != 2 : Should be 2
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)</pre></div>
+<h2 id="c">C++</h2>
+
+<p>Testing in C++ is a bit tricky, doing reflections is difficult. A basic example is provided in out <a href="https://github.com/infomark-org/infomark-docs/tree/master/unittests/cpp">git-repository</a>.
+The final directory structure <em>inside</em> the docker container will be</p>
+<div class="highlight"><pre class="chroma">/src
+  lib/             # from the upload/student_template
+    divide.cpp     # from the upload/student_template
+    divide.hpp     # from the upload/student_template
+  hello.cpp        # from the upload/student_template
+  hello_test.cpp   # from the test
+  catch.hpp        # from the test
+  CMakeLists.txt   # from the test
+  run.sh           # from the test</pre></div>
+<p>Any file from the testing-zip will override a file from the uploaded submission if such a file exists. Further, we automatically remove any &ldquo;*.sh&rdquo; from the submission file in our Docker-setup.</p>
+
+<p>Any submission consists of a main file</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// hello.cpp
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;lib/divide.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d / %d = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">divide</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>and a implementation in <code>lib</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// lib/divide.cpp
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;divide.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">divide</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>
+<p>with forward-declaration</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// lib/divide.h
+</span><span class="c1"></span><span class="cp">#ifndef LIB_DIVIDE_H_
+</span><span class="cp">#define LIB_DIVIDE_H_
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">divide</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+
+<span class="cp">#endif  </span><span class="c1">// LIB_DIVIDE_H_
+</span></code></pre></div>
+<p>A simple way of testing C++ implementations uses the header-only library catch</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&#34;lib/divide.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define CATCH_CONFIG_MAIN  </span><span class="c1">// This tells Catch to provide a main() - only do
+</span><span class="c1"></span>                           <span class="c1">// this in one cpp file
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;catch.hpp&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&#34;Divide should be correct&#34;</span><span class="p">,</span> <span class="s">&#34;[divide]&#34;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">REQUIRE</span><span class="p">(</span><span class="n">divide</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>As the implementation of <code>divide</code> is not correct the output will be:</p>
+<div class="highlight"><pre class="chroma">Alpine clang version 5.0.1 (tags/RELEASE_501/final) (based on LLVM 5.0.1)
+Target: x86_64-alpine-linux-musl
+Thread model: posix
+InstalledDir: /usr/bin
+-- The C compiler identification is GNU 6.4.0
+-- The CXX compiler identification is GNU 6.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /src/build
+Scanning dependencies of target hello
+[ 33%] Building CXX object CMakeFiles/hello.dir/hello_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/hello.dir/lib/divide.cpp.o
+[100%] Linking CXX executable hello
+[100%] Built target hello
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hello is a Catch v2.7.2 host application.
+Run with -? for options
+-------------------------------------------------------------------------------
+Divide should be correct
+-------------------------------------------------------------------------------
+/src/hello_test.cpp:7
+...............................................................................
+/src/hello_test.cpp:8: FAILED:
+  REQUIRE( divide(6, 3) == 2 )
+with expansion:
+  9 == 2
+===============================================================================
+test cases: 1 | 1 failed
+assertions: 1 | 1 failed</pre></div>
+<p>The output would also contain all linking issues (wrongly named function) like</p>
+<div class="highlight"><pre class="chroma">CMakeFiles/hello.dir/hello_test.cpp.o: In function `____C_A_T_C_H____T_E_S_T____0()&#39;:
+hello_test.cpp:(.text+0x2699e): undefined reference to `divide(double, double)&#39;
+hello_test.cpp:(.text+0x26afd): undefined reference to `divide(double, double)&#39;
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/hello.dir/build.make:99: hello] Error 1
+make[1]: *** [CMakeFiles/Makefile2:68: CMakeFiles/hello.dir/all] Error 2
+make: *** [Makefile:84: all] Error 2
+/src/run.sh: line 8: ./hello: not found</pre></div>
+<blockquote>
+<p>Currently, there is no way to skip non-existing methods. If a method does not exists or has the wrong signature
+the output will containing the linking error without any test-results from the run itself. This is caused by the nature
+of C++.</p>
+</blockquote>
+
+
+                            
+                            
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+
+
+    
+    
+    
+    
+    
+    <script>window.jQuery || document.write('<script src="https:\/\/infomark.org\/js\/jquery-3.2.1.slim.min.js"><\/script>')</script>
+    <script src="https://infomark.org/js/popper.min.js"></script>
+    <script src="https://infomark.org/js/bootstrap.min.js"></script>
+    <script src="https://infomark.org/js/custom.js"></script>
+    <script src="https://infomark.org/js/wow.min.js"></script>
+    </script>
+
+
+</body></html><script>
+        $("#TableOfContents a").each(function(){
+            $($(this).attr("href")).css("padding-top", "6rem").prev().css("margin-bottom", "-6rem");
+            
+        });
+    </script>
+    </body>
+</html>

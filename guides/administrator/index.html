@@ -1,0 +1,335 @@
+<!doctype html>
+<html>
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+<link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#ff0000">
+<meta name="msapplication-TileColor" content="#b91d47">
+
+<title>InfoMark</title>
+<link href="//fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+
+<link rel="stylesheet" href="https://infomark.org/sass/main.min.037df327d39daba9481f1c90f50e888d8e9991bb8e907e31300f2c85ec4067ad.css" data></head>
+    <body class="documentation"><nav class="navbar navbar-expand-md navbar-light bg-light fixed-top nav-border nav-scroll">
+
+  <a class="navbar-brand"  href="/">
+    <img src="/images/Logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    InfoMark
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Start</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/guides/overview/">Overview</a>
+          <a class="dropdown-item" href="/guides/administrator/">Administrator's Guide</a>
+          <a class="dropdown-item" href="/guides/developer/">Developer's Guide</a>
+          <a class="dropdown-item" href="/guides/tutor">Tutor's Guide</a>
+          <a class="dropdown-item" href="/guides/queries/">Queries</a>
+          <a class="dropdown-item" href="/guides/console">Console</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/swagger" target="_blank">API</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <a href="https://github.com/infomark-org/infomark" tagrt="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style=" position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+                <div class="row flex-xl-nowrap docs">
+                    <div class="col-xl-2 col-md-1">
+                        <div class="d-none d-xl-block bd-toc">
+                            <div class="title">What's on this page?</div>
+                            <nav id="TableOfContents">
+<ul>
+<li><a href="#general-information">General Information</a>
+<ul>
+<li><a href="#configuration">Configuration</a>
+<ul>
+<li><a href="#auth-jwt">Auth_JWT</a></li>
+<li><a href="#email">Email</a></li>
+<li><a href="#directories">Directories</a></li>
+<li><a href="#server-settings">Server-Settings</a></li>
+<li><a href="#background-worker">Background-Worker</a></li>
+</ul></li>
+<li><a href="#roles-and-permissions">Roles and Permissions</a></li>
+<li><a href="#auto-tests">Auto-Tests</a>
+<ul>
+<li><a href="#conventions">Conventions</a></li>
+</ul></li>
+<li><a href="#exercise-groups">Exercise Groups</a></li>
+<li><a href="#backup-restore">Backup / Restore</a></li>
+<li><a href="#generated-files">Generated Files</a></li>
+</ul></li>
+<li><a href="#api">API</a></li>
+<li><a href="#metrics">Metrics</a></li>
+</ul>
+</nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-9  col-md-10" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                        <div id="doc-header" class="doc-header text-center">
+                            <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> &nbsp;Administrator&#39;s Guide</h1>
+                            <div class="meta">
+                                <i class="far fa-clock"></i> &nbsp;Last updated:  April 30, 2020
+                            </div>
+                        </div>
+                        <main role="main">
+                            
+                            
+                            
+
+<h1 id="general-information">General Information</h1>
+
+<p>This page gives a brief overview of the underlying system and capabilities. It is meant to be read by people who would like to install the system. If you are provided such an instance, please refer to the <a href="/guides/instructor">Instructor&rsquo;s Guide</a></p>
+
+<p>The InfoMark System can serve multiple courses within a single server instance. The linked background workers will then be shared amongst these courses.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The configuration is done within a YAML configuration file.
+For an example configuration, please refer to the <a href="https://github.com/infomark-org/infomark/blob/master/configuration/example.yml">example</a>.</p>
+
+<p>In general, the defaults might do the job. For all secrets like passwords, tokens or keys, you should use <code>openssl rand -base64 32</code> to generate random high-quality secrets or generate the configuration using the InfoMark console.</p>
+
+<p>We discuss some important settings:</p>
+
+<h3 id="auth-jwt">Auth_JWT</h3>
+
+<p>InfoMark supports two authentications systems:</p>
+
+<ul>
+<li>JSON-Web-Token (JWT) and</li>
+<li>sessions.</li>
+</ul>
+
+<p>If you use JWT ensure they stay valid. There is an access token which confirms the identity of the request identity and has to be attached to the header in each request. The refresh token serves the purpose of creating a new short-life access token.</p>
+
+<p>The sessions are handled on the server-side using cookies. Any session will stay 24h valid in total but will expire within 20 minutes if no action is taken (using a default configuration). Please note, the frontend frequently does send requests to the backend even without explicit user interaction, e.g. polling for new test-logs from the auto-testing feature. Hence, these sessions will be kept alive.</p>
+
+<h3 id="email">Email</h3>
+
+<p>For technical reasons, our infrastructure only supports the binary <code>sendmail</code> to deliver emails. If you remove the <code>sendmail_binary</code> key from the config, all emails from the system will be displayed in the terminal. Additionally, each outgoing email will have a footnote</p>
+<div class="highlight"><pre class="chroma">Sent by: FirstName LastName
+sent via Infomark</pre></div>
+<p>when these are composed by any user.</p>
+
+<h3 id="directories">Directories</h3>
+
+<p>We use several directories to store uploads, generated files or common files like a privacy statement. The default values will work if the paths exist. We made these paths configurable as these files require different backup strategies. We suggest estimating beforehand the required space. From our experience 1000 submissions are equal to 20MB. You can limit the size of each submission file in the server settings in <code>server.http.limits</code>.</p>
+
+<h3 id="server-settings">Server-Settings</h3>
+
+<p>To balance the tradeoff between too many request and responsiveness, we added several strategies to avoid blocking actions. We limit the number of bytes which are read from the client during a request. The default of 1MB is enough for common JSON requests. You can configure these limits for each kind of request using the following keys:</p>
+
+<ul>
+<li><code>server.http.limits.max_request_json</code> to limit any JSON request</li>
+<li><code>server.http.limits.max_avatar</code> to limit the image size for the avatar in the profil</li>
+<li><code>server.http.limits.max_submission</code> to limit the size for homework solutions</li>
+</ul>
+
+<p>There is no limit when uploading slides or extra course material.</p>
+
+<h3 id="background-worker">Background-Worker</h3>
+
+<p>Background-Workers can be turned off when using the config <code>distribute_jobs: false</code>.</p>
+
+<h2 id="roles-and-permissions">Roles and Permissions</h2>
+
+<p>InfoMark has a relatively simple permission system. The permissions are linked to a request identity (the user). Each user can be either a normal user or <code>global admin</code>. Any global admin will bypass all permission checks and gives the user all permissions across all hosted courses.</p>
+
+<p>To upgrade/downgrade a user to <code>global admin</code> use the console like</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># upgrade account</span>
+./infomark console admin add <span class="o">[</span>the-user-id<span class="o">]</span>
+<span class="c1"># downgrade account</span>
+./infomark console admin remove <span class="o">[</span>the-user-id<span class="o">]</span></code></pre></div>
+<p>Only, a global admin can create new courses.</p>
+
+<p>To get granularity in the permission system each user enrolled into a course will be assigned to one the following roles:</p>
+
+<ul>
+<li><em>admin</em>: Admin for a course &ndash; not a global admin</li>
+<li><em>tutor</em>: Teaching assistants who will grade homework and lead exercise groups</li>
+<li><em>students</em>: This is the default role.</li>
+</ul>
+
+<p>These permissions control which resources a user has access to, e.g., students cannot see other students personal information. Slides and material can be targeted to a specific role, e.g., distribute sample solution to TAs. These roles are subsets, i.e., an admin has all permissions, which a tutor and a student has. Tutors have additional permissions compared to students.</p>
+
+<p>To upgrade a user to a course-tutor or course-admin use the console</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># set permission to student</span>
+./infomark console course enroll <span class="o">[</span>course-id<span class="o">]</span> <span class="o">[</span>the-user-id<span class="o">]</span> student
+<span class="c1"># set permission to tutor</span>
+./infomark console course enroll <span class="o">[</span>course-id<span class="o">]</span> <span class="o">[</span>the-user-id<span class="o">]</span> tutor
+<span class="c1"># set permission to admin</span>
+./infomark console course enroll <span class="o">[</span>course-id<span class="o">]</span> <span class="o">[</span>the-user-id<span class="o">]</span> admin</code></pre></div>
+<p>Note, this enrolls the user to a course if the user is not enrolled. Otherwise, it simply updates the role in a course.</p>
+
+<h2 id="auto-tests">Auto-Tests</h2>
+
+<p>Please refer to the <a href="/guides/tutor">Tutor&rsquo;s Guide</a> for more details about writing and using auto-tests.</p>
+
+<p>Each task of a programming assignment can be linked to a docker-image and a zip file containing the test code.
+Technically, the server process acting as a Restful JSON web server will communicate using AMQP with separate processes, which are called <code>workers</code>. These workers can be started at different machines.</p>
+
+<blockquote>
+<p>Please note, in the current version these workers have global admin privileges. This will change in the future. Hence, only start these workers on machines you trust (which is anyway a good idea).</p>
+</blockquote>
+
+<h3 id="conventions">Conventions</h3>
+
+<p>A worker communicates directory to the local docker API and runs a command like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run --rm -it --net<span class="o">=</span><span class="s2">&#34;none&#34;</span> <span class="se">\
+</span><span class="se"></span>  -v &lt;STUDENT_UPLOAD.ZIP&gt;:/data/submission.zip:ro <span class="se">\
+</span><span class="se"></span>  -v &lt;TASK_SEPCIFIC_TEST.ZIP&gt;:/data/unittest.zip:ro  <span class="se">\
+</span><span class="se"></span>  &lt;YOUR_DOCKER_IMAGE&gt;</code></pre></div>
+<p>Note, each test is isolated from the internet and the uploaded solution of students <code>&lt;STUDENT_UPLOAD.ZIP&gt;</code> and test-framework <code>&lt;TASK_SEPCIFIC_TEST.ZIP&gt;</code> are mounted read-only.
+The worker captures all outputs from stdout which is between two markers. The docker output</p>
+<div class="highlight"><pre class="chroma"><code class="language-stdout" data-lang="stdout">this output here before the marker will be ignored
+
+--- BEGIN --- INFOMARK -- WORKER
+
+[ ok ]     done
+[ failed ] done
+
+--- END --- INFOMARK -- WORKER
+
+some other output which will be ignored</code></pre></div>
+<p>will be captured as</p>
+<div class="highlight"><pre class="chroma"><code class="language-stdout" data-lang="stdout">[ ok ]     done
+[ failed ] done</code></pre></div>
+<p>If the docker child returns an exit code != 0 a default message will be sent instead. We highly encourage to locally test any new test-framework using the &ldquo;docker run&rdquo; command above.</p>
+
+<p>The workers, will download the student submission over HTTP and run these tests locally. Make sure, the used docker file exists or is already pulled from e.g. docker-hub.</p>
+
+<p>We provide <a href="/guides/tutor">examples</a> for testing Java, Python and C++ programming assignment solutions.</p>
+
+<h2 id="exercise-groups">Exercise Groups</h2>
+
+<p>InfoMark supports multiple exercise groups per course. These are usually weekly meetings where exercises are discussed. The owner of an exercise group can be any user in the system independently from the role. However, to be allowed to grade student submissions the user needs the course-specific role &ldquo;tutor&rdquo;.</p>
+
+<p>The system collects <em>bids</em> from students. Each bid indicates a preference to different dates of the exercise groups (10 means best choice, 1 means the student would like to take another exercise group). By definition each student is enrolled into one unique group only. But, tutors can advise several exercise groups.</p>
+
+<p>To guarantee the best possible assignment between student and exercise groups &ndash; maximizing the overall happiness &ndash; we solve an Integer-Programm using <a href="https://projects.coin-or.org/SYMPHONY">Symphony</a>. Symphony can solve this problem instance with several exercise groups and thousands of students reliably.</p>
+
+<p>The folder <code>assignment_solver</code> contains the docker image. Alternatively you can pull the docker image <code>patwie/symphony</code> from docker-hub.</p>
+
+<p>To export the bids of students run</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console group dump-bids <span class="o">[</span>courseID<span class="o">]</span> <span class="o">[</span>file<span class="o">]</span> <span class="o">[</span>min_per_group<span class="o">]</span> <span class="o">[</span>max_per_group<span class="o">]</span></code></pre></div>
+<p>Hereby, <code>min_per_group</code> and <code>max_per_group</code> constraint the number of allowed participants in each exercise group. If you use the wrong bounds the problem might be infeasible to solve. Then change these constraints. An example is</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console group dump-bids <span class="m">1</span> mycourse <span class="m">15</span> <span class="m">30</span></code></pre></div>
+<p>InfoMark will then display the command to create a solution, e.g.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo docker run -v <span class="s2">&#34;</span><span class="nv">$PWD</span><span class="s2">&#34;</span>:/data -it patwie/symphony  /var/symphony/bin/symphony -F /data/mycourse.mod -D /data/mycourse.dat -f /data/mycourse.par &gt; solution.txt
+
+cat solution.txt
+...
+assign<span class="o">[</span>u276,g2<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u277,g9<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u278,g10<span class="o">]</span>   <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u279,g10<span class="o">]</span>   <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u280,g6<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u281,g1<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u282,g8<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u283,g5<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u284,g9<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u285,g5<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u286,g3<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u287,g6<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u288,g4<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u289,g9<span class="o">]</span>    <span class="m">1</span>.0000000000
+assign<span class="o">[</span>u290,g4<span class="o">]</span>    <span class="m">1</span>.0000000000
+
+...</code></pre></div>
+<p>The solution <code>solution.txt</code> can be directly fed into infomark using</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console group import-assignments <span class="o">[</span>courseID<span class="o">]</span> solution.txt</code></pre></div>
+<p>Executing this command will assign each student to a group. Once they are assigned to an exercise group they cannot change their preference anymore. However, any course-admin can manually change the assignment.</p>
+
+<h2 id="backup-restore">Backup / Restore</h2>
+
+<p>The console features commands which can create and restore snapshots from the database.
+We use Postgres version 11, and the backup/restore routine requires the binaries
+<code>pg_dump</code>, <code>dropdb</code>, <code>createdb</code>, <code>psql</code>, <code>gunzip</code> as it merely wraps these commands and creates pipes</p>
+
+<p>Installing the correct binaries make sure you run these commands <strong>once</strong>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc <span class="p">|</span> sudo apt-key add -
+<span class="nv">RELEASE</span><span class="o">=</span><span class="k">$(</span>lsb_release -cs<span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&#34;deb http://apt.postgresql.org/pub/repos/apt/ </span><span class="si">${</span><span class="nv">RELEASE</span><span class="si">}</span><span class="s2">&#34;</span>-pgdg main <span class="p">|</span> sudo tee  /etc/apt/sources.list.d/pgdg.list
+sudo apt update
+sudo apt -y install postgresql-11
+which gunzip</code></pre></div>
+<p>To create a snapshot run</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console database backup path/to/file.sql.gz</code></pre></div>
+<p>To load data from a snapshot run</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console database restore path/to/file.sql.gz</code></pre></div>
+<h2 id="generated-files">Generated Files</h2>
+
+<p>The InfoMark-backend generates files in an internal cron-job. The cron-jobs have
+a setting <code>cronjob_intervall_*</code> which specifies the interval these jobs should run.
+One cronjob is <code>submission_zip</code>, which will zip all submissions together (per group and task) such that tutors/TAs can download the entire bundle of submissions.</p>
+
+<p>The job will create a lock file to avoid creating the same zip again and to avoid race conditions.
+Setting the interval is done via the setting <code>cronjob_intervall_submission_zip</code>.</p>
+
+<p>These files reside in the directory <code>generated_files_dir</code> with the name</p>
+<div class="highlight"><pre class="chroma">collection-course%d-sheet%d-task%d-group%d.lock</pre></div>
+<p>where each &lsquo;%d&rsquo; is replaced by the <em>id</em>. To regenerate a specific file (e.g. you extended the due date for an exercise) simply remove both files</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rm collection-course%d-sheet%d-task%d-group%d.lock
+rm collection-course%d-sheet%d-task%d-group%d.zip</code></pre></div>
+<h1 id="api">API</h1>
+
+<p>The definition of all available routes to the RESTful backend is described in our Swagger <a href="/swagger/">definition file</a>.</p>
+
+<h1 id="metrics">Metrics</h1>
+
+<p>The metrics for <a href="https://prometheus.io/">Prometheus</a> are served under <code>localhost:&lt;port&gt;/metrics</code>. We highly suggest not to expose these metrics when using a reverse proxy like NGINX.</p>
+
+<p>To visualize these metrics we have assembled a <a href="https://github.com/infomark-org/infomark-docs/tree/master/metrics">custom Grafana-Board</a>.</p>
+
+
+                            
+                            
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+
+
+    
+    
+    
+    
+    
+    <script>window.jQuery || document.write('<script src="https:\/\/infomark.org\/js\/jquery-3.2.1.slim.min.js"><\/script>')</script>
+    <script src="https://infomark.org/js/popper.min.js"></script>
+    <script src="https://infomark.org/js/bootstrap.min.js"></script>
+    <script src="https://infomark.org/js/custom.js"></script>
+    <script src="https://infomark.org/js/wow.min.js"></script>
+    </script>
+
+
+</body></html><script>
+        $("#TableOfContents a").each(function(){
+            $($(this).attr("href")).css("padding-top", "6rem").prev().css("margin-bottom", "-6rem");
+            
+        });
+    </script>
+    </body>
+</html>

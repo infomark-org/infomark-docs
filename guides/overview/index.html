@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+<link rel="mask-icon" href="/images/icons/safari-pinned-tab.svg" color="#ff0000">
+<meta name="msapplication-TileColor" content="#b91d47">
+
+<title>InfoMark</title>
+<link href="//fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+
+<link rel="stylesheet" href="https://infomark.org/sass/main.min.037df327d39daba9481f1c90f50e888d8e9991bb8e907e31300f2c85ec4067ad.css" data></head>
+    <body class="documentation"><nav class="navbar navbar-expand-md navbar-light bg-light fixed-top nav-border nav-scroll">
+
+  <a class="navbar-brand"  href="/">
+    <img src="/images/Logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    InfoMark
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Start</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/guides/overview/">Overview</a>
+          <a class="dropdown-item" href="/guides/administrator/">Administrator's Guide</a>
+          <a class="dropdown-item" href="/guides/developer/">Developer's Guide</a>
+          <a class="dropdown-item" href="/guides/tutor">Tutor's Guide</a>
+          <a class="dropdown-item" href="/guides/queries/">Queries</a>
+          <a class="dropdown-item" href="/guides/console">Console</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/swagger" target="_blank">API</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <a href="https://github.com/infomark-org/infomark" tagrt="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style=" position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+                <div class="row flex-xl-nowrap docs">
+                    <div class="col-xl-2 col-md-1">
+                        <div class="d-none d-xl-block bd-toc">
+                            <div class="title">What's on this page?</div>
+                            <nav id="TableOfContents">
+<ul>
+<li><a href="#quick-start">Quick-Start</a>
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#run">Run</a></li>
+<li><a href="#first-user">First User</a></li>
+</ul></li>
+<li><a href="#design-choices">Design Choices</a></li>
+<li><a href="#system-overview">System Overview</a>
+<ul>
+<li><a href="#backend">Backend</a>
+<ul>
+<li><a href="#server">Server</a></li>
+<li><a href="#workers">Workers</a></li>
+<li><a href="#console">Console</a></li>
+</ul></li>
+<li><a href="#frontend">Frontend</a></li>
+</ul></li>
+<li><a href="#development">Development</a>
+<ul>
+<li>
+<ul>
+<li><a href="#things-that-could-be-different">Things that could be different</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-9  col-md-10" data-spy="scroll" data-target="#TableOfContents" data-offset="0">
+                        <div id="doc-header" class="doc-header text-center">
+                            <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> &nbsp;Overview</h1>
+                            <div class="meta">
+                                <i class="far fa-clock"></i> &nbsp;Last updated:  April 30, 2020
+                            </div>
+                        </div>
+                        <main role="main">
+                            
+                            
+                            
+
+<p>InfoMark is a free, scalable, modern, and open-source online
+course management system supporting auto-testing of programming assignments scaling to thousands of students and several courses.</p>
+
+<p>Uploaded solutions to programming assignments are tested automatically.
+For more information about writing such tests, see our <a href="/guides/tutor/">Tutor&rsquo;s Guide</a>. On how to use the system, please refer to the <a href="/guides/administrator/">Administrator&rsquo;s Guide</a>. And for development, please refer to our <a href="/guides/developer/">Developer&rsquo;s Guide</a>.</p>
+
+<p>Teaching assistants (tutors) can grade these homework solutions online. The platform supports multiple courses, each with various exercise groups, slides and course material. The backend server talks RESTful JSON such that you can write your scripts using ,e.g.,  Python.</p>
+
+<h1 id="quick-start">Quick-Start</h1>
+
+<p>These commands are the <em>same</em> for deployment on your local machine or deployment in production on a server.
+Please download the latest release from the <a href="https://github.com/infomark-org/infomark/releases/">release page</a>.
+These releases ship a single binary containing all required files. The only dependency is docker and docker-compose.</p>
+
+<p>We will explain the necessary steps to spin up a fully production-ready system on your machine. InfoMark is implemented as a modern CLI with POSIX-compliant flags.</p>
+
+<p>Without any lengthy explanation, you can spin up an instance of InfoMark from scratch via:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Create configuration</span>
+./infomark console configuration create &gt; infomark-config.yml
+<span class="c1"># Create docker-compose for database, rabbitMQ, redis</span>
+./infomark console configuration create-compose infomark-config.yml &gt; docker-compose.yml
+<span class="c1"># Start dependencies</span>
+sudo docker-compose up -d
+<span class="c1"># Start InfoMark server</span>
+<span class="nb">export</span> <span class="nv">INFOMARK_CONFIG_FILE</span><span class="o">=</span><span class="sb">`</span>realpath infomark-config.yml<span class="sb">`</span>
+./infomark serve
+<span class="c1"># point your browser to http://localhost:2020</span></code></pre></div>
+<h2 id="requirements">Requirements</h2>
+
+<p>InfoMark has the following minimal requirements:</p>
+
+<ul>
+<li>one CPU core for server <code>infomark serve</code>  (1GB RAM)</li>
+<li>one CPU core for each background worker <code>infomark work</code> (memory requirement depends on your docker-image size for the programming assignments)</li>
+</ul>
+
+<p>We assume an Ubuntu system. But InfoMark will also happily do its business on other systems that provide docker (&gt;= v1.13) and docker-compose. There are no other dependencies you need to juggle with.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>First create a configuration using InfoMark and write it to <code>infomark-config.yml</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console configuration create &gt; infomark-config.yml</code></pre></div>
+<p>This config file is populated with values to provide a minimal working (<a href="https://github.com/infomark-org/infomark/blob/master/configuration/example.yml">example</a>). Strong passwords are generated (each time you call this command). The configuration file might seem a bit complex at first glance, but it should work out-of-the-box.</p>
+
+<p>We use docker-compose for handling dependencies in a sandbox</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console configuration create-compose infomark-config.yml &gt; docker-compose.yml</code></pre></div>
+<p>It will create a ready-to-use docker-compose file. For all following commands, the configuration file <code>infomark-config.yml</code> is required. These commands expect this configuration file to be specified in the environment variable <code>INFOMARK_CONFIG_FILE</code>. You might want to specify this information by</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">INFOMARK_CONFIG_FILE</span><span class="o">=</span>/absolute/path/to/infomark-config.yml</code></pre></div>
+<p>If you do forget to set this environment variable, the following commands will remind you to do so.</p>
+
+<h2 id="run">Run</h2>
+
+<p>To start all dependencies just run the newly generated docker-compose file via</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up</code></pre></div>
+<p>Before starting the server, you might want to check your configuration</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console configuration <span class="nb">test</span> infomark-config.yml</code></pre></div>
+<p>This will make InfoMark try to speak to the database, RabbitMQ and Redis from the Docker-Compose setup. It will also test if it can save uploads.
+You will probably get the feedback, that a privacy statement file does not exist. We ship one example of a privacy statement in German.</p>
+
+<p>If everything is green, start the server by</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark serve</code></pre></div>
+<p>That&rsquo;s all!
+The <code>serve</code> command will take care of initializing the database when starting the first time.
+Point your browser to <a href="http://localhost:2020">http://localhost:2020</a>. This will display the login page of InfoMark.
+To further enable two background workers, just run</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo ./infomark work -n <span class="m">2</span></code></pre></div>
+<p>Sudo is required to start docker containers on behalf of the current user (unless you added the user to the docker-group). The configuration for the work and docker environment can be tested as well by</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console configuration <span class="nb">test</span> infomark-config.yml --test worker</code></pre></div>
+<p>Upgrading InfoMark is also easy: Stop the InfoMark server and worker, replace the binary and start the server and worker again.</p>
+
+<h2 id="first-user">First User</h2>
+
+<p>To add a user, please register your user in the web interface.
+After registration, the email address needs to be confirmed. If sendmail is configured, you will receive an instruction email containing a link to activate this account.</p>
+
+<p>Let us activate the user manually using the console. Further, we will upgrade the permission of this user to have root privileges:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># confirm email</span>
+./infomark console user confirm your@email.com
+
+<span class="c1"># find the id of a user</span>
+./infomark console user find your@email.com
+
+    <span class="m">1</span> YourFirstname YourLastname your@email.com
+
+<span class="c1"># add the user with id &#34;1&#34; to admins.</span>
+./infomark console admin add <span class="m">1</span></code></pre></div>
+<p>When running InfoMark on a server in production, we recommend using <a href="https://www.nginx.org/">NGINX</a> or <a href="https://caddyserver.com/">Caddy</a> as a reverse-proxy in front of InfoMark.</p>
+
+<h1 id="design-choices">Design Choices</h1>
+
+<p>InfoMark is designed to run within IT-controlled private environments in public clouds
+on your own servers to be compliant with any data privacy issues providing data sovereignty.</p>
+
+<p>It is based on several design choices:</p>
+
+<p><strong>Be open, Never lock-in to expand</strong><br>
+Every part must be open-source, scalable, reliable and robust. It must be easy to extract and use the information outside of InfoMark.
+Development must be open and adapting the implementation has to be possible. Writing scripts (e.g. in Python) for common jobs must be easy. We provide an <a href="/swagger/">API description</a>.</p>
+
+<p><strong>Be user-friendly to grow</strong><br>
+The entire system must be easy to deploy, maintain and update
+even for non-technical users with basic IT skills. We want to provide decisions and not options. It should have a near-zero administration. You probably have better things to do than playing a server administrator.</p>
+
+<p><strong>Be robust and reliable to earn trust</strong><br>
+Auto-Testing of programming assignments must be language-agnostic, isolated and safe.
+All intense operations must be asynchronously scheduled.
+The frontend must be light-weight, fast and responsive. Creating and restoring a database backup is not supposed to be a nervous breakdown.</p>
+
+<p><strong>Be modern and simple</strong><br>
+We deliberately chose GO for the backend and ELM for for the frontend. We had a hard time to re-deploy our <a href="https://github.com/infomark-org/InfoMark-deprecated">old system</a> written in Ruby-On-Rails. There should be no magic behind the scene, which breaks when updating the dependencies.</p>
+
+<p><strong>Be as general as necessary and not as possible</strong><br>
+We deliberately narrowed down the feature set to be robust. Any discussion board or support of pdf annotation is out-of-scope by our design. InfoMark solves a very specific problem: automated testing of homework programming exercises.</p>
+
+<h1 id="system-overview">System Overview</h1>
+
+<p>This section provides a brief overview of the InfoMark system, including a description of its parts.
+We use continuous-integration tests to ensure the implementation can be built and passes all tests at any point.</p>
+
+<p>At its core, InfoMark is a single-compiled Go binary that is exposed as a Restful JSON web server with Javascript clients. See the Restful API docs (created using <a href="https://swagger.io/">Swagger</a>) <a href="https://infomark.org/swagger/">here</a>.</p>
+
+<div class="center"><img src="/images/illustrations/overview.png" /></div>
+
+<h2 id="backend">Backend</h2>
+
+<p><a href="https://ci.patwie.com/infomark-org/infomark"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark/status.svg" alt="Build Status" /></a>
+<a href="https://github.com/infomark-org/infomark"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="Source" /></a></p>
+
+<p>The backend acts as a Restful JSON web server and is written in <a href="https://golang.org/">Go</a>. All dependencies are encapsulated in a docker-compose configuration file. The dependencies are:</p>
+
+<ul>
+<li>We use a <a href="https://www.postgresql.org/">PostgreSQL</a> database to store all dynamic data.</li>
+<li>Computationally intensive operations are scheduled and balanced across several background workers asynchronous via <a href="https://www.rabbitmq.com/">RabbitMQ</a>.</li>
+<li>It uses <a href="https://redis.io/">Redis</a> as a light-weight key-value memory store.</li>
+<li><a href="https://www.docker.com/">Docker</a> is used as a light-weight sandbox to run auto-tests of  solutions to programming assignments in an isolated environment.</li>
+</ul>
+
+<p>Each exercise task can be linked to a docker-image and a zip file containing the test code to support testing. See the Administrator Guide for more details.</p>
+
+<h3 id="server">Server</h3>
+
+<p>Part of the backend is the <strong>server</strong>.
+The server talks RESTful JSON to remote CLI, the Web-interface and workers.</p>
+
+<h3 id="workers">Workers</h3>
+
+<p>Part of the backend are <strong>workers</strong>, which are separate processes that handle the auto-testing of uploads. These workers <em>can</em> be distributed across multiple machines.
+We recommend using one worker process for 100 students. The workers can be added or removed at any time. InfoMark uses AMPQ as a message broker. Each submission will be held in a queue and each worker will execute one job concurrently to avoid too much system load. Our recommendation is one worker per available CPU core.</p>
+
+<p>The used amount of memory per submission can be configured. Memory-swapping is deactivated.</p>
+
+<h3 id="console">Console</h3>
+
+<p>To avoid manual interaction with the database, InfoMark provides a console to run several commands like enrolling a student into a course/group, set the role of a user.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./infomark console user find jane.doe
+
+<span class="m">42</span> Jane Doe jane.doe@student.uni-tuebingen.de
+
+./infomark console user confirm
+
+    Usage:
+      infomark console user confirm <span class="o">[</span>email<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+
+./infomark console user confirm jane.doe@student.uni-tuebingen.de
+
+./infomark console course enroll
+
+    Usage:
+      infomark console course enroll <span class="o">[</span>courseID<span class="o">]</span> <span class="o">[</span>userID<span class="o">]</span> <span class="o">[</span>role<span class="o">]</span> <span class="o">[</span>flags<span class="o">]</span>
+
+<span class="c1"># roles: student (0), tutor/ta (1), admin (2)</span>
+./infomark console course enroll <span class="m">1</span> <span class="m">42</span> <span class="m">2</span></code></pre></div>
+<h2 id="frontend">Frontend</h2>
+
+<p><a href="https://ci.patwie.com/infomark-org/infomark-ui"><img src="https://ci.patwie.com/api/badges/infomark-org/infomark-ui/status.svg" alt="Build Status" /></a>
+<a href="https://github.com/infomark-org/infomark-ui"><img src="https://img.shields.io/badge/source-download-blue.svg" alt="Source" /></a></p>
+
+<p>The frontend is written in <a href="https://elm-lang.org/">Elm</a>, a functional frontend language which compiles to JavaScript. The application is just a single page application (SPA) which uses fragments for
+routing. So the server only needs to distribute the static HTML page and the REST API which is used to
+interact with the server. The API is defined <a href="https://infomark.org/swagger/">here</a>
+using <a href="https://swagger.io/">Swagger</a>.</p>
+
+<h1 id="development">Development</h1>
+
+<p>The initial system was developed in the <a href="https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/lehrstuehle/computergrafik/computer-graphics/">computer graphics groups</a> of the University of Tübingen because there are no comparable systems that meet our requirements.</p>
+
+<h3 id="things-that-could-be-different">Things that could be different</h3>
+
+<p>During the design of the system we had to make compromises given some constraints:</p>
+
+<ul>
+<li>The system has its own user-management. Unfortunately, we had not the option to rely on external OAuth2. This bad (as user management is difficult) and good (this help to be compliant with GDPR).</li>
+<li>To avoid any hassle of creating a proper email setups, we use a pre-installed sendmail configuration. Creating a working email service is hard. Creating a proper and secure email service is almost impossible.</li>
+</ul>
+
+
+                            
+                            
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+
+
+    
+    
+    
+    
+    
+    <script>window.jQuery || document.write('<script src="https:\/\/infomark.org\/js\/jquery-3.2.1.slim.min.js"><\/script>')</script>
+    <script src="https://infomark.org/js/popper.min.js"></script>
+    <script src="https://infomark.org/js/bootstrap.min.js"></script>
+    <script src="https://infomark.org/js/custom.js"></script>
+    <script src="https://infomark.org/js/wow.min.js"></script>
+    </script>
+
+
+</body></html><script>
+        $("#TableOfContents a").each(function(){
+            $($(this).attr("href")).css("padding-top", "6rem").prev().css("margin-bottom", "-6rem");
+            
+        });
+    </script>
+    </body>
+</html>

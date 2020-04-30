@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_admin/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_admin_add/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_admin_remove/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_configuration/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_configuration_create-compose/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_configuration_create/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_configuration_test/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_course/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_course_enroll/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_database/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_database_backup/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_database_migrate/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_database_restore/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_database_run/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_bids/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_dump-bids/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_enroll/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_import-assignments/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_list/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_group_locate/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_submission/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_submission_run/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_submission_trigger/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_submission_trigger_all/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_user/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_user_confirm/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_user_find/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_user_set-email/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_utils/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_utils_completion/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_console_utils_doc/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_serve/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/commands/infomark_work/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/</loc>
+    <lastmod>2020-04-30T07:04:04+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/administrator/</loc>
+    <lastmod>2020-04-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/console/</loc>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/developer/</loc>
+    <lastmod>2020-04-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/overview/</loc>
+    <lastmod>2020-04-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/queries/</loc>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/guides/tutor/</loc>
+    <lastmod>2020-04-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://infomark.org/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
